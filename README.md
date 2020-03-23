@@ -12,6 +12,8 @@ kubectl create namespace kubevious
 
 helm upgrade --wait --install  --atomic --namespace "kubevious" release_name ./helm
 ```
+where release_name is the name of release being deployed to Kubernetes Cluster.
+
 You need to make sure you have helm installed in your machine.
 
 
