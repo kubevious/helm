@@ -1,0 +1,34 @@
+# This file is auto-generated during CI/CD
+kubevious:
+  image:
+    repository: kubevious/kubevious
+    tag: 0.3.4
+    pullPolicy: IfNotPresent
+  name: kubevious
+  svcName: kubevious-svc
+  port: 4000
+  cpu: 100m
+  memory: 200Mi
+mysql:
+  image:
+    repository: mysql
+    tag: 5.7
+    pullPolicy: IfNotPresent
+  name: kubevious-mysql
+  svcName: kubevious-mysql-svc
+  port: 3306
+  cpu: 50m
+  memory: 500Mi
+  storage: 10Gi
+ui:
+  image:
+    repository: kubevious/ui
+    tag: 0.3.2
+    pullPolicy: IfNotPresent
+  name: kubevious-ui
+  svcName: kubevious-ui-svc
+  port: 3000
+  cpu: 25m
+  memory: 100Mi
+ingress:
+  enabled: false

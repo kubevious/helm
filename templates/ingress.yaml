@@ -1,0 +1,38 @@
+{{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.domain }}
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: kubevious-certificate
+  namespace: {{ .Release.Namespace }}
+spec:
+  domains:
+    - {{ .Values.ingress.domain }}
+{{- end }}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubevious
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: kubevious-ui
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.allow-http: "true"
+    {{- if .Values.ingress.domain }}
+    networking.gke.io/managed-certificates: kubevious-certificate
+    {{- end}}
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /*
+          backend:
+            serviceName: {{ .Values.ui.svcName }}
+            servicePort: {{ .Values.ui.port }}
+    {{- if .Values.ingress.domain }}
+    host: {{ .Values.ingress.domain }}
+    {{- end}}
+
+{{- end }}
