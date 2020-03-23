@@ -1,29 +1,21 @@
-## Summary of Changes
+# Kubevious Helm Charts
 
-#### Major Changes:
-
-* Resolved critical issue causing a crash loop if HorizontalPodAutoScaler refers to an invalid Deployment.
-* Enhanced parcer to handle errors gracefully.
-
-## Deployment
-You need to make sure you have helm installed in your machine.
-Deploy using Helm:
+## Installing
+Deploy using Helm v3.x:
 ```sh
 kubectl create namespace kubevious
 
-helm upgrade --wait --install  --atomic --namespace "kubevious" release_name ./helm
+helm upgrade --wait --atomic -i -n kubevious kubevious ./helm
 ```
-where release_name is the name of release being deployed to Kubernetes Cluster.
 
-Starting from helm v3.2 you can skip manual namespace creation and use:
-
+Starting from Helm v3.2 it will not be required to create a namespace manually:
 ```sh
-helm upgrade --wait --install  --atomic --namespace "kubevious" release_name ./helm
+helm upgrade --wait --atomic -i -n kubevious kubevious ./helm
 ```
-## Uninstall
-To remove this deployment from cluster use:
+## Uninstalling
+Undeploy from cluster:
 ```sh
-helm delete release_name -n namespace
+helm delete kubevious -n namespace
 ```
 
 
