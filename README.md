@@ -6,6 +6,7 @@
 * Enhanced parcer to handle errors gracefully.
 
 ## Deployment
+You need to make sure you have helm installed in your machine.
 Deploy using Helm:
 ```sh
 kubectl create namespace kubevious
@@ -14,7 +15,16 @@ helm upgrade --wait --install  --atomic --namespace "kubevious" release_name ./h
 ```
 where release_name is the name of release being deployed to Kubernetes Cluster.
 
-You need to make sure you have helm installed in your machine.
+Starting from helm v3.2 you can skip manual namespace creation and use:
+
+```sh
+helm upgrade --wait --install  --atomic --namespace "kubevious" release_name ./helm
+```
+## Uninstall
+To remove this deployment from cluster use:
+```sh
+helm delete release_name -n namespace
+```
 
 
 ## Accessing UI
