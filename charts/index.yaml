@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  kubevious:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2020-03-25T22:34:15.076766+04:00"
+    description: A Helm chart for Kubevious server
+    digest: 46974e1932a8ea946d416086874d6332e2d66943f3a55bdf2eefc5c9694479b5
+    name: kubevious
+    type: application
+    urls:
+    - kubevious-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-03-25T22:34:15.073346+04:00"
