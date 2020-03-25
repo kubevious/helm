@@ -16,13 +16,13 @@ kind: Ingress
 metadata:
   name: kubevious
   namespace: {{ .Release.Namespace }}
+{{- if .Values.ingress.annotations }}
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: kubevious-ui
-    ingress.kubernetes.io/rewrite-target: /
-    kubernetes.io/ingress.allow-http: "true"
-    {{- if .Values.ingress.domain }}
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+{{- if .Values.ingress.domain }}
     networking.gke.io/managed-certificates: kubevious-certificate
-    {{- end}}
+{{- end}}
+{{- end}}
 spec:
   rules:
   - http:
