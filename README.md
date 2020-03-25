@@ -5,12 +5,14 @@ Deploy using Helm v3.x:
 ```sh
 kubectl create namespace kubevious
 
-helm upgrade --wait --atomic -i -n kubevious kubevious ./helm
+helm repo add kubevious https://helm.kubevious.io
+helm upgrade --wait --atomic -i kubevious kubevious/kubevious -n kubevious 
 ```
 
 Starting from Helm v3.2 it will not be required to create a namespace manually:
 ```sh
-helm upgrade --wait --atomic -i -n kubevious kubevious ./helm
+helm repo add kubevious https://helm.kubevious.io
+helm upgrade --wait --atomic -i  kubevious kubevious/kubevious -n kubevious
 ```
 ## Uninstalling
 Undeploy from cluster:
