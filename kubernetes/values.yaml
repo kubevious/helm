@@ -2,7 +2,7 @@ provider: none
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.4.5
+    tag: 0.4.6
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
@@ -32,5 +32,4 @@ ui:
   memory: 100Mi
 ingress:
   enabled: false
-  annotations:
-
+  annotations: null
