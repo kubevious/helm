@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   kubevious:
   - apiVersion: v2
+    appVersion: 0.4.15
+    created: "2020-03-27T23:58:28.367713315Z"
+    description: A Helm chart for Kubevious
+    digest: 1bab0a5f2650b62cc7b03b158098c6ef835c2305f7a9c4ffedfe613cc4c1a7f2
+    name: kubevious
+    type: application
+    urls:
+    - kubevious-0.4.15.tgz
+    version: 0.4.15
+  - apiVersion: v2
     appVersion: 0.4.14
-    created: "2020-03-27T22:57:14.313710115Z"
+    created: "2020-03-27T23:58:28.367214604Z"
     description: A Helm chart for Kubevious
     digest: 12aaedf65e0e03ee91e4a93a4619e309f742d56cd39b4e8c100a5538c7f54632
     name: kubevious
@@ -13,7 +23,7 @@ entries:
     version: 0.4.14
   - apiVersion: v2
     appVersion: 0.4.13
-    created: "2020-03-27T22:57:14.313172184Z"
+    created: "2020-03-27T23:58:28.366708633Z"
     description: A Helm chart for Kubevious
     digest: 2844264a4a85805235a39fee0f644d9ee0c506aa99d33e76354b0868d196dac4
     name: kubevious
@@ -23,7 +33,7 @@ entries:
     version: 0.4.13
   - apiVersion: v2
     appVersion: 0.4.12
-    created: "2020-03-27T22:57:14.312586985Z"
+    created: "2020-03-27T23:58:28.366117475Z"
     description: A Helm chart for Kubevious
     digest: e6f9e408a42fbb55f70b1272648882b7e563b179c20f222469fc750ab5e27606
     name: kubevious
@@ -33,7 +43,7 @@ entries:
     version: 0.4.12
   - apiVersion: v2
     appVersion: 0.4.11
-    created: "2020-03-27T22:57:14.31205863Z"
+    created: "2020-03-27T23:58:28.36180151Z"
     description: A Helm chart for Kubevious
     digest: 26c6a0d6201291261bfef8fe5e17396da8954c90653e1ef407533d7b6ac04a20
     name: kubevious
@@ -43,7 +53,7 @@ entries:
     version: 0.4.11
   - apiVersion: v2
     appVersion: 0.4.10
-    created: "2020-03-27T22:57:14.304874507Z"
+    created: "2020-03-27T23:58:28.361243477Z"
     description: A Helm chart for Kubevious
     digest: cb3942be3764e43252f4dc637393855aaa728e6942131262e7d71c64cd464d63
     name: kubevious
@@ -53,7 +63,7 @@ entries:
     version: 0.4.10
   - apiVersion: v2
     appVersion: "0.3"
-    created: "2020-03-27T22:57:14.304371915Z"
+    created: "2020-03-27T23:58:28.358585038Z"
     description: A Helm chart for Kubevious
     digest: bd6f0c3e32280b6ee0e22becc824af67e23e741e45925627fb61b4a7028943b0
     name: kubevious
@@ -63,7 +73,7 @@ entries:
     version: "0.3"
   - apiVersion: v2
     appVersion: "0.2"
-    created: "2020-03-27T22:57:14.303908049Z"
+    created: "2020-03-27T23:58:28.358088666Z"
     description: A Helm chart for Kubevious
     digest: cc7b92fc4987016d5e00a97d662182c8534575405d835ebab34063dcde33d769
     name: kubevious
@@ -73,7 +83,7 @@ entries:
     version: "0.2"
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2020-03-27T22:57:14.303445154Z"
+    created: "2020-03-27T23:58:28.357599935Z"
     description: A Helm chart for Kubevious
     digest: e86855b7058db905bddf6ddbacf9e07f6f1b5359d34724359f87f6025ae62c69
     name: kubevious
@@ -81,4 +91,4 @@ entries:
     urls:
     - kubevious-0.1.tgz
     version: "0.1"
-generated: "2020-03-27T22:57:14.302913649Z"
+generated: "2020-03-27T23:58:28.357063844Z"

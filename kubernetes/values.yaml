@@ -7,7 +7,7 @@ ingress:
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.4.7
+    tag: 0.4.8
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
@@ -28,7 +28,7 @@ mysql:
 ui:
   image:
     repository: kubevious/ui
-    tag: 0.4.3
+    tag: 0.4.4
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
