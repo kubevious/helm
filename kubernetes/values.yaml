@@ -17,7 +17,7 @@ kubevious:
 mysql:
   image:
     repository: mysql
-    tag: 5.7
+    tag: 8.0.19
     pullPolicy: IfNotPresent
   name: kubevious-mysql
   svcName: kubevious-mysql-svc

@@ -22,14 +22,14 @@ spec:
   rules:
   - http:
       paths:
-        - backend:
-            serviceName: {{ .Values.kubevious.svcName }}
-            servicePort: {{ .Values.kubevious.port }}
-          path: /api/
-        - backend:
+        # - path: /api/*
+        #   backend:
+        #     serviceName: {{ .Values.kubevious.svcName }}
+        #     servicePort: {{ .Values.kubevious.port }}
+        - path: /*
+          backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
-          path: /
     {{- if .Values.ingress.domain }}
     host: {{ .Values.ingress.domain }}
     {{- end}}
