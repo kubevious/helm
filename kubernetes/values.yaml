@@ -2,7 +2,7 @@
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.3.4
+    tag: 0.4.7
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
@@ -23,7 +23,7 @@ mysql:
 ui:
   image:
     repository: kubevious/ui
-    tag: 0.3.2
+    tag: 0.4.3
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
@@ -31,6 +31,8 @@ ui:
   cpu: 25m
   memory: 100Mi
 ingress:
+  ## If your are deploying to Google Cloud
+  # domain: gke
   enabled: false
 ## Provide your host if you want to expose service via domain
 #  host: your host
