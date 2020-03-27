@@ -22,7 +22,8 @@ helm install ingress stable/nginx-ingress --set controller.publishService.enable
 If you have already installed kubevious using `helm template` you will need to remove old installation to be able to install using helm charts:
 ```sh
 kubectl delete namespace kubectl
-
+kubectl delete clusterrole kubevious
+kubectl delete clusterrolebinding kubevious
 ```
 ## Uninstalling
 Undeploy from cluster:
@@ -37,7 +38,4 @@ Setup port forwarding:
 kubectl port-forward $(kubectl get pod -l k8s-app=kubevious-ui -n kubevious -o jsonpath="{.items[0].metadata.name}") 3000:3000 -n kubevious
 ```
 Access from browser: http://localhost:3000
-
-
-helm install stable/nginx-ingress --set controller.publishService.enabled=true
 
