@@ -1,32 +1,26 @@
 {{- if .Values.ingress.enabled }}
-{{- if .Values.ingress.domain }}
----
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: kubevious-certificate
-  namespace: {{ .Release.Namespace }}
-spec:
-  domains:
-    - {{ .Values.ingress.domain }}
-{{- end }}
----
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: kubevious
   namespace: {{ .Release.Namespace }}
-{{- if .Values.ingress.annotations }}
   annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.allow-http: "true"
+{{- if .Values.ingress.staticIpName }}
+    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingress.staticIpName }}
+{{- end }}
+{{- if .Values.ingress.annotations }}
 {{ toYaml .Values.ingress.annotations | indent 4 }}
+{{- end }}
+{{- if eq .Values.provider "gke" }}
 {{- if .Values.ingress.domain }}
     networking.gke.io/managed-certificates: kubevious-certificate
-{{- end}}
-{{- end}}
+{{- end }}
+{{- end }}
 spec:
   rules:
-  - host: {{ .Values.ingress.host }}
-    http:
+  - http:
       paths:
         - backend:
             serviceName: {{ .Values.kubevious.svcName }}
@@ -36,4 +30,7 @@ spec:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
           path: /
+    {{- if .Values.ingress.domain }}
+    host: {{ .Values.ingress.domain }}
+    {{- end}}
 {{- end }}
