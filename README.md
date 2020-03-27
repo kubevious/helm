@@ -12,14 +12,13 @@ helm upgrade --wait --atomic -i kubevious kubevious/kubevious -n kubevious
 Starting from Helm v3.2 it will not be required to create a namespace manually:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --wait --atomic -i  kubevious kubevious/kubevious -n kubevious
+helm upgrade --wait --atomic -i kubevious kubevious/kubevious -n kubevious
 ```
 ## Uninstalling
 Undeploy from cluster:
 ```sh
-helm delete kubevious -n namespace
+helm delete kubevious -n kubevious
 ```
-
 
 ## Accessing UI
 Setup port forwarding:
