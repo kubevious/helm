@@ -2,7 +2,7 @@ provider: none
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.4.6
+    tag: 0.4.7
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
@@ -23,7 +23,7 @@ mysql:
 ui:
   image:
     repository: kubevious/ui
-    tag: 0.4.2
+    tag: 0.4.3
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
