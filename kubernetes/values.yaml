@@ -1,29 +1,9 @@
-## Provider environment where Kubevious is deployed.
-## Possible values are: gke, eks, aks, doks.
-## Use "none" for any other cases including on-prem.
 provider: none
-
-## Ingress gateway configuration
 ingress:
-
-  ## Specifies whether to expose Kubevious using ingress gateway.
   enabled: false
-
-  ## Domain name to be used with ingress gateway.
   domain: null
-  
-  ## Name of static ip object used with the ingress gateway.
   staticIpName: null
-
-  ## Additional annotations to be applied to the ingress gateway.
   annotations: {}
-
-
-########################################################
-## Configuration of internal components of Kubevious. ##
-## Each section for separate microservices.           ##
-########################################################
-
 kubevious:
   image:
     repository: kubevious/kubevious
@@ -34,7 +14,6 @@ kubevious:
   port: 4000
   cpu: 100m
   memory: 200Mi
-
 mysql:
   image:
     repository: mysql
@@ -46,7 +25,6 @@ mysql:
   cpu: 50m
   memory: 500Mi
   storage: 10Gi
-
 ui:
   image:
     repository: kubevious/ui
