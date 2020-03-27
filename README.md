@@ -49,7 +49,7 @@ helm delete kubevious -n namespace
 If you are upgrading from version deployed using kubectl apply, first cleanup existing deployment:
 
 ```sh
-kubectl delete namespace kubectl
+kubectl delete namespace kubevious
 kubectl delete clusterrole kubevious
 kubectl delete clusterrolebinding kubevious
 ```
