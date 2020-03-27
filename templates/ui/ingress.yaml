@@ -25,14 +25,15 @@ metadata:
 {{- end}}
 spec:
   rules:
-  - http:
+  - host: {{ .Values.ingress.host }}
+    http:
       paths:
-        - path: /*
-          backend:
+        - backend:
+            serviceName: {{ .Values.kubevious.svcName }}
+            servicePort: {{ .Values.kubevious.port }}
+          path: /api/
+        - backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
-    {{- if .Values.ingress.domain }}
-    host: {{ .Values.ingress.domain }}
-    {{- end}}
-
+          path: /
 {{- end }}

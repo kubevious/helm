@@ -31,10 +31,11 @@ ui:
   cpu: 25m
   memory: 100Mi
 ingress:
-  ## If your are deploying to Google Cloud
-  # domain: gke
   enabled: false
+## Provide your host if you want to expose service via domain
+#  host: your host
   annotations:
+    kubernetes.io/ingress.class: nginx
+    ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.global-static-ip-name: kubevious-ui
     ingress.kubernetes.io/rewrite-target: /
-    kubernetes.io/ingress.allow-http: "true"
