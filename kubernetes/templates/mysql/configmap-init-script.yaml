@@ -8,10 +8,17 @@ data:
     USE kubevious;
     SET NAMES utf8mb4;
 
-    SET GLOBAL expire_logs_days = 3;
+    SET GLOBAL expire_logs_days = 0;
+    SET GLOBAL binlog_expire_logs_seconds = 259200;
 
     CREATE TABLE IF NOT EXISTS `config` (
       `key` varchar(64) NOT NULL DEFAULT '',
+      `value` json NOT NULL,
+      PRIMARY KEY (`key`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+    CREATE TABLE IF NOT EXISTS `config_hashes` (
+      `key` BINARY(32) NOT NULL DEFAULT '',
       `value` json NOT NULL,
       PRIMARY KEY (`key`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -28,15 +35,16 @@ data:
       `snapshot_id` int unsigned NOT NULL,
       `dn` varchar(1024) NOT NULL DEFAULT '',
       `kind` varchar(128) NOT NULL DEFAULT '',
-      `config-kind` varchar(128) NOT NULL DEFAULT '',
+      `config_kind` varchar(128) NOT NULL DEFAULT '',
       `name` varchar(128) NULL DEFAULT '',
-      `config` json NOT NULL,
+      `config_hash` BINARY(32) NOT NULL,
       PRIMARY KEY (`id`),
       KEY `snapshot_id` (`snapshot_id`),
       KEY `dn` (`dn`),
       KEY `kind` (`kind`),
-      KEY `config-kind` (`config-kind`),
-      CONSTRAINT `snap_item_snapshot_id` FOREIGN KEY (`snapshot_id`) REFERENCES `snapshots` (`id`)
+      KEY `config_kind` (`config_kind`),
+      CONSTRAINT `snap_item_snapshot_id` FOREIGN KEY (`snapshot_id`) REFERENCES `snapshots` (`id`),
+      CONSTRAINT `snap_item_config_hash` FOREIGN KEY (`config_hash`) REFERENCES `config_hashes` (`key`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
     CREATE TABLE IF NOT EXISTS `diffs` (
@@ -56,14 +64,18 @@ data:
       `diff_id` int unsigned NOT NULL,
       `dn` varchar(1024) NOT NULL DEFAULT '',
       `kind` varchar(128) NOT NULL DEFAULT '',
-      `config-kind` varchar(128) NOT NULL DEFAULT '',
+      `config_kind` varchar(128) NOT NULL DEFAULT '',
       `name` varchar(128) NULL DEFAULT '',
       `present` tinyint(1) NOT NULL,
-      `config` json DEFAULT NULL,
+      `config_hash` BINARY(32) NULL,
       PRIMARY KEY (`id`),
       KEY `diff_id` (`diff_id`),
       KEY `dn` (`dn`),
       KEY `kind` (`kind`),
-      KEY `config-kind` (`config-kind`),
-      CONSTRAINT `diff_items_diff_id` FOREIGN KEY (`diff_id`) REFERENCES `diffs` (`id`)
+      KEY `config_kind` (`config_kind`),
+      CONSTRAINT `diff_item_diff_id` FOREIGN KEY (`diff_id`) REFERENCES `diffs` (`id`),
+      CONSTRAINT `diff_item_config_hash` FOREIGN KEY (`config_hash`) REFERENCES `config_hashes` (`key`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+    INSERT IGNORE INTO `config`(`key`, `value`)
+    VALUES('DB_SCHEMA', '{ "version": 2 }')
