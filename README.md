@@ -60,11 +60,10 @@ kubectl delete clusterrolebinding kubevious
 ## Configuration
 The following table lists the configurable parameters of the kubevious chart and their default values.
 
-
-| Value                | Description                                 | Default    |
-| -------------------- |---------------------------------------------|------------|
-| provider             | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem. | none       | 
-| ingress.enabled      | Whether to expose Kubevious using ingress gateway.      |  false      | 
-| ingress.domain       | Domain name to be used with ingress gateway.      |            | 
-| ingress.staticIpName | Name of static ip object used with the ingress gateway.      |            | 
-| ingress.annotations  | Additional annotations to be applied to the ingress gateway.      |            | 
+| Value                | Description                                                                                                                                                                  | Default    |
+| -------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| provider             | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none       | 
+| ingress.enabled      | Whether to expose Kubevious using ingress gateway.                                                                                                                           | false      | 
+| ingress.domain       | Domain name to be used with ingress gateway.                                                                                                                                 |            | 
+| ingress.staticIpName | Name of static ip object used with the ingress gateway.                                                                                                                      |            | 
+| ingress.annotations  | Additional annotations to be applied to the ingress gateway.                                                                                                                 |            | 
