@@ -12,3 +12,8 @@ helm template kubernetes \
     -f ../cicd-demo.git/helm/overrides.yaml \
     > kubevious-test.yaml
 ```
+
+
+## Ingress Class
+ingressClassName
+https://kubernetes.io/docs/concepts/services-networking/ingress/#deprecated-annotation

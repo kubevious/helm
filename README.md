@@ -36,15 +36,15 @@ Enable Ingress deployment using dedicated value parameters. If you are running i
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --set ingress.enabled=true \ 
-    kubevious kubevious/kubevious \
+    --set ingress.enabled=true \
+    kubevious kubevious/kubevious
 ```
 
 ## Uninstalling the Chart
 Undeploy from cluster:
 
 ```sh
-helm delete kubevious -n namespace
+helm delete kubevious -n kubevious
 ```
 
 ## Upgrading from non-Helm version
@@ -64,6 +64,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | -------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | provider             | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none       | 
 | ingress.enabled      | Whether to expose Kubevious using ingress gateway.                                                                                                                           | false      | 
+| ingress.class        | Ingress class name.                                                                                                                           | false      | 
 | ingress.domain       | Domain name to be used with ingress gateway.                                                                                                                                 |            | 
 | ingress.staticIpName | Name of static ip object used with the ingress gateway.                                                                                                                      |            | 
 | ingress.annotations  | Additional annotations to be applied to the ingress gateway.                                                                                                                 |            | 

@@ -1,6 +1,7 @@
 provider: none
 ingress:
   enabled: false
+  class: null
   domain: null
   staticIpName: null
   annotations: {}

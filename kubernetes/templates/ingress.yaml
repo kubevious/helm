@@ -7,6 +7,9 @@ metadata:
   annotations:
     ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.allow-http: "true"
+{{- if .Values.ingress.class }}
+    kubernetes.io/ingress.class: {{ .Values.ingress.class }}
+{{- end }}
 {{- if .Values.ingress.staticIpName }}
     kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingress.staticIpName }}
 {{- end }}
