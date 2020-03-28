@@ -2,5 +2,7 @@
 
 ## Digital Ocean
 ```sh
-helm install ingress stable/nginx-ingress --set controller.publishService.enabled=true -n kubevious
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm install ingress stable/nginx-ingress --set controller.publishService.enabled=true
 ```
+
