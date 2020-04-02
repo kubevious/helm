@@ -29,7 +29,7 @@ spec:
         #   backend:
         #     serviceName: {{ .Values.kubevious.svcName }}
         #     servicePort: {{ .Values.kubevious.port }}
-        - path: /*
+        - path: /
           backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
