@@ -1,7 +1,7 @@
-kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
-  name: {{ .Release.Namespace }}-kubevious
+  name: {{ .Release.Namespace }}-{{ .Values.parser.name }}
 rules:
 
   - apiGroups:

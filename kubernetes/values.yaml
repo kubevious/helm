@@ -15,6 +15,25 @@ kubevious:
   port: 4000
   cpu: 100m
   memory: 200Mi
+parser:
+  image:
+    repository: kubevious/parser
+    tag: unknown
+    pullPolicy: IfNotPresent
+  name: kubevious-parser
+  port: 4500
+  cpu: 100m
+  memory: 200Mi
+ui:
+  image:
+    repository: kubevious/ui
+    tag: 0.4.4
+    pullPolicy: IfNotPresent
+  name: kubevious-ui
+  svcName: kubevious-ui-svc
+  port: 3000
+  cpu: 25m
+  memory: 100Mi
 mysql:
   image:
     repository: mysql
@@ -26,13 +45,3 @@ mysql:
   cpu: 50m
   memory: 500Mi
   storage: 10Gi
-ui:
-  image:
-    repository: kubevious/ui
-    tag: 0.4.4
-    pullPolicy: IfNotPresent
-  name: kubevious-ui
-  svcName: kubevious-ui-svc
-  port: 3000
-  cpu: 25m
-  memory: 100Mi

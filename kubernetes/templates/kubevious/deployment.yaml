@@ -14,7 +14,6 @@ spec:
       labels:
         k8s-app: {{ .Values.kubevious.name }}
     spec:
-      serviceAccountName: {{ .Values.kubevious.name }}
       containers:
         - name: {{ .Values.kubevious.name }}
           image: "{{ .Values.kubevious.image.repository }}:{{ .Values.kubevious.image.tag }}"
