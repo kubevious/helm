@@ -18,7 +18,7 @@ kubevious:
 parser:
   image:
     repository: kubevious/parser
-    tag: 0.4.21
+    tag: 0.4.22
     pullPolicy: IfNotPresent
   name: kubevious-parser
   port: 4500
