@@ -5,7 +5,6 @@ metadata:
   name: kubevious
   namespace: {{ .Release.Namespace }}
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.allow-http: "true"
 {{- if .Values.ingress.class }}
     kubernetes.io/ingress.class: {{ .Values.ingress.class }}
@@ -29,7 +28,7 @@ spec:
         #   backend:
         #     serviceName: {{ .Values.kubevious.svcName }}
         #     servicePort: {{ .Values.kubevious.port }}
-        - path: /
+        - path: /*
           backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
