@@ -17,7 +17,7 @@ Deploy using Helm:
 
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.4.24 -n kubevious 
 ```
 
 ## Accessing Kubevious
