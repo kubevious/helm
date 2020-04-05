@@ -28,7 +28,7 @@ spec:
         #   backend:
         #     serviceName: {{ .Values.kubevious.svcName }}
         #     servicePort: {{ .Values.kubevious.port }}
-        - path: /*
+        - path: /{{- if eq .Values.provider "gke" }}*{{- end }}
           backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}

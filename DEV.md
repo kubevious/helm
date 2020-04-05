@@ -3,6 +3,7 @@
 ```sh
 helm template kubernetes \
     --namespace kubevious \
+    --set ingress.enabled=true \
     > kubevious-test.yaml
 ```
 
