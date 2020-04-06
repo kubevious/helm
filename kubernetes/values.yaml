@@ -5,6 +5,8 @@ ingress:
   domain: null
   staticIpName: null
   annotations: {}
+  tls: false
+  tlsSecretName: null
 kubevious:
   image:
     repository: kubevious/kubevious

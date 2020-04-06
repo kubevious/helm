@@ -4,6 +4,9 @@
 helm template kubernetes \
     --namespace kubevious \
     --set ingress.enabled=true \
+    --set ingress.domain=example.com \
+    --set ingress.tls=true \
+    --set ingress.tlsSecretName=kubevious-tls \
     > kubevious-test.yaml
 ```
 
