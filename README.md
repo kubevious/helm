@@ -68,6 +68,5 @@ The following table lists the configurable parameters of the kubevious chart and
 | ingress.domain         | Domain name to be used with ingress gateway.                                                                                                                                 |            | 
 | ingress.staticIpName   | Name of static ip object used with the ingress gateway.                                                                                                                      |            | 
 | ingress.annotations    | Additional annotations to be applied to the ingress gateway.                                                                                                                 |            | 
-| ingress.tls            | Enables TLS configuration.                                                                                                                                                   | false      | 
-| ingress.tlsSecretName  | Name of Kubernetes secret used in TLS                                                                                                                                        |            | 
+| ingress.tlsSecretName  | Enables TLS configuration. Specifies the name of Kubernetes secret used in TLS                                                                                                                                        |            | 
 
