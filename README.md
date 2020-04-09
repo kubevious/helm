@@ -32,7 +32,7 @@ kubectl port-forward $(kubectl get pod -l k8s-app=kubevious-ui -n kubevious -o j
 Access from browser: http://localhost:3000
 
 ### Option 2. Expose using Ingress
-Enable Ingress deployment using dedicated value parameters. If you are running in cloud environment consider setting **provider** value to simplify ingress configuration. Also, check full list of [helm chart values](#helm-chart-values). You will also find other parameters to setup static ip, SSL certificate and domain name.
+Enable Ingress deployment using dedicated value parameters. See full list of [helm chart values](#helm-chart-values). You will also find other parameters to setup static ip, SSL certificate and domain name.
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
@@ -62,7 +62,7 @@ The following table lists the configurable parameters of the kubevious chart and
 
 | Value                  | Description                                                                                                                                                                  | Default    |
 | ---------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| provider               | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none       | 
+| mysql.storageClass     | Storage class applied to MySQL persistent volume claim.                                                                                                                      | -          | 
 | ingress.enabled        | Whether to expose Kubevious using ingress gateway.                                                                                                                           | false      | 
 | ingress.class          | Ingress class name.                                                                                                                                                          | false      | 
 | ingress.domain         | Domain name to be used with ingress gateway.                                                                                                                                 |            | 
@@ -70,4 +70,5 @@ The following table lists the configurable parameters of the kubevious chart and
 | ingress.tlsSecretName  | Enables TLS configuration. Specifies the name of Kubernetes secret used in TLS                                                                                               |            | 
 | ingress.annotations    | Additional annotations to be applied to the ingress gateway.                                                                                                                 |            | 
 | ingress.lablels        | Additional metadata labels to be applied to the ingress gateway.                                                                                                             |            | 
+| provider               | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none       | 
 
