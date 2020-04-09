@@ -28,12 +28,12 @@ helm upgrade --atomic -i kubevious kubevious/kubevious \
     --set ingress.tlsSecretName=kubevious-tls
 ```
 
-helm upgrade --atomic -i kubevious kubevious/kubevious \
-    --version 0.5.2 \
-    --namespace kubevious \
-    --set ingress.enabled=true \
-    --set ingress.tls=false
-
+## Experimental Deployment
+```sh
+cd ./kubernetes
+kubectl create namespace experiment
+helm upgrade --atomic -i kubevious --namespace experiment --set ingress.enabled=true -- ./
+```
 
 ## Ingress Class
 ingressClassName
