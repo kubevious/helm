@@ -5,6 +5,7 @@ ingress:
   domain: null
   staticIpName: null
   annotations: {}
+  labels: {}
   tls: false
   tlsSecretName: null
 kubevious:

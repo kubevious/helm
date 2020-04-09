@@ -4,6 +4,11 @@ kind: Ingress
 metadata:
   name: kubevious
   namespace: {{ .Release.Namespace }}
+  labels:
+    k8s-app: kubevious
+{{- if .Values.ingress.labels }}
+{{ toYaml .Values.ingress.labels | indent 4 }}
+{{- end }}
   annotations:
     kubernetes.io/ingress.allow-http: "true"
 {{- if .Values.ingress.class }}
@@ -24,12 +29,7 @@ spec:
   rules:
   - http:
       paths:
-        # - path: /api/*
-        #   backend:
-        #     serviceName: {{ .Values.kubevious.svcName }}
-        #     servicePort: {{ .Values.kubevious.port }}
-        - path: /{{- if eq .Values.provider "gke" }}*{{- end }}
-          backend:
+        - backend:
             serviceName: {{ .Values.ui.svcName }}
             servicePort: {{ .Values.ui.port }}
     {{- if .Values.ingress.domain }}
