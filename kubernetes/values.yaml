@@ -48,4 +48,4 @@ mysql:
   cpu: 50m
   memory: 500Mi
   storage: 10Gi
-  storageClass: '-'
+  storageClass: null
