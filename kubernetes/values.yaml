@@ -21,7 +21,7 @@ kubevious:
 parser:
   image:
     repository: kubevious/parser
-    tag: 0.5.10
+    tag: 0.5.11
     pullPolicy: IfNotPresent
   name: kubevious-parser
   port: 4500
@@ -30,7 +30,7 @@ parser:
 ui:
   image:
     repository: kubevious/ui
-    tag: 0.5.4
+    tag: 0.5.5
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
