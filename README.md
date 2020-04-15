@@ -36,6 +36,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
+    --version 0.5.9 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
