@@ -17,7 +17,7 @@ Deploy using Helm:
 
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.4.24 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.5.9 -n kubevious 
 ```
 
 ## Accessing Kubevious
@@ -69,6 +69,6 @@ The following table lists the configurable parameters of the kubevious chart and
 | ingress.staticIpName   | Name of static ip object used with the ingress gateway.                                                                                                                      |            | 
 | ingress.tlsSecretName  | Enables TLS configuration. Specifies the name of Kubernetes secret used in TLS                                                                                               |            | 
 | ingress.annotations    | Additional annotations to be applied to the ingress gateway.                                                                                                                 |            | 
-| ingress.lablels        | Additional metadata labels to be applied to the ingress gateway.                                                                                                             |            | 
+| ingress.labels         | Additional metadata labels to be applied to the ingress gateway.                                                                                                             |            | 
 | provider               | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none       | 
 
