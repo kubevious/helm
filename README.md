@@ -63,7 +63,7 @@ The following table lists the configurable parameters of the kubevious chart and
 
 | Value                  | Description                                                                                                                                                                  | Default    |
 | ---------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| mysql.storageClass     | Storage class applied to MySQL persistent volume claim.                                                                                                                      | -          | 
+| mysql.storageClass     | Storage class applied to MySQL persistent volume claim.                                                                                                                      |            | 
 | ingress.enabled        | Whether to expose Kubevious using ingress gateway.                                                                                                                           | false      | 
 | ingress.class          | Ingress class name.                                                                                                                                                          | false      | 
 | ingress.domain         | Domain name to be used with ingress gateway.                                                                                                                                 |            | 
