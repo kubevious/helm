@@ -6,5 +6,8 @@ metadata:
 data:
   MYSQL_HOST: {{ .Values.mysql.name }}-0.{{ .Values.mysql.svcName }}.{{ .Release.Namespace }}.svc.cluster.local
   MYSQL_PORT: "{{ .Values.mysql.port }}"
+  MYSQL_DB: "{{ .Values.mysql.db }}"
+  MYSQL_USER: "{{ .Values.mysql.user }}"
+  MYSQL_PASS: "{{ .Values.mysql.pass }}"
 
 

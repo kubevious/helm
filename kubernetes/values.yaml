@@ -49,3 +49,6 @@ mysql:
   memory: 500Mi
   storage: 10Gi
   storageClass: null
+  db: kubevious
+  user: root
+  pass: ''
