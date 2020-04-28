@@ -7,7 +7,7 @@ For more information refer to the root repository: https://github.com/kubevious/
 - Kubernetes v1.13 or higher
 - Helm v3.x
 
-## Installing the Chart
+## Installing the Chart using Helm v3.x
 If using Helm version lower than v3.2 first create a namespace:
 
 ```sh
@@ -47,6 +47,9 @@ Undeploy from cluster:
 ```sh
 helm delete kubevious -n kubevious
 ```
+
+## Installing the Chart using Helm v2.x
+TBD
 
 ## Upgrading from non-Helm version
 
