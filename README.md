@@ -20,8 +20,6 @@ helm repo add kubevious https://helm.kubevious.io
 helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.5.9 -n kubevious 
 ```
 
-If you happen to see error *"UPGRADE FAILED: kubevious has no deployed releases"*, most probably you're running Heml v2, so please check the [legacy instructions here](#installing-the-chart-using-helm-v2x).
-
 ## Accessing Kubevious
 Kubevious runs within your cluster. There are two ways to access Kubevious UI. 
 
