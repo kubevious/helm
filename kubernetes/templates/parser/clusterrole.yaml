@@ -14,6 +14,8 @@ rules:
       - nodes
       - limitranges
       - serviceaccounts
+      - persistentvolumeclaims
+      - persistentvolumes
     verbs:
       - get
       - list
