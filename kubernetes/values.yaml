@@ -15,7 +15,7 @@ kubevious:
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
-  port: 4000
+  port: 4001
   cpu: 100m
   memory: 200Mi
 parser:
@@ -24,7 +24,7 @@ parser:
     tag: 0.6.6
     pullPolicy: IfNotPresent
   name: kubevious-parser
-  port: 4500
+  port: 4002
   cpu: 100m
   memory: 200Mi
 ui:
@@ -34,7 +34,7 @@ ui:
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
-  port: 3000
+  port: 80
   cpu: 25m
   memory: 100Mi
 mysql:
