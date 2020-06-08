@@ -23,14 +23,11 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: BACKEND_URL
-              value: "http://{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc.cluster.local:4000"
+              value: "http://{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.kubevious.port }}"
             {{- if and .Values.ingress.enabled .Values.ingress.domain }}
             - name: FORCE_HTTPS
               value: "true"
             {{- end }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.mysql.name }}-client
           ports:
             - containerPort: {{ .Values.ui.port }}
               name: http
