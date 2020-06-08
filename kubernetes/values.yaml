@@ -11,7 +11,7 @@ ingress:
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.6.28
+    tag: 0.6.29
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
