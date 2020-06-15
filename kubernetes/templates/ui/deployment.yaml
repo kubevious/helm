@@ -31,18 +31,7 @@ spec:
           ports:
             - containerPort: {{ .Values.ui.port }}
               name: http
-          {{- if .Values.ui.customHeader }}
-          volumeMounts:
-            - name: header-config-volume
-              mountPath: /app/views/partials
-          {{- end }}
           resources:
             requests:
               cpu: {{ .Values.ui.cpu }}
               memory: {{ .Values.ui.memory }}
-      {{- if .Values.ui.customHeader }}
-      volumes:
-        - name: header-config-volume
-          configMap:
-            name: {{ .Values.ui.name }}-header
-      {{- end }}
