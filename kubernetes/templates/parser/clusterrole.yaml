@@ -72,3 +72,12 @@ rules:
       - get
       - list
       - watch
+
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - get
+      - list
+      - watch
