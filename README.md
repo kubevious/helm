@@ -17,7 +17,7 @@ Deploy using Helm:
 
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.6.35 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.6.36 -n kubevious 
 ```
 
 ## Accessing Kubevious
@@ -36,7 +36,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 0.6.35 \
+    --version 0.6.36 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
