@@ -23,7 +23,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: KUBEVIOUS_COLLECTOR
-              value: "http://{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.kubevious.port }}/api/v1/collect"
+              value: "http://{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc:{{ .Values.kubevious.port }}/api/v1/collect"
           ports:
             - containerPort: {{ .Values.parser.port }}
               name: http

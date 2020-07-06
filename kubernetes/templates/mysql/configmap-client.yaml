@@ -4,7 +4,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   name: {{ .Values.mysql.name }}-client
 data:
-  MYSQL_HOST: {{ .Values.mysql.name }}-0.{{ .Values.mysql.svcName }}.{{ .Release.Namespace }}.svc.cluster.local
+  MYSQL_HOST: {{ .Values.mysql.name }}-0.{{ .Values.mysql.svcName }}.{{ .Release.Namespace }}.svc
   MYSQL_PORT: "{{ .Values.mysql.port }}"
   MYSQL_DB: "{{ .Values.mysql.db }}"
   MYSQL_USER: "{{ .Values.mysql.user }}"
