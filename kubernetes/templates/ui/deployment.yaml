@@ -23,7 +23,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: BACKEND_URL
-              value: "{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc:{{ .Values.kubevious.port }}"
+              value: "{{ .Values.kubevious.svcName }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.kubevious.port }}"
             {{- if and .Values.ingress.enabled .Values.ingress.domain }}
             - name: FORCE_HTTPS
               value: "true"
