@@ -52,3 +52,5 @@ mysql:
   db: kubevious
   user: root
   pass: ""
+cluster:
+  domain: cluster.local
