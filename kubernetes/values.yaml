@@ -30,7 +30,7 @@ parser:
 ui:
   image:
     repository: kubevious/ui
-    tag: 0.7.9
+    tag: 0.7.10
     pullPolicy: IfNotPresent
   name: kubevious-ui
   svcName: kubevious-ui-svc
