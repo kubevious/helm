@@ -45,8 +45,8 @@ mysql:
   name: kubevious-mysql
   svcName: kubevious-mysql-svc
   port: 3306
-  cpu: 50m
-  memory: 500Mi
+  cpu: 500m
+  memory: 1000Mi
   storage: 10Gi
   storageClass: null
   db: kubevious
