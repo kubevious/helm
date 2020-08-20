@@ -1,0 +1,29 @@
+{{- if .Values.kubevious.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "kubevious.fullname" . }}
+  labels:
+    app.kubernetes.io/component: {{ include "kubevious.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "kubevious.fullname" . }}
+  minReplicas: {{ .Values.kubevious.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.kubevious.autoscaling.maxReplicas }}
+  metrics:
+  {{- if .Values.kubevious.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.kubevious.autoscaling.targetCPUUtilizationPercentage }}
+  {{- end }}
+  {{- if .Values.kubevious.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.kubevious.autoscaling.targetMemoryUtilizationPercentage }}
+  {{- end }}
+{{- end }}

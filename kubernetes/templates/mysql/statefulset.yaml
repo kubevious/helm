@@ -3,19 +3,29 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: {{ .Release.Namespace }}
-  name: {{ .Values.mysql.name }}
+  name: {{ include "kubevious-mysql.fullname" . }}
+  labels:
+    app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      k8s-app: {{ .Values.mysql.name }}
-  serviceName: {{ .Values.mysql.svcName }}
+      app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+      {{- include "kubevious.labels" . | nindent 6 }}
+  serviceName: {{ include "kubevious-mysql.fullname" . }}
   replicas: 1
   template:
     metadata:
       labels:
-        k8s-app: {{ .Values.mysql.name }}
+        app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+        {{- include "kubevious.labels" . | nindent 8 }}
     spec:
+      {{- with .Values.kubevious.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.kubevious.podSecurityContext | nindent 8 }}
       initContainers:
       - name: init-mysql
         image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
@@ -34,27 +44,29 @@ spec:
           mountPath: /mnt/config-map
       containers:
       - name: mysql
-        image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
+        image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}"
         env:
         - name: MYSQL_DATABASE
-          value: kubevious
-        - name: MYSQL_ALLOW_EMPTY_PASSWORD
-          value: "1"
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "kubevious-mysql.fullname" . }}-secret
+              key: MYSQL_DB
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "kubevious-mysql.fullname" . }}-secret
+              key: MYSQL_ROOT_PASSWORD
         ports:
         - name: mysql
-          containerPort: {{ .Values.mysql.port }}
+          containerPort: {{ .Values.mysql.service.port }}
         volumeMounts:
-        - name: data
+        - name: "data"
           mountPath: /var/lib/mysql
           subPath: mysql
         - name: conf
           mountPath: /etc/mysql/conf.d
         - name: init-script
           mountPath: /docker-entrypoint-initdb.d
-        resources:
-          requests:
-            cpu: {{ .Values.mysql.cpu }}
-            memory: {{ .Values.mysql.memory }}
         livenessProbe:
           exec:
             command: ["mysqladmin", "ping"]
@@ -64,31 +76,55 @@ spec:
         readinessProbe:
           exec:
             # Check we can execute queries over TCP (skip-networking is off).
-            command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
+            command:
+              - bash 
+              - "-c" 
+              - | 
+                mysql -p$MYSQL_ROOT_PASSWORD -h 127.0.0.1 -e 'SELECT 1'
           initialDelaySeconds: 5
           periodSeconds: 2
           timeoutSeconds: 1
+        resources:
+          {{- toYaml .Values.kubevious.resources | nindent 12 }}
+      {{- with .Values.kubevious.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.kubevious.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.kubevious.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
       - name: conf
         emptyDir: {}
       - name: config-map
         configMap:
-          name: {{ .Values.mysql.name }}-conf
+          name: {{ include "kubevious-mysql.fullname" . }}-conf
       - name: init-script
         configMap:
-          name: {{ .Values.mysql.name }}-init-script
+          name: {{ include "kubevious-mysql.fullname" . }}-init-script
+      {{- if .Values.mysql.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
-      name: data
+      name: "data"
     spec:
-      accessModes: ["ReadWriteOnce"]
-{{- if .Values.mysql.storageClass }}
-{{- if (eq "-" .Values.mysql.storageClass) }}
+      accessModes: ["{{ .Values.mysql.persistence.accessMode }}"]
+{{- if .Values.mysql.persistence.storageClass }}
+{{- if (eq "-" .Values.mysql.persistence.storageClass) }}
       storageClassName: ""
 {{- else }}
-      storageClassName: "{{ .Values.mysql.storageClass }}"
+      storageClassName: "{{ .Values.mysql.persistence.storageClass }}"
 {{- end }}
 {{- end }}
       resources:
         requests:
-          storage: {{ .Values.mysql.storage }}
+          storage: {{ .Values.mysql.persistence.size }}
+
+      {{- else }}
+      - name: data
+        emptyDir: {}
+      {{- end }}

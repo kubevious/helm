@@ -1,15 +1,15 @@
-{{- if eq .Values.provider "gke" }}
-{{- if .Values.ingress.enabled }}
-{{- if .Values.ingress.domain }}
+{{- if and (eq .Values.provider "gke") (.Values.ingress.enabled) }}
 ---
 apiVersion: networking.gke.io/v1beta1
 kind: ManagedCertificate
 metadata:
   name: kubevious-certificate
-  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: {{ include "kubevious.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
 spec:
   domains:
-    - {{ .Values.ingress.domain }}
-{{- end }}
-{{- end }}
+    {{- range .Values.ingress.hosts }}
+    - {{ .host }}
+    {{- end }}
 {{- end }}
