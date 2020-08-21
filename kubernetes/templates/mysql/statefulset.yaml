@@ -49,12 +49,20 @@ spec:
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
+              {{- if .Values.mysql.existingSecret }}
+              name: {{ .Values.mysql.existingSecret }}
+              {{- else }}
               name: {{ include "kubevious-mysql.fullname" . }}-secret
+              {{- end }}
               key: MYSQL_DB
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
+              {{- if .Values.mysql.existingSecret }}
+              name: {{ .Values.mysql.existingSecret }}
+              {{- else }}
               name: {{ include "kubevious-mysql.fullname" . }}-secret
+              {{- end }}
               key: MYSQL_ROOT_PASSWORD
         ports:
         - name: mysql

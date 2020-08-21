@@ -12,6 +12,8 @@ cluster:
 
 ingress:
   enabled: false
+  # Configuration for GKE
+  # staticIpName: 
   annotations:
     kubernetes.io/ingress.allow-http: "true"
     # kubernetes.io/ingress.class: nginx
@@ -160,6 +162,16 @@ mysql:
   db_name: kubevious
   db_user: "root"
   db_password: ""
+  root_password: ""
+  # Configure to use an existing secret with the required keys
+  # MYSQL_HOST: 
+  # MYSQL_PORT: 
+  # MYSQL_DB: 
+  # MYSQL_USER: 
+  # MYSQL_PASS: 
+  # MYSQL_ROOT_PASSWORD:
+    
+  # existingSecret: "kubevious-mysql-secret"
   persistence:
     enabled: false
     accessMode: ReadWriteOnce
@@ -183,17 +195,17 @@ mysql:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
-  resources:
+  resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
     # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    limits:
-      cpu: 100m
-      memory: 256Mi
-    requests:
-      cpu: 100m
-      memory: 256Mi
+    # limits:
+    #   cpu: 100m
+    #   memory: 256Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 256Mi
 
   nodeSelector: {}
 

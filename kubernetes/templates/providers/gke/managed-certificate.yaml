@@ -1,4 +1,4 @@
-{{- if and (eq .Values.provider "gke") (.Values.ingress.enabled) }}
+{{- if and (eq .Values.provider "gke") (.Values.ingress.enabled) (gt (len .Values.ingress.tls) 0) }}
 ---
 apiVersion: networking.gke.io/v1beta1
 kind: ManagedCertificate

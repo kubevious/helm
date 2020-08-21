@@ -38,7 +38,11 @@ spec:
               value: "production"
           envFrom:
             - secretRef:
+                {{- if .Values.mysql.existingSecret }}
+                name: {{ .Values.mysql.existingSecret }}
+                {{- else }}
                 name: {{ include "kubevious-mysql.fullname" . }}-secret
+                {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.kubevious.service.port }}
