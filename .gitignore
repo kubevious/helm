@@ -66,3 +66,6 @@ typings/
 .history
 
 /kubevious-test.yaml
+
+.idea
+.vscode

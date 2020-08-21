@@ -27,7 +27,7 @@ Kubevious runs within your cluster. There are two ways to access Kubevious UI.
 The easiest but not most convenient method. Wait few seconds before pods are up and running. Setup port forwarding:
 
 ```sh
-kubectl port-forward $(kubectl get pod -l k8s-app=kubevious-ui -n kubevious -o jsonpath="{.items[0].metadata.name}") 3000:80 -n kubevious
+kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/component=kubevious-ui" -n kubevious -o jsonpath="{.items[0].metadata.name}") 3000:80 -n kubevious
 ```
 Access from browser: http://localhost:3000
 
@@ -36,7 +36,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 0.6.36 \
+    --version 0.7.14 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
