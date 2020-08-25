@@ -66,7 +66,7 @@ spec:
               key: MYSQL_ROOT_PASSWORD
         ports:
         - name: mysql
-          containerPort: {{ .Values.mysql.service.port }}
+          containerPort: 3306
         volumeMounts:
         - name: "data"
           mountPath: /var/lib/mysql

@@ -45,7 +45,7 @@ spec:
                 {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.kubevious.service.port }}
+              containerPort: 4001
               protocol: TCP
           livenessProbe:
             httpGet:

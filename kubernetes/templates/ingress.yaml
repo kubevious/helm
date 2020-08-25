@@ -12,12 +12,6 @@ metadata:
   labels:
     {{- include "kubevious.labels" . | nindent 4 }}
   annotations:
-    {{- if .Values.ingress.staticIpName }}
-    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingress.staticIpName }}
-    {{- end }}
-    {{- if and (eq .Values.provider "gke") (gt (len .Values.ingress.tls) 0) }}
-    networking.gke.io/managed-certificates: kubevious-certificate
-    {{- end }}
   {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
