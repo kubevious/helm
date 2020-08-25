@@ -46,7 +46,13 @@ spec:
       - name: mysql
         image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}"
         env:
+        - name: NODE_ENV
+          value: "production"
         - name: MYSQL_DATABASE
+          value: {{ .Values.mysql.db_name }}
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.db_user }}
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               {{- if .Values.mysql.existingSecret }}
@@ -54,7 +60,7 @@ spec:
               {{- else }}
               name: {{ include "kubevious-mysql.fullname" . }}-secret
               {{- end }}
-              key: MYSQL_DB
+              key: MYSQL_PASS
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:

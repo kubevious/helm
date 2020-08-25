@@ -36,6 +36,14 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
+            - name: MYSQL_HOST
+              value: {{ include "kubevious-mysql.fullname" . }}
+            - name: MYSQL_PORT
+              value: {{ .Values.mysql.service.port }}
+            - name: MYSQL_DB
+              value: {{ .Values.mysql.db_name }}
+            - name: MYSQL_USER
+              value: {{ .Values.mysql.db_user }}
           envFrom:
             - secretRef:
                 {{- if .Values.mysql.existingSecret }}
