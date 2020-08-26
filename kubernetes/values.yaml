@@ -163,15 +163,6 @@ mysql:
   db_user: "root"
   db_password: ""
   root_password: ""
-  # Configure to use an existing secret with the required keys
-  # MYSQL_HOST: 
-  # MYSQL_PORT: 
-  # MYSQL_DB: 
-  # MYSQL_USER: 
-  # MYSQL_PASS: 
-  # MYSQL_ROOT_PASSWORD:
-    
-  # existingSecret: "kubevious-mysql-secret"
   persistence:
     enabled: false
     accessMode: ReadWriteOnce
