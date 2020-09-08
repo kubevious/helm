@@ -1,15 +1,17 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ .Values.kubevious.svcName }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "kubevious.fullname" . }}
   labels:
-    k8s-app: {{ .Values.kubevious.svcName }}
+    app.kubernetes.io/component: {{ include "kubevious.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
 spec:
-  type: NodePort
-  selector:
-    k8s-app: {{ .Values.kubevious.name }}
+  type: {{ .Values.kubevious.service.type }}
   ports:
-  - targetPort: {{ .Values.kubevious.port }}
-    protocol: TCP
-    port: {{ .Values.kubevious.port }}
+    - port: {{ .Values.kubevious.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/component: {{ include "kubevious.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}

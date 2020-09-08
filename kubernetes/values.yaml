@@ -1,56 +1,205 @@
-provider: none
+# Default values for kubevious.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Possible values are: gke, eks, aks, doks. Use none for any other cases including on-prem.
+provider: "none"
+cluster:
+  domain: cluster.local
+
 ingress:
   enabled: false
-  class: null
-  domain: null
-  staticIpName: null
-  annotations: {}
-  labels: {}
-  tls: false
-  tlsSecretName: null
+  annotations:
+    kubernetes.io/ingress.allow-http: "true"
+    # kubernetes.io/ingress.global-static-ip-name: ip
+    # networking.gke.io/managed-certificates: kubevious-certificate
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 kubevious:
+  replicaCount: 1
   image:
     repository: kubevious/kubevious
     tag: 0.7.39
     pullPolicy: IfNotPresent
-  name: kubevious
-  svcName: kubevious-svc
-  port: 4001
-  cpu: 100m
-  memory: 200Mi
+  imagePullSecrets: []
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 4001
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 256Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 256Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
 parser:
+  replicaCount: 1
   image:
     repository: kubevious/parser
     tag: 0.7.13
     pullPolicy: IfNotPresent
-  name: kubevious-parser
-  port: 4002
-  cpu: 100m
-  memory: 200Mi
+  imagePullSecrets: []
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 4002
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 256Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 256Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
 ui:
+  replicaCount: 1
   image:
     repository: kubevious/ui
     tag: 0.7.24
     pullPolicy: IfNotPresent
-  name: kubevious-ui
-  svcName: kubevious-ui-svc
-  port: 80
-  cpu: 25m
-  memory: 100Mi
+  imagePullSecrets: []
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 80
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 25m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 25m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
 mysql:
   image:
     repository: mysql
     tag: 8.0.19
     pullPolicy: IfNotPresent
-  name: kubevious-mysql
-  svcName: kubevious-mysql-svc
-  port: 3306
-  cpu: 250m
-  memory: 1000Mi
-  storage: 20Gi
-  storageClass: null
-  db: kubevious
-  user: root
-  pass: ""
-cluster:
-  domain: cluster.local
+  db_name: kubevious
+  db_user: "root"
+  db_password: ""
+  root_password: ""
+  persistence:
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: "20Gi"
+    # storageClass: "-"
+  service:
+    type: ClusterIP
+    port: "3306"
+
+  imagePullSecrets: []
+
+  podAnnotations: {}
+
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 256Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 256Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
