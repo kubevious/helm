@@ -69,3 +69,5 @@ typings/
 
 .idea
 .vscode
+
+output/
