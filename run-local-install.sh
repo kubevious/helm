@@ -21,8 +21,9 @@ rm -f kubevious-0.0.0.tgz
 
 helm package kubernetes/ --version 0.0.0
 
+kubectl create namespace kubevious
+
 helm install \
     --atomic \
     -n kubevious \
-    --set mysql.persistence.enabled=false \
     kubevious ./kubevious-0.0.0.tgz
