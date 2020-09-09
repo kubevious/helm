@@ -120,11 +120,7 @@ spec:
     spec:
       accessModes: ["{{ .Values.mysql.persistence.accessMode }}"]
 {{- if .Values.mysql.persistence.storageClass }}
-{{- if (eq "-" .Values.mysql.persistence.storageClass) }}
-      storageClassName: ""
-{{- else }}
       storageClassName: "{{ .Values.mysql.persistence.storageClass }}"
-{{- end }}
 {{- end }}
       resources:
         requests:

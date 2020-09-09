@@ -5,11 +5,12 @@
 nameOverride: ""
 fullnameOverride: ""
 
-# Possible values are: gke, eks, aks, doks. Use none for any other cases including on-prem.
-provider: "none"
 cluster:
   domain: cluster.local
 
+###
+### INGRESS
+###
 ingress:
   enabled: false
   annotations:
@@ -25,6 +26,10 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+###
+### KUBEVIOUS BACKEND
+###
 kubevious:
   replicaCount: 1
   image:
@@ -48,23 +53,24 @@ kubevious:
   service:
     type: ClusterIP
     port: 4001
+
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    requests:
+      cpu: 100m
+      memory: 200Mi
     # limits:
-    #   cpu: 100m
-    #   memory: 256Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 256Mi
+    #   cpu: 500m
+    #   memory: 1Gi
 
   nodeSelector: {}
 
   tolerations: []
 
   affinity: {}
+
+###
+### KUBEVIOUS PARSER
+###
 parser:
   replicaCount: 1
   image:
@@ -88,17 +94,14 @@ parser:
   service:
     type: ClusterIP
     port: 4002
+
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    requests:
+      cpu: 100m
+      memory: 200Mi
     # limits:
-    #   cpu: 100m
-    #   memory: 256Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 256Mi
+    #   cpu: 500m
+    #   memory: 1Gi
 
   nodeSelector: {}
 
@@ -114,6 +117,10 @@ parser:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
+
+###
+### UI
+###
 ui:
   replicaCount: 1
   image:
@@ -137,16 +144,13 @@ ui:
   service:
     type: ClusterIP
     port: 80
+
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    requests:
+      cpu: 25m
+      memory: 50Mi
     # limits:
-    #   cpu: 25m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 25m
+    #   cpu: 100m
     #   memory: 128Mi
 
   nodeSelector: {}
@@ -154,6 +158,10 @@ ui:
   tolerations: []
 
   affinity: {}
+
+###
+### MYSQL
+###
 mysql:
   image:
     repository: mysql
@@ -164,10 +172,10 @@ mysql:
   db_password: ""
   root_password: ""
   persistence:
-    enabled: false
+    enabled: true
     accessMode: ReadWriteOnce
     size: "20Gi"
-    # storageClass: "-"
+    # storageClass: ""
   service:
     type: ClusterIP
     port: "3306"
@@ -186,17 +194,14 @@ mysql:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
     # runAsUser: 1000
+
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    requests:
+      cpu: 250m
+      memory: 1000Mi
     # limits:
-    #   cpu: 100m
-    #   memory: 256Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 256Mi
+    #   cpu: 1000m
+    #   memory: 2Gi
 
   nodeSelector: {}
 

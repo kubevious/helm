@@ -77,3 +77,30 @@ The following table lists the configurable parameters of the kubevious chart and
 | cluster.domain         | Overrides the default Kubernetes cluster domain name.                                                                                                                        | cluster.local | 
 | provider               | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none          | 
 
+## Chart Configuration Changes
+In version 0.7.15 Helm charts were redesigned. Consider following changes when upgrading from earlier version. 
+
+Following configuration options were removed:
+- provider
+- ingress.class
+- ingress.staticIpName
+
+Following configuration values options were renamed:
+- mysql.storageClass -> mysql.persistence.storageClass
+- mysql.storage -> mysql.persistence.size
+- mysql.db -> mysql.db_name
+- mysql.user -> mysql.db_user
+- mysql.pass -> mysql.db_password
+- *.port -> *.service.port
+- *.cpu -> *.resources.requests.cpu
+- *.memory -> *.resources.requests.memory
+
+Following Ingress annotations are not populated automatically. Use "ingress.annotations" instead. List of removed annotations:
+- kubernetes.io/ingress.global-static-ip-name
+- networking.gke.io/managed-certificates
+- kubernetes.io/ingress.class
+- kubernetes.io/tls-acme
+
+Automatic creation of GKE managed certificate was removed.
+
+MySQL password generation was added.
