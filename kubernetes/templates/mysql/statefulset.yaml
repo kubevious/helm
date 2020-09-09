@@ -49,9 +49,9 @@ spec:
         - name: NODE_ENV
           value: "production"
         - name: MYSQL_DATABASE
-          value: {{ .Values.mysql.db_name }}
+          value: "{{ .Values.mysql.db_name }}"
         - name: MYSQL_USER
-          value: {{ .Values.mysql.db_user }}
+          value: "{{ .Values.mysql.db_user }}"
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:

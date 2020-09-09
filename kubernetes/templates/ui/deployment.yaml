@@ -37,7 +37,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: BACKEND_URL
-              value: {{ include "kubevious.endpoint" . }}
+              value: "{{ include "kubevious.endpoint" . }}"
             {{- if and (.Values.ingress.enabled) (gt (len .Values.ingress.tls) 0) }}
             - name: FORCE_HTTPS
               value: "true"
