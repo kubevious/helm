@@ -9,26 +9,26 @@ data:
   initdb.sql: |
     USE kubevious;
     SET NAMES utf8mb4;
-
+    
     SET GLOBAL expire_logs_days = 0;
     SET GLOBAL binlog_expire_logs_seconds = 259200;
-
+    
     CREATE TABLE IF NOT EXISTS `config` (
       `key` varchar(64) NOT NULL DEFAULT '',
       `value` json NOT NULL,
       PRIMARY KEY (`key`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+    
     CREATE TABLE IF NOT EXISTS `config_hashes` (
       `key` binary(32) NOT NULL DEFAULT '',
-      `part` smallint unsigned NOT NULL,
+      `part` int unsigned NOT NULL,
       `value` json NOT NULL,
       PRIMARY KEY (`key`, `part`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1
     PARTITION BY RANGE (`part`) (
       PARTITION p0 VALUES LESS THAN (0)
     );
-
+    
     CREATE TABLE IF NOT EXISTS `snapshots` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `part` int unsigned NOT NULL,
@@ -39,7 +39,7 @@ data:
     PARTITION BY RANGE (part) (
       PARTITION p0 VALUES LESS THAN (0)
     );
-
+    
     CREATE TABLE IF NOT EXISTS `snap_items` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `part` int unsigned NOT NULL,
@@ -48,19 +48,17 @@ data:
       `kind` varchar(128) NOT NULL DEFAULT '',
       `config_kind` varchar(128) NOT NULL DEFAULT '',
       `name` varchar(128) NULL DEFAULT '',
-      `config_hash_part` smallint unsigned NOT NULL,
       `config_hash` binary(32) NOT NULL,
       PRIMARY KEY (`id`, `part`),
       KEY `snapshot_id` (`snapshot_id`),
       KEY `dn` (`dn`),
       KEY `kind` (`kind`),
-      KEY `config_kind` (`config_kind`),
-      KEY `config_hash_part` (`config_hash_part`)
+      KEY `config_kind` (`config_kind`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1
     PARTITION BY RANGE (part) (
       PARTITION p0 VALUES LESS THAN (0)
     );
-
+    
     CREATE TABLE IF NOT EXISTS `diffs` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `part` int unsigned NOT NULL,
@@ -75,7 +73,7 @@ data:
     PARTITION BY RANGE (part) (
       PARTITION p0 VALUES LESS THAN (0)
     );
-
+    
     CREATE TABLE IF NOT EXISTS `diff_items` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `part` int unsigned NOT NULL,
@@ -85,19 +83,17 @@ data:
       `config_kind` varchar(128) NOT NULL DEFAULT '',
       `name` varchar(128) NULL DEFAULT '',
       `present` tinyint(1) NOT NULL,
-      `config_hash_part` smallint unsigned NOT NULL,
       `config_hash` binary(32) NULL,
       PRIMARY KEY (`id`, `part`),
       KEY `diff_id` (`diff_id`),
       KEY `dn` (`dn`),
       KEY `kind` (`kind`),
-      KEY `config_kind` (`config_kind`),
-      KEY `config_hash_part` (`config_hash_part`)
+      KEY `config_kind` (`config_kind`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1
     PARTITION BY RANGE (part) (
       PARTITION p0 VALUES LESS THAN (0)
     );
-
+    
     CREATE TABLE IF NOT EXISTS `rules` (
       `name` varchar(128) NOT NULL,
       `enabled` TINYINT NOT NULL,
@@ -107,7 +103,7 @@ data:
       `hash` binary(32) NULL,
       PRIMARY KEY (`name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+    
     CREATE TABLE IF NOT EXISTS `rule_statuses` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `rule_name` varchar(128) NOT NULL,
@@ -118,7 +114,7 @@ data:
       PRIMARY KEY (`id`),
       KEY `rule_name` (`rule_name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+    
     CREATE TABLE IF NOT EXISTS `rule_logs` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `rule_name` varchar(128) NOT NULL,
@@ -127,7 +123,7 @@ data:
       PRIMARY KEY (`id`),
       KEY `rule_name` (`rule_name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+    
     CREATE TABLE IF NOT EXISTS `rule_items` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `rule_name` varchar(128) NOT NULL,
@@ -138,8 +134,8 @@ data:
       PRIMARY KEY (`id`),
       KEY `rule_name` (`rule_name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
+    
+    
     CREATE TABLE IF NOT EXISTS `markers` (
       `name` varchar(128) NOT NULL, 
       `shape` varchar(128) NOT NULL, 
@@ -147,8 +143,8 @@ data:
       `propagate` TINYINT NOT NULL,
       PRIMARY KEY (`name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
+    
+    
     CREATE TABLE IF NOT EXISTS `marker_items` (
       `id` int unsigned NOT NULL AUTO_INCREMENT,
       `marker_name` varchar(128) NOT NULL,
@@ -156,7 +152,8 @@ data:
       PRIMARY KEY (`id`), 
       KEY `marker_name` (`marker_name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
+    
+    
     INSERT IGNORE INTO `config`(`key`, `value`)
-    VALUES('DB_SCHEMA', '{ "version": 4 }');
+    VALUES('DB_SCHEMA', '{ "version": 5 }');
+  
