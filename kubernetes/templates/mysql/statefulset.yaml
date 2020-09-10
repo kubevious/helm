@@ -50,6 +50,7 @@ spec:
           value: "production"
         - name: MYSQL_DATABASE
           value: "{{ .Values.mysql.db_name }}"
+        {{- if and (.Values.mysql.db_user) (not (eq .Values.mysql.db_user "root")) }}
         - name: MYSQL_USER
           value: "{{ .Values.mysql.db_user }}"
         - name: MYSQL_PASSWORD
@@ -57,10 +58,11 @@ spec:
             secretKeyRef:
               name: {{ include "kubevious-mysql.fullname" . }}-secret
               key: MYSQL_PASS
+        {{- end }}
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "kubevious-mysql.fullname" . }}-secret
+              name: {{ include "kubevious-mysql.fullname" . }}-secret-root
               key: MYSQL_ROOT_PASSWORD
         ports:
         - name: mysql

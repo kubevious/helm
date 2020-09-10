@@ -41,7 +41,29 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 
 {{- define "kubevious-ui.fullname" -}}
 {{ include "kubevious.fullname" . }}-ui
-{{- end }}1
+{{- end }}
+
+
+{{- define "kubevious-mysql.root-password" -}}
+{{- if .Values.mysql.root_password }}
+{{- .Values.mysql.root_password }}
+{{- else }}
+{{- randAlphaNum 16 }}
+{{- end }}
+{{- end }}
+
+{{- define "kubevious-mysql.user-password" -}}
+{{- if and (.Values.mysql.db_user) (not (eq .Values.mysql.db_user "root")) }}
+{{- if .Values.mysql.db_password }}
+{{- .Values.mysql.db_password }}
+{{- else }}
+{{- randAlphaNum 16 }}
+{{- end }}
+{{- else }}
+{{- include "kubevious-mysql.root-password" . }}
+{{- end }}
+{{- end }}
+
 
 {{/*
 Create chart name and version as used by the chart label.

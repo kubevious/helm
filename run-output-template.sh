@@ -6,4 +6,6 @@ cd $MY_DIR
 
 rm -rf output
 
-helm template kubevious ./kubernetes -n kubevious --output-dir output/
+helm template kubevious ./kubernetes --debug \
+    -n kubevious \
+    --output-dir output/
