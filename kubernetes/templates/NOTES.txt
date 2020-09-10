@@ -27,6 +27,8 @@
                 Nl..............'dWWd'.....lNWd'.............'oN                
                 WKOkkkkkkkkkkkkkOXWWKOkkkkkKW XOOOOOOOOOOOOOOOKW                
 
+Kubevious v{{- .Chart.Version -}} installed!
+
 Access Kubevious by these commands:
 {{- if .Values.ingress.enabled }}
   {{- range $host := .Values.ingress.hosts }}
