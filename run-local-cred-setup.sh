@@ -6,7 +6,7 @@ cd $MY_DIR
 
 CURRENT_CONTEXT=$(kubectl config current-context)
 echo "Current context is: ${CURRENT_CONTEXT}"
-echo "Will install Kubevious now"
+echo "Will setup Kubevious MySQL credentials now"
 read -r -p "Do you want to continue?(y/N) " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
@@ -17,8 +17,14 @@ case "$response" in
         ;;
 esac
 
-helm uninstall kubevious -n kubevious
+kubectl delete pod kubevious-mysql-credentials-setup -n kubevious
 
-kubectl delete pvc data-kubevious-mysql-0 -n kubevious
+kubectl apply -f utils/setup-credentials-pod.yaml
 
-kubectl get pv
+kubectl get pods -n kubevious
+
+sleep 10
+
+kubectl get pods -n kubevious
+
+kubectl logs kubevious-mysql-credentials-setup -n kubevious
