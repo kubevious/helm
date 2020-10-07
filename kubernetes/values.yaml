@@ -11,7 +11,7 @@ ingress:
 kubevious:
   image:
     repository: kubevious/kubevious
-    tag: 0.7.37
+    tag: 0.7.38
     pullPolicy: IfNotPresent
   name: kubevious
   svcName: kubevious-svc
@@ -21,7 +21,7 @@ kubevious:
 parser:
   image:
     repository: kubevious/parser
-    tag: 0.7.12
+    tag: 0.7.13
     pullPolicy: IfNotPresent
   name: kubevious-parser
   port: 4002
