@@ -208,3 +208,28 @@ mysql:
   tolerations: []
 
   affinity: {}
+
+
+###
+### WORLDVIOUS
+###
+worldvious:
+
+  ## Disable version check. As a part of version check Kubevious deployments
+  ## are added to leaderbord at https://worldvious.io
+  ## Reporting is anonymized to nearest city. No IP address stored/logged.
+  opt_out_version_check: false
+
+  ## Disable automatic exception reporting
+  opt_out_error_report: false
+
+  ## Disable reporting of object counters. Includes total number of namespaces,
+  ## nodes, pods, configmaps, etc. Helps to understand Kubevious users better.
+  opt_out_counters_report: false
+
+  ## Disable reporting of internal Kubevious time counters. Those counters are 
+  ## logged to console output. Helps to idenfify bottlenecks and  scale Kubevious.
+  opt_out_metrics_report: false  
+
+  ## Disable all reportings above
+  opt_out_all: false

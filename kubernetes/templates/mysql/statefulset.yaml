@@ -56,13 +56,13 @@ spec:
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "kubevious-mysql.fullname" . }}-secret
+              name: {{ include "kubevious-mysql.secret" . }}
               key: MYSQL_PASS
         {{- end }}
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "kubevious-mysql.fullname" . }}-secret-root
+              name: {{ include "kubevious-mysql.secret-root" . }}
               key: MYSQL_ROOT_PASSWORD
         ports:
         - name: mysql

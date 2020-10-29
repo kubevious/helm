@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,7 +47,7 @@ spec:
               value: "{{ .Values.mysql.db_user }}"
           envFrom:
             - secretRef:
-                name: {{ include "kubevious-mysql.fullname" . }}-secret
+                name: {{ include "kubevious-mysql.secret" . }}
           ports:
             - name: http
               containerPort: 4001

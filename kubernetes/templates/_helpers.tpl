@@ -43,24 +43,61 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{ include "kubevious.fullname" . }}-ui
 {{- end }}
 
+{{- define "kubevious-mysql.secret" -}}
+{{ include "kubevious-mysql.fullname" . }}-secret
+{{- end }}
+
+{{- define "kubevious-mysql.secret-root" -}}
+{{ include "kubevious-mysql.fullname" . }}-secret-root
+{{- end }}
+
+{{- define "kubevious-worldvious.secret" -}}
+{{ include "kubevious.fullname" . }}-worldvious
+{{- end }}
+
+{{- define "kubevious-worldvious.config" -}}
+{{ include "kubevious.fullname" . }}-worldvious
+{{- end }}
+
 
 {{- define "kubevious-mysql.root-password" -}}
 {{- if .Values.mysql.root_password }}
-{{- .Values.mysql.root_password }}
+{{- .Values.mysql.root_password | b64enc }}
 {{- else }}
-{{- randAlphaNum 16 }}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace (include "kubevious-mysql.secret-root" .) ) -}}
+{{- if $secret }}
+{{- $secret.data.MYSQL_ROOT_PASSWORD }}
+{{- else }}
+{{- randAlphaNum 16 | b64enc }}
 {{- end }}
 {{- end }}
+{{- end }}
+
 
 {{- define "kubevious-mysql.user-password" -}}
 {{- if and (.Values.mysql.db_user) (not (eq .Values.mysql.db_user "root")) }}
 {{- if .Values.mysql.db_password }}
-{{- .Values.mysql.db_password }}
+{{- .Values.mysql.db_password | b64enc }}
 {{- else }}
-{{- randAlphaNum 16 }}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace (include "kubevious-mysql.secret" .) ) -}}
+{{- if $secret }}
+{{- $secret.data.MYSQL_PASS }}
+{{- else }}
+{{- randAlphaNum 16 | b64enc }}
+{{- end }}
 {{- end }}
 {{- else }}
 {{- include "kubevious-mysql.root-password" . }}
+{{- end }}
+{{- end }}
+
+
+{{- define "kubevious-worldvious.id" -}}
+{{- $secret := (lookup "v1" "Secret" .Release.Namespace (include "kubevious-worldvious.secret" .) ) -}}
+{{- if $secret }}
+{{- $secret.data.WORLDVIOUS_ID }}
+{{- else }}
+{{- uuidv4 | b64enc }}
 {{- end }}
 {{- end }}
 

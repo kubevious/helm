@@ -6,7 +6,7 @@ cd $MY_DIR
 
 CURRENT_CONTEXT=$(kubectl config current-context)
 echo "Current context is: ${CURRENT_CONTEXT}"
-echo "Will install Kubevious now"
+echo "Will UNINSTALL Kubevious now"
 read -r -p "Do you want to continue?(y/N) " response
 case "$response" in
     [yY][eE][sS]|[yY]) 

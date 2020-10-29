@@ -23,7 +23,8 @@ helm package kubernetes/ --version 0.0.0
 
 kubectl create namespace kubevious
 
-helm upgrade -i --debug \
+# --debug
+helm upgrade -i  \
     --atomic \
     -n kubevious \
     kubevious ./kubevious-0.0.0.tgz
