@@ -27,4 +27,5 @@ kubectl create namespace kubevious
 helm upgrade -i  \
     --atomic \
     -n kubevious \
+    -f dev/overrides.yaml \
     kubevious ./kubevious-0.0.0.tgz

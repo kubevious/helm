@@ -4,10 +4,8 @@
 
 nameOverride: ""
 fullnameOverride: ""
-
 cluster:
   domain: cluster.local
-
 ###
 ### INGRESS
 ###
@@ -15,18 +13,10 @@ ingress:
   enabled: false
   annotations:
     kubernetes.io/ingress.allow-http: "true"
-    # kubernetes.io/ingress.global-static-ip-name: ip
-    # networking.gke.io/managed-certificates: kubevious-certificate
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths: []
+  hosts: 
+    - host: ""
+      paths: [ "/" ]
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
 ###
 ### KUBEVIOUS BACKEND
 ###
@@ -34,26 +24,15 @@ kubevious:
   replicaCount: 1
   image:
     repository: kubevious/kubevious
-    tag: 0.7.39
+    tag: 0.7.44
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
-
   podSecurityContext: {}
-    # fsGroup: 2000
-
   securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
   service:
     type: ClusterIP
     port: 4001
-
   resources:
     requests:
       cpu: 100m
@@ -61,13 +40,9 @@ kubevious:
     # limits:
     #   cpu: 500m
     #   memory: 1Gi
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
-
 ###
 ### KUBEVIOUS PARSER
 ###
@@ -75,26 +50,15 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.7.13
+    tag: 0.7.15
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
-
   podSecurityContext: {}
-    # fsGroup: 2000
-
   securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
   service:
     type: ClusterIP
     port: 4002
-
   resources:
     requests:
       cpu: 100m
@@ -102,13 +66,9 @@ parser:
     # limits:
     #   cpu: 500m
     #   memory: 1Gi
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
-
   serviceAccount:
     # Specifies whether a service account should be created
     create: true
@@ -117,7 +77,6 @@ parser:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
-
 ###
 ### UI
 ###
@@ -125,26 +84,15 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.7.24
+    tag: 0.7.26
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
-
   podSecurityContext: {}
-    # fsGroup: 2000
-
   securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
   service:
     type: ClusterIP
     port: 80
-
   resources:
     requests:
       cpu: 25m
@@ -152,20 +100,16 @@ ui:
     # limits:
     #   cpu: 100m
     #   memory: 128Mi
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
-
 ###
 ### MYSQL
 ###
 mysql:
   image:
     repository: mysql
-    tag: 8.0.19
+    tag: 8.0.22
     pullPolicy: IfNotPresent
   db_name: kubevious
   db_user: "kubevious"
@@ -175,26 +119,14 @@ mysql:
     enabled: true
     accessMode: ReadWriteOnce
     size: "20Gi"
-    # storageClass: ""
+    storageClass: ""
   service:
     type: ClusterIP
     port: "3306"
-
   imagePullSecrets: []
-
   podAnnotations: {}
-
   podSecurityContext: {}
-    # fsGroup: 2000
-
   securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
   resources:
     requests:
       cpu: 250m
@@ -202,34 +134,24 @@ mysql:
     # limits:
     #   cpu: 1000m
     #   memory: 2Gi
-
   nodeSelector: {}
-
   tolerations: []
-
   affinity: {}
-
-
 ###
 ### WORLDVIOUS
 ###
 worldvious:
-
   ## Disable version check. As a part of version check Kubevious deployments
   ## are added to leaderbord at https://worldvious.io
   ## Reporting is anonymized to nearest city. No IP address stored/logged.
   opt_out_version_check: false
-
   ## Disable automatic exception reporting
   opt_out_error_report: false
-
   ## Disable reporting of object counters. Includes total number of namespaces,
   ## nodes, pods, configmaps, etc. Helps to understand Kubevious users better.
   opt_out_counters_report: false
-
   ## Disable reporting of internal Kubevious time counters. Those counters are 
   ## logged to console output. Helps to idenfify bottlenecks and  scale Kubevious.
-  opt_out_metrics_report: false  
-
+  opt_out_metrics_report: false
   ## Disable all reportings above
   opt_out_all: false

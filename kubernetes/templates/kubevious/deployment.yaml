@@ -46,6 +46,8 @@ spec:
             - name: MYSQL_USER
               value: "{{ .Values.mysql.db_user }}"
           envFrom:
+            - configMapRef:
+                name: {{ include "kubevious-worldvious.config" . }}
             - secretRef:
                 name: {{ include "kubevious-mysql.secret" . }}
           ports:

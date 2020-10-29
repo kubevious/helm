@@ -11,7 +11,6 @@ data:
     # Apply this config only on the master.
     [mysqld]
     log-bin
-    expire_logs_days=3
   slave.cnf: |
     # Apply this config only on slaves.
     [mysqld]

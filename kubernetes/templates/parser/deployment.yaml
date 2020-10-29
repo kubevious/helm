@@ -40,6 +40,9 @@ spec:
               value: "production"
             - name: KUBEVIOUS_COLLECTOR
               value: "{{ include "kubevious.collector" . }}"
+          envFrom:  
+            - configMapRef:
+                name: {{ include "kubevious-worldvious.config" . }}
           ports:
             - name: http
               containerPort: 4002
