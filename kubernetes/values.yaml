@@ -24,7 +24,7 @@ kubevious:
   replicaCount: 1
   image:
     repository: kubevious/kubevious
-    tag: 0.7.44
+    tag: 0.7.46
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -84,7 +84,7 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.7.26
+    tag: 0.7.30
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
