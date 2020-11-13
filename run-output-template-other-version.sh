@@ -6,8 +6,8 @@ cd $MY_DIR
 
 rm -rf output
 
-docker run -ti --rm -v $(pwd):/apps -v ~/.kube:/root/.kube -v ~/.helm:/root/.helm alpine/helm \
+docker run -ti --rm -v $(pwd):/apps -v ~/.kube:/root/.kube -v ~/.helm:/root/.helm alpine/helm:3.1.0 \
     template kubevious /apps/kubernetes --debug \
     -n kubevious \
-    -f /appsdev/overrides.yaml \
+    -f /apps/dev/overrides.yaml \
     --output-dir /apps/output/

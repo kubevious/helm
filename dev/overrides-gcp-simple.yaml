@@ -1,8 +1,5 @@
 ingress:
   enabled: true
-  # hosts: 
-  #   - host: ""
-  #     paths: [""]
 ui:
   service: 
     type: NodePort

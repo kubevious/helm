@@ -5,39 +5,40 @@ For more information refer to the root repository: https://github.com/kubevious/
 
 ## Prerequisites
 - Kubernetes v1.13 or higher
-- Helm v3.x
+- Helm v3.1 or higher
 
-## Installing the Chart using Helm v3.x
-If using Helm version lower than v3.2 first create a namespace:
+## Installation 
+First create a namespace:
 
 ```sh
 kubectl create namespace kubevious
 ```
-Deploy using Helm:
 
+Add Kubevious repository and install the Helm chart:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
 helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.6.36 -n kubevious 
 ```
 
 ## Accessing Kubevious
-Kubevious runs within your cluster. There are two ways to access Kubevious UI. 
+Kubevious runs within your cluster. Upon successful completion of helm chart installation, you will see commands to access kubevious UI. There are two ways to access Kubevious UI. 
 
 ### Option 1. Access using port forwarding
 The easiest but not most convenient method. Wait few seconds before pods are up and running. Setup port forwarding:
 
 ```sh
-kubectl port-forward $(kubectl get pod -l "app.kubernetes.io/component=kubevious-ui" -n kubevious -o jsonpath="{.items[0].metadata.name}") 3000:80 -n kubevious
+kubectl port-forward $(kubectl get pods -n kubevious -l "app.kubernetes.io/component=kubevious-ui" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n kubevious  
 ```
-Access from browser: http://localhost:3000
+Access from browser: http://localhost:8080
 
 ### Option 2. Expose using Ingress
-Enable Ingress deployment using dedicated value parameters. See full list of [helm chart values](#helm-chart-values). You will also find other parameters to setup static ip, SSL certificate and domain name.
+Enable Ingress deployment using dedicated value parameters. See full list of [helm chart values](#helm-chart-values) to cofigure Ingress parameters.
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
     --version 0.6.36 \
     --set ingress.enabled=true \
+    --set ui.service.type=NodePort \
     kubevious kubevious/kubevious
 ```
 
@@ -48,34 +49,27 @@ Undeploy from cluster:
 helm delete kubevious -n kubevious
 ```
 
-## Installing the Chart using Helm v2.x
-TBD
-
-## Upgrading from non-Helm version
-
-If you are upgrading from version deployed using kubectl apply, first cleanup existing deployment:
-
-```sh
-kubectl delete namespace kubevious
-kubectl delete clusterrole kubevious
-kubectl delete clusterrolebinding kubevious
-```
-
 ## Configuration
 The following table lists the configurable parameters of the kubevious chart and their default values.
 
-| Value                  | Description                                                                                                                                                                  | Default       |
-| ---------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| mysql.storageClass     | Storage class applied to MySQL persistent volume claim.                                                                                                                      |               | 
-| ingress.enabled        | Whether to expose Kubevious using ingress gateway.                                                                                                                           | false         | 
-| ingress.class          | Ingress class name.                                                                                                                                                          | false         | 
-| ingress.domain         | Domain name to be used with ingress gateway.                                                                                                                                 |               | 
-| ingress.staticIpName   | Name of static ip object used with the ingress gateway.                                                                                                                      |               | 
-| ingress.tlsSecretName  | Enables TLS configuration. Specifies the name of Kubernetes secret used in TLS                                                                                               |               | 
-| ingress.annotations    | Additional annotations to be applied to the ingress gateway.                                                                                                                 |               | 
-| ingress.labels         | Additional metadata labels to be applied to the ingress gateway.                                                                                                             |               | 
-| cluster.domain         | Overrides the default Kubernetes cluster domain name.                                                                                                                        | cluster.local | 
-| provider               | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem.                       | none          | 
+| Value               | Description                                                  | Default                                      |
+| ------------------- | ------------------------------------------------------------ | -------------------------------------------- |
+| nameOverride        | Overrides the *app.kubernetes.io/name* label value           |                                              |
+| fullnameOverride    | Overrides name of the app                                    |                                              |
+| cluster.domain      | Overrides the default Kubernetes cluster domain name.        | cluster.local                                |
+| ingress.enabled     | Whether to expose Kubevious using Ingress gateway.           | false                                        |
+| ingress.annotations | Dictionary of Ingress annodations.                           | `{kubernetes.io/ingress.allow-http: "true"}` |
+| ingress.hosts       | Array of hosts and paths for ingress                         | `[{host: "", paths: [ "" ] }`]               |
+| ingress.tls         | Array of ingress tls configurations. Fields are *hosts* array and *secretName* |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+|                     |                                                              |                                              |
+| mysql.storageClass  | Storage class applied to MySQL persistent volume claim.      |                                              |
+| provider            | Environment where Kubevious is deployed. Possible values are: **gke**, **eks**, **aks**, **doks**. Use **none** for any other cases including on-prem. | none                                         |
 
 ## Chart Configuration Changes
 In version 0.7.15 Helm charts were redesigned. Consider following changes when upgrading from earlier version. 
