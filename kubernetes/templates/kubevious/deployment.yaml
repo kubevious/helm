@@ -50,6 +50,8 @@ spec:
                 name: {{ include "kubevious-worldvious.config" . }}
             - secretRef:
                 name: {{ include "kubevious-mysql.secret" . }}
+            - secretRef:
+                name: {{ include "kubevious-worldvious.secret" . }}
           ports:
             - name: http
               containerPort: 4001

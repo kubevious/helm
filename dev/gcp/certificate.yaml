@@ -1,0 +1,8 @@
+kind: ManagedCertificate
+apiVersion: networking.gke.io/v1beta1
+metadata:
+  name: kubevious-certificate
+  namespace: kubevious
+spec:
+  domains:
+    - demo2.kubevious.io

@@ -37,11 +37,12 @@ Visit http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }} to a
       {{- else }}
 Access Kubevious by this command:
   echo "Visit http://"$(kubectl get ingress kubevious-ui -n kubevious -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+It may take few minutes for Ingress IP to be allocated. Try running few times.
       {{- end }}
     {{- end }}
   {{- end }}
 
-You can also access Kubevious by setting up port forwarding
+Alternatively, you can also access Kubevious by setting up port forwarding
   kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
 and visiting http://127.0.0.1:8080
 {{- else if contains "NodePort" .Values.ui.service.type }}

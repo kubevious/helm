@@ -15,7 +15,7 @@ ingress:
     kubernetes.io/ingress.allow-http: "true"
   hosts: 
     - host: ""
-      paths: [ "/" ]
+      paths: [ "" ]
   tls: []
 ###
 ### KUBEVIOUS BACKEND
@@ -24,7 +24,7 @@ kubevious:
   replicaCount: 1
   image:
     repository: kubevious/kubevious
-    tag: 0.7.46
+    tag: 0.7.49
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -50,7 +50,7 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.7.15
+    tag: 0.7.16
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -84,7 +84,7 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.7.30
+    tag: 0.7.40
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
