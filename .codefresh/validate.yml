@@ -31,6 +31,17 @@ steps:
       - git reset --hard ${{CF_REVISION}}
       - ls -la
 
+  lint:
+    title: Lint
+    stage: validate
+    image: kubevious/aws_cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}
+    shell: bash
+    commands:
+      - pwd
+      - ls -la
+      - helm lint kubernetes/
+
   validate_default:
     title: Validate Chart Default
     stage: validate
