@@ -132,3 +132,20 @@ Create the name of the service account to use
 {{- default "default" .Values.parser.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{- define "kubevious-ui.service.type" -}}
+{{- if .Values.ingress.enabled }}
+{{- if (eq .Values.ui.service.type "ClusterIP") }}
+{{- "NodePort" }}
+{{- else }}
+{{- .Values.ui.service.type }}
+{{- end }}
+{{- else }}
+{{- .Values.ui.service.type }}
+{{- end }}
+{{- end }}
+
+{{- define "kubevious-ui.service.name" -}}
+{{ print (include "kubevious-ui.fullname" . ) "-" (include "kubevious-ui.service.type" . | lower) }}
+{{- end }}

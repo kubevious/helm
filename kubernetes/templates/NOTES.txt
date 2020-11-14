@@ -36,37 +36,34 @@ Kubevious v{{- .Chart.Version }} installed!
 Visit http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }} to access Kubevious
       {{- else }}
 Access Kubevious by this command:
-  echo "Visit http://"$(kubectl get ingress kubevious-ui -n kubevious -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-It may take few minutes for Ingress IP to be allocated. Try running few times.
+$  echo "Visit http://"$(kubectl get ingress kubevious-ui -n kubevious -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
       {{- end }}
     {{- end }}
   {{- end }}
+It may take some time for Ingress to be up and running.
 
 Alternatively, you can also access Kubevious by setting up port forwarding
-  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
+$  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
 and visiting http://127.0.0.1:8080
-{{- else if contains "NodePort" .Values.ui.service.type }}
+{{- else if contains "NodePort" (include "kubevious-ui.service.type" .) }}
 Access Kubevious by this command:
-  echo "Visit http://"$(kubectl get nodes -n {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")":"$(kubectl get -n {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "kubevious-ui.fullname" . }})
+$  echo "Visit http://"$(kubectl get nodes -n {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")":"$(kubectl get -n {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "kubevious-ui.service.name" . }})
 
 Alternatively, you can also access Kubevious by setting up port forwarding
-  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
+$  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
 and visiting http://127.0.0.1:8080
-{{- else if contains "LoadBalancer" .Values.ui.service.type }}
+{{- else if contains "LoadBalancer" (include "kubevious-ui.service.type" .) }}
 Access Kubevious by this command:
-  echo "Visit http://"$(kubectl get svc -n {{ .Release.Namespace }} {{ include "kubevious-ui.fullname" . }} -o jsonpath="{.status.loadBalancer.ingress[0].ip}" )":"{{ .Values.ui.service.port }}
+$  echo "Visit http://"$(kubectl get svc -n {{ .Release.Namespace }} {{ include "kubevious-ui.service.name" . }} -o jsonpath="{.status.loadBalancer.ingress[0].ip}" )":"{{ .Values.ui.service.port }}
 
-NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-      You can watch the status of by running 'kubectl get -n {{ .Release.Namespace }} svc -w {{ include "kubevious-ui.fullname" . }}'
+NOTE: It may take a few minutes for the LoadBalancer IP to be available. You can watch the status of by running:
+$  kubectl get -n {{ .Release.Namespace }} svc -w {{ include "kubevious-ui.service.name" . }}
 
 Alternatively, you can also access Kubevious by setting up port forwarding
-  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
+$  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
 and visiting http://127.0.0.1:8080
-{{- else if contains "ClusterIP" .Values.ui.service.type }}
+{{- else if contains "ClusterIP" (include "kubevious-ui.service.type" .) }}
 Access Kubevious by setting up port forwarding
-  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
+$  kubectl port-forward $(kubectl get pods -n {{ .Release.Namespace }} -l "app.kubernetes.io/component={{ include "kubevious-ui.fullname" . }}" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n {{ .Release.Namespace }} 
 and visiting http://127.0.0.1:8080
 {{- end }}
-
-
-

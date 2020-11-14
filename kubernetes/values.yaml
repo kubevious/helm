@@ -84,7 +84,7 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.7.40
+    tag: 0.7.41
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -141,17 +141,23 @@ mysql:
 ### WORLDVIOUS
 ###
 worldvious:
-  ## Disable version check. As a part of version check Kubevious deployments
-  ## are added to leaderbord at https://worldvious.io
-  ## Reporting is anonymized to nearest city. No IP address stored/logged.
+  ## Disables version check. As a part of the version check, Kubevious deployments
+  ## are added to the leaderboard at https://worldvious.io. Reporting is anonymized
+  ## to the nearest city. No IP address is stored or logged. We calculate the SHA256
+  ## hash of the IP address and use it as a key. As a part of this request, we also
+  ## added news notification and a feedback request mechanism.
   opt_out_version_check: false
-  ## Disable automatic exception reporting
+  ## Disables automatic exception and error reporting.
   opt_out_error_report: false
-  ## Disable reporting of object counters. Includes total number of namespaces,
-  ## nodes, pods, configmaps, etc. Helps to understand Kubevious users better.
+  ## Disables periodic reporting of cluster metrics, such as: number of nodes, pods,
+  ## ingresses, configmaps, etc. The number of pods and nodes would appear on the
+  ## https://worldvious.io leaderboard. Those are the same counters you would see in
+  ## the console log of kubevious and parser pods.
   opt_out_counters_report: false
-  ## Disable reporting of internal Kubevious time counters. Those counters are 
-  ## logged to console output. Helps to idenfify bottlenecks and  scale Kubevious.
+  ## Disables periodic reporting of internal time metrics. In conjunction with counters
+  ## reporting, this would help identify internal bottlenecks and improve overall
+  ## performance. Those are the same metrics you would see in the console log of kubevious
+  ## and parser pods.
   opt_out_metrics_report: false
-  ## Disable all reportings above
+  ## Opt out from all of the above reportings.
   opt_out_all: false
