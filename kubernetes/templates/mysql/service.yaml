@@ -1,15 +1,18 @@
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ .Values.mysql.svcName }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "kubevious-mysql.fullname" . }}
   labels:
-    k8s-app: {{ .Values.mysql.svcName }}
+    app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
 spec:
-  selector:
-    k8s-app: {{ .Values.mysql.name }}
-  clusterIP: None
+  type: {{ .Values.kubevious.service.type }}
   ports:
-  - targetPort: {{ .Values.mysql.port }}
-    protocol: TCP
-    port: {{ .Values.mysql.port }}
+    - port: {{ .Values.mysql.service.port }}
+      targetPort: mysql
+      protocol: TCP
+      name: mysql
+  selector:
+    app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}

@@ -1,7 +1,11 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Release.Namespace }}-{{ .Values.parser.name }}
+  name: {{ include "kubevious-parser.fullname" . }}
+  labels:
+    app.kubernetes.io/component: {{ include "kubevious-parser.fullname" . }}
+    {{- include "kubevious.labels" . | nindent 4 }}
 rules:
 
   - apiGroups:

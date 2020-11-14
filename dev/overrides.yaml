@@ -1,0 +1,12 @@
+# ingress:
+#   enabled: true
+#   annotations:
+#     kubernetes.io/ingress.allow-http: "true"
+#     kubernetes.io/ingress.global-static-ip-name: kubevious-ui
+#     networking.gke.io/managed-certificates: kubevious-certificate
+#   hosts: 
+#     - host: "demo2.kubevious.io"
+#       paths: [""]
+# ui:
+#   service: 
+#     type: NodePort
