@@ -11,7 +11,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
-      {{- include "kubevious.labels" . | nindent 6 }}
+      {{- include "kubevious.match-labels" . | nindent 6 }}
   serviceName: {{ include "kubevious-mysql.fullname" . }}
   replicas: 1
   template:

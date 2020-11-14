@@ -2,38 +2,6 @@ apiVersion: v1
 entries:
   kubevious:
   - apiVersion: v2
-    appVersion: 0.7.24
-    created: "2020-11-14T22:45:59.563382801Z"
-    description: A Helm chart for Kubevious
-    digest: fee42b3cd7e93023a3efb6513c86098e2baac4e1083ce6030811845e6751ebe1
-    icon: https://kubevious.io/img/logo.png
-    keywords:
-    - kubernetes ui
-    - kubernetes web ui
-    - kubernetes configuration checker
-    - kubernetes validator
-    name: kubevious
-    type: application
-    urls:
-    - kubevious-0.7.24.tgz
-    version: 0.7.24
-  - apiVersion: v2
-    appVersion: 0.7.23
-    created: "2020-11-14T22:45:59.562453469Z"
-    description: A Helm chart for Kubevious
-    digest: f54426334cea818b480e5d0cd8c00938f1881c0b1d190e0cdb80410435b24330
-    icon: https://kubevious.io/img/logo.png
-    keywords:
-    - kubernetes ui
-    - kubernetes web ui
-    - kubernetes configuration checker
-    - kubernetes validator
-    name: kubevious
-    type: application
-    urls:
-    - kubevious-0.7.23.tgz
-    version: 0.7.23
-  - apiVersion: v2
     appVersion: 0.7.22
     created: "2020-11-14T22:45:59.561471421Z"
     description: A Helm chart for Kubevious

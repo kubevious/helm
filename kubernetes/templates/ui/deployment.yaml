@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: {{ include "kubevious-ui.fullname" . }}
-      {{- include "kubevious.labels" . | nindent 6 }}
+      {{- include "kubevious.match-labels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.ui.podAnnotations }}

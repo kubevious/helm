@@ -123,6 +123,16 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
+Match labels
+*/}}
+{{- define "kubevious.match-labels" -}}
+app.kubernetes.io/name: {{ include "kubevious.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "kubevious-parser.serviceAccountName" -}}

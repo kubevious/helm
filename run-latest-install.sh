@@ -17,17 +17,13 @@ case "$response" in
         ;;
 esac
 
-VERSION=0.0.0
-
-rm -f kubevious-${VERSION}.tgz
-
-helm package kubernetes/ --version ${VERSION}
+helm repo update
 
 kubectl create namespace kubevious
 
 # --debug
-helm upgrade -i  \
-    --atomic \
+helm upgrade --atomic -i \
+    --version 0.7.24 \
     -n kubevious \
-    -f dev/overrides.yaml \
-    kubevious ./kubevious-${VERSION}.tgz
+    -f dev/overrides-gcp-https.yaml \
+    kubevious kubevious/kubevious 
