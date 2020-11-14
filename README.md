@@ -4,7 +4,7 @@
 For more information refer to the root repository: https://github.com/kubevious/kubevious
 
 ## Notable Changes
-Unfortunately, versions 0.7.xx or lower are not upgradable to the newer versions of Kubevious. That was the reason of the delay between versions 0.6 and 0.7, as we wanted to pack all non-upgradable changes into version 0.7. The following changes were made that prevents seamless upgrades. 
+Unfortunately, versions 0.7.22 or lower are not upgradable to the newer versions of Kubevious (0.7.23+). That was the reason of the delay between versions 0.6 and 0.7, as we wanted to pack all non-upgradable changes into version 0.7. The following changes were made that prevents seamless upgrades. 
 
 - Helm charts were rewritten, allowing significantly more freedom of deployment configuration choices 
 - The database schema was redesigned to improve query and old data purge performance
