@@ -23,7 +23,7 @@ kubectl create namespace kubevious
 
 # --debug
 helm upgrade --atomic -i \
-    --version 0.7.24 \
+    --version 0.7.25 \
     -n kubevious \
     -f dev/overrides-gcp-https.yaml \
     kubevious kubevious/kubevious 
