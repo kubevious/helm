@@ -17,7 +17,7 @@ A two-way feedback mechanism was added to Kubevious. It includes version checks,
 ## Prerequisites
 
 - Kubernetes v1.13 or higher
-- Helm v3.1 or higher
+- Helm v3.2 or higher
 
 ## Installation 
 
