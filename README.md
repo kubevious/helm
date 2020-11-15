@@ -12,7 +12,7 @@ Unfortunately, versions 0.7.24 or lower are not upgradable to the newer versions
 
 Significant changes to the Helm chart values were also made. We no longer configure public cloud specific annotations and resources. With such a variaty of environment options, it was impossible to maintain. Please see complete table of [configurations](#configuration) below.
 
-A two-way feedback mechanism was added to Kubevious. It includes version checks, news updates, useful hints and tips,  and reporting of errors, cluster size metrics, and internal time counters. Participants would also see their clusters on a https://worldvious.io leaderboard map. Location is anonymized to the nearest city. No IP address is stored or logged. We calculate the SHA256 hash of the IP address and use it as a key in the backend. If, for some reason, you do not want to participate, please see details of reporting [configurations](#configuration) parameters and instructions to opt-out (it's super easy).
+A two-way feedback mechanism was added to Kubevious. It includes version checks, news updates, useful hints and tips,  and reporting of errors, cluster size metrics, and internal time counters. Participants would also see their clusters on a https://worldvious.io leaderboard map. Location is anonymized to the nearest city/zip. No IP address is stored or logged. We calculate the SHA256 hash of the IP address and use it as a key in the backend. If, for some reason, you do not want to participate, please see details of reporting [configurations](#configuration) parameters and instructions to opt-out (it's super easy).
 
 ## Prerequisites
 
