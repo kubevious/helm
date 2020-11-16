@@ -21,6 +21,7 @@ ingress:
 ### KUBEVIOUS BACKEND
 ###
 kubevious:
+# Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/kubevious
@@ -47,6 +48,7 @@ kubevious:
 ### KUBEVIOUS PARSER
 ###
 parser:
+# Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/parser
@@ -81,6 +83,7 @@ parser:
 ### UI
 ###
 ui:
+# Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/ui
@@ -118,7 +121,7 @@ mysql:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: "20Gi"
+    size: "10Gi"
     storageClass: ""
   service:
     type: ClusterIP

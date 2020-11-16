@@ -115,7 +115,7 @@ spec:
       - name: init-script
         configMap:
           name: {{ include "kubevious-mysql.fullname" . }}-init-script
-      {{- if .Values.mysql.persistence.enabled }}
+{{- if .Values.mysql.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: "data"
@@ -127,8 +127,7 @@ spec:
       resources:
         requests:
           storage: {{ .Values.mysql.persistence.size }}
-
-      {{- else }}
+{{- else }}
       - name: data
         emptyDir: {}
-      {{- end }}
+{{- end }}
