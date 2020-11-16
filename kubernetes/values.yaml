@@ -21,7 +21,7 @@ ingress:
 ### KUBEVIOUS BACKEND
 ###
 kubevious:
-# Do not modify replicaCount
+  # Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/kubevious
@@ -48,7 +48,7 @@ kubevious:
 ### KUBEVIOUS PARSER
 ###
 parser:
-# Do not modify replicaCount
+  # Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/parser
@@ -83,7 +83,7 @@ parser:
 ### UI
 ###
 ui:
-# Do not modify replicaCount
+  # Do not modify replicaCount
   replicaCount: 1
   image:
     repository: kubevious/ui
