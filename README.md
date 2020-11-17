@@ -58,10 +58,23 @@ helm upgrade --atomic -i -n kubevious \
 Undeploy from cluster:
 
 ```sh
-helm delete kubevious -n kubevious
+helm uninstall kubevious -n kubevious
 ```
 
+**IMPORTANT:** As requested by the community, now Kubevious Helm charts generate random MySQL root and user passwords. The Helm uninstall leaves behind the MySQL persistent volume. The same volume will be mounted if Kubevious is reinstalled into the same namespace using the same release name. That creates a big problem because Helm chart will generate new passwords for the backend to connect to MySQL, but the connection would fail because the mounted volume is initialized using the password generated using the initial installation. There are few solutions to this:
+
+1. Delete the PersistentVolumeClain after *helm uninstall*:
+```sh
+$ kubectl delete pvc data-kubevious-mysql-0 -n kubevious
+```
+
+2. Install Kubevious providing your own root and user passwords. See *mysql.root_password* and *mysql.db_password* configuration values below.
+
+3. Bit more complicated way is to update passwords in *kubevious-mysql-secret* and *kubevious-mysql-secret-root* Kubernetes secrets. Though wouldn't recommend going that route.
+
+
 ## Configuration
+
 The following table lists the configurable parameters of the kubevious chart and their default values.
 
 | Value                               | Description                                                  | Default                                      |
