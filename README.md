@@ -4,7 +4,7 @@
 For more information refer to the root repository: https://github.com/kubevious/kubevious
 
 ## Notable Changes
-Unfortunately, versions 0.7.24 or lower are not upgradable to the newer versions of Kubevious (0.7.25+). That was the reason of the delay between versions 0.6 and 0.7, as we wanted to pack all non-upgradable changes into version 0.7. The following changes were made that prevents seamless upgrades. 
+Unfortunately, versions 0.7.25 or lower are not upgradable to the newer versions of Kubevious (0.7.26+). That was the reason of the delay between versions 0.6 and 0.7, as we wanted to pack all non-upgradable changes into version 0.7. The following changes were made that prevents seamless upgrades. 
 
 - Helm charts were rewritten, allowing significantly more freedom of deployment configuration choices 
 - The database schema was redesigned to improve query and old data purge performance
@@ -30,7 +30,7 @@ kubectl create namespace kubevious
 Add Kubevious repository and install the Helm chart:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.7.25 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.7.26 -n kubevious 
 ```
 
 ## Accessing Kubevious
@@ -49,7 +49,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 0.7.25 \
+    --version 0.7.26 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
