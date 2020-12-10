@@ -8,5 +8,5 @@ keywords:
   - kubernetes configuration checker
   - kubernetes validator
 icon: https://kubevious.io/img/logo.png
-version: 0.8.2
-appVersion: 0.8.2
+version: 0.8.3
+appVersion: 0.8.3
