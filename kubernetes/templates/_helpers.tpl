@@ -59,7 +59,6 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{ include "kubevious.fullname" . }}-worldvious
 {{- end }}
 
-
 {{- define "kubevious-mysql.root-password" -}}
 {{- if .Values.mysql.root_password }}
 {{- .Values.mysql.root_password | b64enc }}
@@ -68,7 +67,11 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{- if $secret }}
 {{- $secret.data.MYSQL_ROOT_PASSWORD }}
 {{- else }}
+{{- if .Values.mysql.generate_passwords }}
 {{- randAlphaNum 16 | b64enc }}
+{{- else }}
+{{- "kubevious" | b64enc }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -83,7 +86,11 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{- if $secret }}
 {{- $secret.data.MYSQL_PASS }}
 {{- else }}
+{{- if .Values.mysql.generate_passwords }}
 {{- randAlphaNum 16 | b64enc }}
+{{- else }}
+{{- "kubevious" | b64enc }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- else }}
@@ -119,6 +126,15 @@ helm.sh/chart: {{ include "kubevious.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Base labels
+*/}}
+{{- define "kubevious.base-labels" -}}
+app.kubernetes.io/name: {{ include "kubevious.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 

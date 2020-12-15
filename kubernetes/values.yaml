@@ -110,12 +110,20 @@ ui:
 ### MYSQL
 ###
 mysql:
+  external:
+    enabled: false
+    host: ""
+    port: ""
+    database: ""
+    user: ""
+    password: ""
   image:
     repository: mysql
     tag: 8.0.22
     pullPolicy: IfNotPresent
   db_name: kubevious
   db_user: "kubevious"
+  generate_passwords: false
   db_password: ""
   root_password: ""
   persistence:

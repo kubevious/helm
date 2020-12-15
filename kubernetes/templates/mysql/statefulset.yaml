@@ -18,7 +18,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
-        {{- include "kubevious.labels" . | nindent 8 }}
+        {{- include "kubevious.base-labels" . | nindent 8 }}
     spec:
       {{- with .Values.kubevious.imagePullSecrets }}
       imagePullSecrets:

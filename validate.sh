@@ -11,5 +11,5 @@ echo "RUNNIG HELM LINT with DEPLOY IMAGE..."
 docker run -ti --rm -v $(pwd):/apps kubevious/aws_cicd_deployer helm lint /apps/kubernetes
 
 echo "RUNNIG HELM VERIFY..."
-# helm verify kubernetes/
+helm verify kubernetes/
 

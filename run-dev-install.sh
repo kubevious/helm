@@ -17,9 +17,12 @@ case "$response" in
         ;;
 esac
 
-VERSION=0.0.0
+VERSION=0.0.8
 
-rm -f kubevious-${VERSION}.tgz
+yq w -i kubernetes/Chart.yaml version ${VERSION}
+yq w -i kubernetes/Chart.yaml appVersion ${VERSION}
+
+rm -f kubevious-*.tgz
 
 helm package kubernetes/ --version ${VERSION}
 
