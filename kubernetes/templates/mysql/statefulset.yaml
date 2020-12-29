@@ -36,6 +36,8 @@ spec:
           set -ex
           echo "[mysqld]" > /mnt/conf.d/server-id.cnf
           echo "server-id=1" >> /mnt/conf.d/server-id.cnf
+          echo "[mysqld]" > /mnt/conf.d/bin-logs.cnf
+          echo "binlog_expire_logs_seconds=259200" >> /mnt/conf.d/bin-logs.cnf
           cp /mnt/config-map/master.cnf /mnt/conf.d/
         volumeMounts:
         - name: conf
