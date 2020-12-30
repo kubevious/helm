@@ -99,6 +99,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | kubevious.nodeSelector              | Kubevious backend PodSpec nodeSelector                       |                                              |
 | kubevious.tolerations               | Kubevious backend PodSpec tolerations                        |                                              |
 | kubevious.affinity                  | Kubevious backend PodSpec affinity                           |                                              |
+| kubevious.log.level | Kubevious backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
 | parser.podAnnotations               | Kubevious parser pod annotations                            |                                              |
 | parser.image.pullPolicy          | Kubevious parser PodSpec pullPolicy                         | IfNotPresent                                 |
 | parser.image.imagePullSecrets    | Kubevious parser PodSpec imagePullSecrets                   |                                              |
@@ -112,6 +113,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.nodeSelector              | Kubevious parser PodSpec nodeSelector                       |                                              |
 | parser.tolerations               | Kubevious parser PodSpec tolerations                        |                                              |
 | parser.affinity                  | Kubevious parser PodSpec affinity                           |                                              |
+| parser.log.level | Parser backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
 | parser.serviceAccount.create | Indicates wheter a service account should be created for Kubevious parser | true |
 | parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
 | parser.serviceAccount.name | The name of the service account to use. If not and create is tru, a name is generated |                                              |

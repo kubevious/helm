@@ -44,6 +44,8 @@ kubevious:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  log:
+    level: info
 ###
 ### KUBEVIOUS PARSER
 ###
@@ -71,6 +73,8 @@ parser:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+  log:
+    level: info
   serviceAccount:
     # Specifies whether a service account should be created
     create: true
