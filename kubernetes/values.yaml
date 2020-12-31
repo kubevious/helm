@@ -25,7 +25,7 @@ kubevious:
   replicaCount: 1
   image:
     repository: kubevious/kubevious
-    tag: 0.8.18
+    tag: 0.8.19
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -54,7 +54,7 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.8.13
+    tag: 0.8.14
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
