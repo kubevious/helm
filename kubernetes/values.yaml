@@ -91,7 +91,7 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.9.6
+    tag: 0.9.7
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
