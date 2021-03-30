@@ -147,30 +147,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{/*
-Create the name of the service account to use for kubevious
-*/}}
-{{- define "kubevious.serviceAccountName" -}}
-{{- if .Values.kubevious.serviceAccount.create }}
-{{- default (include "kubevious.fullname" .) .Values.kubevious.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.kubevious.serviceAccount.name }}
-{{- end }}
-{{- end }}
 
 {{/*
-Create the name of the service account to use for mysql
-*/}}
-{{- define "kubevious-mysql.serviceAccountName" -}}
-{{- if .Values.kubevious.mysql.create }}
-{{- default (include "kubevious-mysql.fullname" .) .Values.mysql.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.mysql.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use for the parser
+Create the name of the service account to use
 */}}
 {{- define "kubevious-parser.serviceAccountName" -}}
 {{- if .Values.parser.serviceAccount.create }}
@@ -180,16 +159,6 @@ Create the name of the service account to use for the parser
 {{- end }}
 {{- end }}
 
-{{/*
-Create the name of the service account to use for the ui
-*/}}
-{{- define "kubevious-ui.serviceAccountName" -}}
-{{- if .Values.ui.serviceAccount.create }}
-{{- default (include "kubevious-ui.fullname" .) .Values.ui.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.ui.serviceAccount.name }}
-{{- end }}
-{{- end }}
 
 {{- define "kubevious-ui.service.type" -}}
 {{- if .Values.ingress.enabled }}
