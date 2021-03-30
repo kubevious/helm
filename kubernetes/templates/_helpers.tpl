@@ -162,7 +162,7 @@ Create the name of the service account to use for kubevious
 Create the name of the service account to use for mysql
 */}}
 {{- define "kubevious-mysql.serviceAccountName" -}}
-{{- if .Values.kubevious.mysql.create }}
+{{- if .Values.mysql.serviceAccount.create }}
 {{- default (include "kubevious-mysql.fullname" .) .Values.mysql.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.mysql.serviceAccount.name }}
