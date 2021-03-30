@@ -79,7 +79,7 @@ spec:
           mountPath: /docker-entrypoint-initdb.d
         livenessProbe:
           exec:
-            command: ["mysqladmin", "ping"]
+            command: ["mysqladmin", "ping", "-u$MYSQL_USER", "-p$MYSQL_PASSWORD"]
           initialDelaySeconds: 120
           periodSeconds: 10
           timeoutSeconds: 5
@@ -90,7 +90,7 @@ spec:
               - bash 
               - "-c" 
               - | 
-                mysql -p$MYSQL_ROOT_PASSWORD -h 127.0.0.1 -e 'SELECT 1'
+                mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -h 127.0.0.1 -e 'SELECT 1'
           initialDelaySeconds: 5
           periodSeconds: 2
           timeoutSeconds: 1
