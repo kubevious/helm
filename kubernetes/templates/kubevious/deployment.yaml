@@ -68,6 +68,7 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.kubevious.resources | nindent 12 }}
+      serviceAccountName: {{ include "kubevious.serviceAccountName" . }}
       {{- with .Values.kubevious.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
