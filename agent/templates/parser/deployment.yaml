@@ -40,12 +40,26 @@ spec:
               value: "production"
             - name: LOG_LEVEL
               value: "{{ .Values.parser.log.level }}"
+            - name: KUBEVIOUS_COLLECTOR
+              value: https://portal.kubevious.io/api/v1/collect
+            - name: KUBEVIOUS_COLLECTOR_AUTH
+              value: https://portal.kubevious.io/api/v1/auth/collector/login
+            - name: KUBEVIOUS_COLLECTOR_KEY_PATH
+              value: /runtime/token/key
+          volumeMounts:
+            - mountPath: /runtime/token
+              name: kubevious-token
+              readOnly: true              
           ports:
             - name: http
               containerPort: 4002
               protocol: TCP
           resources:
             {{- toYaml .Values.parser.resources | nindent 12 }}
+      volumes:
+        - name: kubevious-token
+          secret:
+            secretName: kubevious-token            
       {{- with .Values.parser.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
