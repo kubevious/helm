@@ -1,0 +1,46 @@
+# Default values for kubevious agent.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+cluster:
+  domain: cluster.local
+
+###
+### KUBEVIOUS PARSER
+###
+parser:
+  # Do not modify replicaCount
+  replicaCount: 1
+  image:
+    repository: kubevious/parser
+    tag: 0.9.11
+    pullPolicy: IfNotPresent
+  imagePullSecrets: []
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  service:
+    type: ClusterIP
+    port: 4002
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+      # limits:
+      #   cpu: 500m
+      #   memory: 1Gi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  log:
+    level: info
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""

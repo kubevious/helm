@@ -1,0 +1,12 @@
+apiVersion: v2
+name: kubevious
+description: A Helm chart for Kubevious Agent
+type: application
+keywords:
+  - kubernetes ui
+  - kubernetes web ui
+  - kubernetes configuration checker
+  - kubernetes validator
+icon: https://kubevious.io/img/logo.png
+version: 0.9.10
+appVersion: 0.9.10
