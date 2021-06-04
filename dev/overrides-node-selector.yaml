@@ -1,0 +1,9 @@
+kubevious:
+    nodeSelector:
+        kubernetes.io/arch: amd64
+parser:
+    nodeSelector:
+        kubernetes.io/arch: amd64
+ui:
+    nodeSelector:
+        kubernetes.io/arch: amd64
