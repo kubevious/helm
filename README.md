@@ -131,6 +131,12 @@ The following table lists the configurable parameters of the kubevious chart and
 | ui.nodeSelector              | Kubevious ui PodSpec nodeSelector                       |                                              |
 | ui.tolerations               | Kubevious ui PodSpec tolerations                        |                                              |
 | ui.affinity                  | Kubevious ui PodSpec affinity                           |                                              |
+| mysql.external.enabled | Indicates whether an existing MySQL database should be used. When enabled a new MySQL database would not be deployed. | false |
+| mysql.external.host | Host for external MySQL server | |
+| mysql.external.port | Port for external MySQL server | |
+| mysql.external.database | Database name for external MySQL server. The database should be manually created. | |
+| mysql.external.user | User name. User should have access to the database specified above. | |
+| mysql.external.password | Password. | |
 | mysql.image.pullPolicy          | Kubevious mysql PodSpec pullPolicy                         | IfNotPresent                                 |
 | mysql.db_name | MySQL database name | kubevious |
 | mysql.db_user | MySQL database user | kubevious |
