@@ -42,6 +42,8 @@ spec:
               value: "{{ .Values.parser.log.level }}"
             - name: KUBEVIOUS_COLLECTOR
               value: "{{ include "kubevious.collector" . }}"
+            - name: KUBEVIOUS_API_MINIMAL
+              value: "true"
           envFrom:  
             - configMapRef:
                 name: {{ include "kubevious-worldvious.config" . }}
