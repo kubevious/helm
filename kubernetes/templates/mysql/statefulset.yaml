@@ -95,7 +95,7 @@ spec:
           periodSeconds: 2
           timeoutSeconds: 1
         resources:
-          {{- toYaml .Values.kubevious.resources | nindent 12 }}
+          {{- toYaml .Values.mysql.resources | nindent 12 }}
       serviceAccountName: {{ include "kubevious-mysql.serviceAccountName" . }}
       {{- with .Values.kubevious.nodeSelector }}
       nodeSelector:
