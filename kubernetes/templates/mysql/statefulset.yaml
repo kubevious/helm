@@ -20,12 +20,12 @@ spec:
         app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
         {{- include "kubevious.base-labels" . | nindent 8 }}
     spec:
-      {{- with .Values.kubevious.imagePullSecrets }}
+      {{- with .Values.mysql.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.kubevious.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.mysql.podSecurityContext | nindent 8 }}
       initContainers:
       - name: init-mysql
         image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
@@ -97,15 +97,15 @@ spec:
         resources:
           {{- toYaml .Values.mysql.resources | nindent 12 }}
       serviceAccountName: {{ include "kubevious-mysql.serviceAccountName" . }}
-      {{- with .Values.kubevious.nodeSelector }}
+      {{- with .Values.mysql.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.kubevious.affinity }}
+      {{- with .Values.mysql.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.kubevious.tolerations }}
+      {{- with .Values.mysql.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

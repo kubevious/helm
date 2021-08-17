@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.kubevious.service.type }}
+  type: {{ .Values.mysql.service.type }}
   ports:
     - port: {{ .Values.mysql.service.port }}
       targetPort: mysql
