@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: {{ include "kubevious-ui.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 spec:
-  type: {{ include "kubevious-ui.service.type" . }}
+  type: {{ .Values.ui.service.type }}
   ports:
     - port: {{ .Values.ui.service.port }}
       targetPort: http

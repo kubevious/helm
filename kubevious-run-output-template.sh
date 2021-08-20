@@ -8,5 +8,5 @@ rm -rf output
 
 helm template kubevious ./kubernetes --debug \
     -n kubevious \
-    -f dev/overrides.yaml \
+    -f dev/overrides-ingress.yaml \
     --output-dir output/
