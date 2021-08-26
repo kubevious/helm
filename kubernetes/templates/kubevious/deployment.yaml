@@ -40,13 +40,13 @@ spec:
             - name: LOG_LEVEL
               value: "{{ .Values.kubevious.log.level }}"
             - name: MYSQL_HOST
-              value: "{{ include "kubevious-mysql.fullname" . }}"
+              value: "{{ include "kubevious-mysql.host" . }}"
             - name: MYSQL_PORT
-              value: "{{ .Values.mysql.service.port }}"
+              value: "{{ include "kubevious-mysql.port" . }}"
             - name: MYSQL_DB
-              value: "{{ .Values.mysql.db_name }}"
+              value: "{{ include "kubevious-mysql.database" . }}"
             - name: MYSQL_USER
-              value: "{{ .Values.mysql.db_user }}"
+              value: "{{ include "kubevious-mysql.user" . }}"
           envFrom:
             - configMapRef:
                 name: {{ include "kubevious-worldvious.config" . }}

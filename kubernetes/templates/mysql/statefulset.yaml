@@ -1,3 +1,4 @@
+{{- if not .Values.mysql.external.enabled -}}
 ---
 # source: https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/
 apiVersion: apps/v1
@@ -134,3 +135,4 @@ spec:
       - name: data
         emptyDir: {}
 {{- end }}
+{{- end -}}

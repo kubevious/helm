@@ -1,3 +1,4 @@
+{{- if not .Values.mysql.external.enabled -}}
 ---
 kind: Service
 apiVersion: v1
@@ -15,3 +16,4 @@ spec:
       name: mysql
   selector:
     app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
+{{- end -}}

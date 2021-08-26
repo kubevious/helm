@@ -76,8 +76,46 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{- end }}
 {{- end }}
 
+{{- define "kubevious-mysql.host" -}}
+{{- if .Values.mysql.external.enabled }}
+{{- .Values.mysql.external.host }}
+{{- else }}
+{{- include "kubevious-mysql.fullname" . }}
+{{- end }}
+{{- end }}
+
+
+{{- define "kubevious-mysql.port" -}}
+{{- if .Values.mysql.external.enabled }}
+{{- .Values.mysql.external.port }}
+{{- else }}
+{{- .Values.mysql.service.port }}
+{{- end }}
+{{- end }}
+
+
+{{- define "kubevious-mysql.database" -}}
+{{- if .Values.mysql.external.enabled }}
+{{- .Values.mysql.external.database }}
+{{- else }}
+{{- .Values.mysql.db_name }}
+{{- end }}
+{{- end }}
+
+
+{{- define "kubevious-mysql.user" -}}
+{{- if .Values.mysql.external.enabled }}
+{{- .Values.mysql.external.user }}
+{{- else }}
+{{- .Values.mysql.db_user }}
+{{- end }}
+{{- end }}
+
 
 {{- define "kubevious-mysql.user-password" -}}
+{{- .Values.mysql.external.password | b64enc }}
+{{- if .Values.mysql.external.enabled }}
+{{- else }}
 {{- if and (.Values.mysql.db_user) (not (eq .Values.mysql.db_user "root")) }}
 {{- if .Values.mysql.db_password }}
 {{- .Values.mysql.db_password | b64enc }}
@@ -95,6 +133,7 @@ http://{{ include "kubevious.fullname" . }}.{{ .Release.Namespace}}.svc.{{ .Valu
 {{- end }}
 {{- else }}
 {{- include "kubevious-mysql.root-password" . }}
+{{- end }}
 {{- end }}
 {{- end }}
 

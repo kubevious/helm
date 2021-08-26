@@ -1,0 +1,8 @@
+mysql:
+  external:
+    enabled: true
+    host: "my-external-mysql"
+    port: "1234"
+    database: "my-external-db"
+    user: "my-external-user"
+    password: "my-external-user"
