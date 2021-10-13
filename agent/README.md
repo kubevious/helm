@@ -57,9 +57,9 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.serviceAccount.create | Indicates whether a service account should be created for Kubevious parser | true |
 | parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
 | parser.serviceAccount.name | The name of the service account to use. If not and create is true, a name is generated |                                              |
-| parser.serviceAccount.legacyMinimal | The legacy permission mode where only minimal read-only access to the cluster is allowed. When turned on you will not be able to see and validate any custom CRDs. See below if you want to learn how how sensitive data is sanitized. | false |
+| parser.serviceAccount.legacyMinimal | The legacy permission mode where only minimal read-only access to the cluster is allowed. When turned on you will not be able to see and validate any custom CRDs. See [below](#kubernetes-secret-sanitization) if you want to learn how how sensitive data is sanitized. | false |
 
-## Detailed Nodes
+## Detailed Notes
 
 ### Kubernetes Secret Sanitization
 Data from Kubernetes secrets is sanitized and does not leave the cluster. Keys of data are maintained but data is completely removed. Maintaining information about keys in secret allows validation of structure of secrets and show how things are mapped to environment variables and volume mounts. Below is the example of Secret reported to Kubevious SaaS:
@@ -69,8 +69,8 @@ apiVersion: v1
 metadata:
   name: default-token-w2656
 data:
-  ca.crt: "<null-instead-of-the-data>"
-  token: "<null-instead-of-the-data>"
+  ca.crt: <null-instead-of-the-data>
+  token: <null-instead-of-the-data>
 ```
-If you want to learn more how sanitization works, please see the following code snippet below:
+If you want to learn more how sanitization works, please see the following code snippet below. Search for the `_sanitizeSecret` function. It may take few seconds for github to scroll to the line of interest.
 https://github.com/kubevious/parser/commit/1c3f19b781d6c22ccf4a4fa24bce10b514ea8150#diff-179652d03fa7d2a54b9fe88c99bd1e94bea9147b01b2b6616610a069244a348fR96-R104
