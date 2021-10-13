@@ -42,5 +42,5 @@ kubectl create secret generic kubevious-token -n kubevious-agent \
 helm upgrade -i  \
     --atomic \
     -n kubevious-agent \
-    -f agent-dev/overrides.yaml \
+    -f agent-dev/overrides-install.yaml \
     kubevious-agent ./kubevious-agent-${VERSION}.tgz

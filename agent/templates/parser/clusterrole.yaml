@@ -1,4 +1,5 @@
 ---
+{{- if .Values.parser.serviceAccount.create -}}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -8,6 +9,7 @@ metadata:
     {{- include "kubevious.labels" . | nindent 4 }}
 rules:
 
+  {{- if .Values.parser.serviceAccount.legacyMinimal }}
   - apiGroups:
       - ""
     resources:
@@ -94,3 +96,15 @@ rules:
       - get
       - list
       - watch
+  {{- else }}
+  - apiGroups:
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - get
+      - list
+      - watch
+  {{- end }}
+
+{{- end }}

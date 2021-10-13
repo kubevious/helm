@@ -114,9 +114,9 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.tolerations               | Kubevious parser PodSpec tolerations                        |                                              |
 | parser.affinity                  | Kubevious parser PodSpec affinity                           |                                              |
 | parser.log.level | Parser backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
-| parser.serviceAccount.create | Indicates wheter a service account should be created for Kubevious parser | true |
+| parser.serviceAccount.create | Indicates whether a service account should be created for Kubevious parser | true |
 | parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
-| parser.serviceAccount.name | The name of the service account to use. If not and create is tru, a name is generated |                                              |
+| parser.serviceAccount.name | The name of the service account to use. If not and create is true, a name is generated |                                              |
 |                                     |                                                              |                                              |
 | ui.podAnnotations            | Kubevious ui pod annotations                            |                                              |
 | ui.image.pullPolicy          | Kubevious ui PodSpec pullPolicy                         | IfNotPresent                                 |
