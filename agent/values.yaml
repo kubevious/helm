@@ -6,7 +6,6 @@ nameOverride: ""
 fullnameOverride: ""
 cluster:
   domain: cluster.local
-
 ###
 ### KUBEVIOUS PARSER
 ###
@@ -15,7 +14,7 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.9.14
+    tag: 0.9.22
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
