@@ -47,6 +47,8 @@ spec:
               value: "{{ include "kubevious-mysql.database" . }}"
             - name: MYSQL_USER
               value: "{{ include "kubevious-mysql.user" . }}"
+            - name: SERVER_PORT
+              value: "4001"              
           envFrom:
             - configMapRef:
                 name: {{ include "kubevious-worldvious.config" . }}

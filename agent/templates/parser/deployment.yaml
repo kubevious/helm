@@ -46,6 +46,8 @@ spec:
               value: https://portal.kubevious.io/api/v1/auth/collector/login
             - name: KUBEVIOUS_COLLECTOR_KEY_PATH
               value: /runtime/token/key
+            - name: SERVER_PORT
+              value: "4002"
           volumeMounts:
             - mountPath: /runtime/token
               name: kubevious-token

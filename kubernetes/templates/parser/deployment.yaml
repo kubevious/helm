@@ -44,6 +44,8 @@ spec:
               value: "{{ include "kubevious.collector" . }}"
             - name: KUBEVIOUS_API_MINIMAL
               value: "true"
+            - name: SERVER_PORT
+              value: "4002"
           envFrom:  
             - configMapRef:
                 name: {{ include "kubevious-worldvious.config" . }}
