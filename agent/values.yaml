@@ -12,7 +12,7 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.9.24
+    tag: 0.9.29
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
