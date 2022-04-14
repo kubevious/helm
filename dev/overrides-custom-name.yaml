@@ -1,0 +1,4 @@
+nameOverride: "kubevious-custom"
+fullnameOverride: "kubevious-pre-release"
+ingress:
+  enabled: true

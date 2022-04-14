@@ -4,9 +4,9 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-rm -rf output
+OUTPUT_DIR=output/default
+rm -rf ${OUTPUT_DIR}
 
 helm template kubevious ./kubernetes --debug \
     -n kubevious \
-    -f dev/overrides-external-mysql.yaml \
-    --output-dir output/
+    --output-dir ${OUTPUT_DIR}

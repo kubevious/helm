@@ -31,17 +31,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.ui.securityContext | nindent 12 }}
-          image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag }}"
           imagePullPolicy: {{ .Values.ui.image.pullPolicy }}
           env:
             - name: NODE_ENV
               value: "production"
-            - name: BACKEND_URL
-              value: "{{ include "kubevious.endpoint" . }}"
-            {{- if and (.Values.ingress.enabled) (gt (len .Values.ingress.tls) 0) }}
-            - name: FORCE_HTTPS
-              value: "true"
-            {{- end }}
           ports:
             - name: http
               containerPort: 80

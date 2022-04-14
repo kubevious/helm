@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "kubevious-worldvious.config" . }}
   labels:
-    app.kubernetes.io/component: {{ include "kubevious.fullname" . }}
+    app.kubernetes.io/component: {{ include "kubevious-worldvious.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 data:
   WORLDVIOUS_URL: https://api.kubevious.io/api/v1/oss

@@ -4,10 +4,11 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-rm -rf output
+OUTPUT_DIR=output/debug
+rm -rf ${OUTPUT_DIR}
 
 helm template kubevious ./kubernetes \
     -n kubevious \
     -f dev/overrides-node-selector.yaml \
     --version 0.8.15 \
-    --output-dir output/
+    --output-dir ${OUTPUT_DIR}

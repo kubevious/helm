@@ -53,6 +53,7 @@ steps:
       - pwd
       - ls -la
       - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides.yaml --output-dir output/
+      - ls -la output/
 
   validate_ingress:
     title: Validate Chart with Ingress
@@ -65,6 +66,34 @@ steps:
       - pwd
       - ls -la
       - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-ingress.yaml --output-dir output/
+      - ls -la output/
+
+  validate_external_mysql:
+    title: Validate Chart with External MySQL
+    stage: validate
+    image: kubevious/aws_cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}
+    shell: bash
+    commands:
+      - rm -rf output
+      - pwd
+      - ls -la
+      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-external-mysql.yaml --output-dir output/
+      - ls -la output/
+
+  validate_custom_name:
+    title: Validate Chart with Custom Name
+    stage: validate
+    image: kubevious/aws_cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}
+    shell: bash
+    commands:
+      - rm -rf output
+      - pwd
+      - ls -la
+      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-custom-name.yaml --output-dir output/
+      - ls -la output/
+      
 
       
   

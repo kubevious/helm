@@ -11,20 +11,23 @@ cluster:
 ###
 ingress:
   enabled: false
+  className: ""
   annotations:
     kubernetes.io/ingress.allow-http: "true"
   hosts:
     - host: ""
-      paths: [""]
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   tls: []
 ###
 ### KUBEVIOUS BACKEND
 ###
-kubevious:
+backend:
   # Do not modify replicaCount
   replicaCount: 1
   image:
-    repository: kubevious/kubevious
+    repository: kubevious/backend
     tag: 0.9.11
     pullPolicy: IfNotPresent
   imagePullSecrets: []
@@ -33,10 +36,10 @@ kubevious:
   securityContext: {}
   service:
     type: ClusterIP
-    port: 4001
+    port: 4000
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
@@ -54,6 +57,43 @@ kubevious:
   affinity: {}
   log:
     level: info
+###
+### KUBEVIOUS COLLECTOR
+###
+collector:
+  # Do not modify replicaCount
+  replicaCount: 1
+  image:
+    repository: kubevious/collector
+    tag: 0.9.3
+    pullPolicy: IfNotPresent
+  imagePullSecrets: []
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  service:
+    type: ClusterIP
+    port: 4000
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+      # limits:
+      #   cpu: 500m
+      #   memory: 1Gi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  log:
+    level: info    
 ###
 ### KUBEVIOUS PARSER
 ###
@@ -92,7 +132,7 @@ parser:
     # If not set and create is true, a name is generated using the fullname template
     name: ""
 ###
-### UI
+### KUBEVIOUS UI
 ###
 ui:
   # Do not modify replicaCount
@@ -110,7 +150,7 @@ ui:
     port: 80
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
@@ -156,7 +196,7 @@ mysql:
     port: "3306"
   serviceAccount:
     # Specifies whether a service account should be created
-    create: true
+    create: false
     # Annotations to add to the service account
     annotations: {}
     # The name of the service account to use.
@@ -176,6 +216,39 @@ mysql:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+###
+### REDIS
+###
+redis:
+  image:
+    repository: redislabs/redisearch
+    tag: 2.0.9
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: "6379"
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  imagePullSecrets: []
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+      # limits:
+      #   cpu: 1000m
+      #   memory: 2Gi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}  
 ###
 ### WORLDVIOUS
 ###
