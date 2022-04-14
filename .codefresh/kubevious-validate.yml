@@ -52,7 +52,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides.yaml --output-dir output/
+      - helm template kubevious ./kubernetes --debug -n kubevious --output-dir output/
       - ls -la output/
 
   validate_ingress:
