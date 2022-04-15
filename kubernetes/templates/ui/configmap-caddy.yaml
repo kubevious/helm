@@ -12,14 +12,14 @@ data:
       admin :5555
     }
 
-    :4000 {
+    :80 {
 
         handle /api/v1/* {
-            reverse_proxy {{ include "kubevious-backend.service.name" . }}:4002
+            reverse_proxy {{ include "kubevious-backend.service.name" . }}:{{ .Values.backend.service.port }}
         }
 
         handle /socket/* {
-            reverse_proxy {{ include "kubevious-backend.service.name" . }}:4002
+            reverse_proxy {{ include "kubevious-backend.service.name" . }}:{{ .Values.backend.service.port }}
         }
 
         handle /* {

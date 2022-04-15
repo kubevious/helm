@@ -7,5 +7,5 @@ metadata:
     app.kubernetes.io/component: {{ include "kubevious-redis.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 data:
-  MYSQL_HOST: "{{ include "kubevious-redis.host" . }}"
-  MYSQL_PORT: "{{ include "kubevious-redis.port" . }}"
+  REDIS_HOST: "{{ include "kubevious-redis.host" . }}"
+  REDIS_PORT: "{{ include "kubevious-redis.port" . }}"
