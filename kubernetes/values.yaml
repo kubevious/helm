@@ -1,7 +1,6 @@
 # Default values for kubevious.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
 nameOverride: ""
 fullnameOverride: ""
 cluster:
@@ -28,7 +27,7 @@ backend:
   replicaCount: 1
   image:
     repository: kubevious/backend
-    tag: 0.9.11
+    tag: 0.9.18
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -93,7 +92,7 @@ collector:
   tolerations: []
   affinity: {}
   log:
-    level: info    
+    level: info
 ###
 ### KUBEVIOUS PARSER
 ###
@@ -102,7 +101,7 @@ parser:
   replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 0.9.14
+    tag: 0.9.31
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -139,7 +138,7 @@ ui:
   replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 0.9.13
+    tag: 0.9.18
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -248,7 +247,7 @@ redis:
       #   memory: 2Gi
   nodeSelector: {}
   tolerations: []
-  affinity: {}  
+  affinity: {}
 ###
 ### WORLDVIOUS
 ###

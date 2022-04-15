@@ -17,3 +17,7 @@ Create the name of the service account to use for kubevious
 {{- define "kubevious-backend.service.name" -}}
 {{ print (include "kubevious-backend.fullname" . ) "-" (.Values.backend.service.type | lower) }}
 {{- end }}
+
+{{- define "kubevious-backend.baseUrl" -}}
+http://{{ include "kubevious-backend.service.name" . }}:{{ .Values.backend.service.port }}
+{{- end }}

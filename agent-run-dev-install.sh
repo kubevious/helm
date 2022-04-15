@@ -19,8 +19,12 @@ esac
 
 VERSION=0.0.1
 
-yq w -i kubernetes/Chart.yaml version ${VERSION}
-yq w -i kubernetes/Chart.yaml appVersion ${VERSION}
+yq ".version = \"${VERSION}\"" -i kubernetes/Chart.yaml 
+yq ".appVersion = \"${VERSION}\"" -i kubernetes/Chart.yaml
+
+echo "**********"
+cat kubernetes/Chart.yaml 
+echo "**********"
 
 rm -f kubevious-agent-*.tgz
 

@@ -40,7 +40,9 @@ spec:
             - name: LOG_LEVEL
               value: "{{ .Values.collector.log.level }}"
             - name: SERVER_PORT
-              value: "4002"              
+              value: "4002"          
+            - name: BACKEND_BASE_URL
+              value: {{ include "kubevious-backend.baseUrl" . }}
           envFrom:
             - configMapRef:
                 name: {{ include "kubevious-mysql.config" . }}
