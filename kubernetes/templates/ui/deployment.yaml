@@ -50,6 +50,14 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.ui.resources | nindent 12 }}
+          volumeMounts:
+          - name: caddy-config
+            mountPath: /etc/caddy/Caddyfile
+            subPath: Caddyfile
+      volumes:
+        - name: caddy-config
+          configMap:
+            name: {{ include "kubevious-ui.caddyConfig" . }}
       serviceAccountName: {{ include "kubevious-ui.serviceAccountName" . }}
       {{- with .Values.ui.nodeSelector }}
       nodeSelector:

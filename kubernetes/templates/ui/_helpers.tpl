@@ -18,3 +18,7 @@ Create the name of the service account to use for the ui
 {{- define "kubevious-ui.service.name" -}}
 {{ print (include "kubevious-ui.fullname" . ) "-" (.Values.ui.service.type | lower) }}
 {{- end }}
+
+{{- define "kubevious-ui.caddyConfig" -}}
+{{ print (include "kubevious-ui.fullname" . ) "-caddy" }}
+{{- end }}
