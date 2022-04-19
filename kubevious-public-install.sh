@@ -17,13 +17,15 @@ case "$response" in
         ;;
 esac
 
+helm repo add kubevious https://helm.kubevious.io
+
 helm repo update
 
 kubectl create namespace kubevious
 
 # --debug
 helm upgrade --atomic -i \
-    --version 0.7.26 \
+    --version 0.8.15 \
     -n kubevious \
     --set worldvious.opt_out_all=save \
     kubevious kubevious/kubevious 

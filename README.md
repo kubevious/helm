@@ -117,6 +117,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.serviceAccount.create | Indicates whether a service account should be created for Kubevious parser | true |
 | parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
 | parser.serviceAccount.name | The name of the service account to use. If not and create is true, a name is generated |                                              |
+| parser.serviceAccount.skipRoleBinding | Skip creation of RoleBinding and Role for Kubevious Parser. You would have to create a RoleBinding and Role manually and allow Kubernetes API access for Parser ServiceAccount. | false |
 |                                     |                                                              |                                              |
 | ui.podAnnotations            | Kubevious ui pod annotations                            |                                              |
 | ui.image.pullPolicy          | Kubevious ui PodSpec pullPolicy                         | IfNotPresent                                 |

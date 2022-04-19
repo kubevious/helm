@@ -17,14 +17,18 @@ case "$response" in
         ;;
 esac
 
-VERSION=0.0.8
+# VERSION=0.9.13
 
-yq ".version = \"${VERSION}\"" -i kubernetes/Chart.yaml 
-yq ".appVersion = \"${VERSION}\"" -i kubernetes/Chart.yaml
+# yq ".version = \"${VERSION}\"" -i kubernetes/Chart.yaml 
+# yq ".appVersion = \"${VERSION}\"" -i kubernetes/Chart.yaml
 
-echo "**********"
+echo "********************"
 cat kubernetes/Chart.yaml 
-echo "**********"
+echo "********************"
+
+VERSION=$(yq ".version" kubernetes/Chart.yaml)
+echo "VERSION: ${VERSION}"
+echo "********************"
 
 rm -f kubevious-*.tgz
 
