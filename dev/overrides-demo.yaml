@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.global-static-ip-name: kubevious-ui
+    networking.gke.io/managed-certificates: kubevious-certificate
+  hosts: 
+    - host: "demo.kubevious.io"
+      paths:
+        - path: ""
+ui:
+  image:
+    repository: kubevious/ui-demo
+mysql:
+  persistence:
+    size: "20Gi"
