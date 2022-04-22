@@ -33,7 +33,7 @@ Kubevious v{{- .Chart.Version }} installed!
   {{- range $host := .Values.ingress.hosts }}
     {{- range .paths }}
       {{- if $host.host }}
-Visit http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }} to access Kubevious
+Visit http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }} to access Kubevious
       {{- else }}
 Access Kubevious by this command:
 $  echo "Visit http://"$(kubectl get ingress kubevious-ui -n kubevious -o jsonpath="{.status.loadBalancer.ingress[0].ip}")

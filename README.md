@@ -34,7 +34,7 @@ helm upgrade --atomic -i kubevious kubevious/kubevious --version 0.8.15 -n kubev
 ```
 
 ## Accessing Kubevious
-Kubevious runs within your cluster. Upon successful completion of helm chart installation, you will see commands to access kubevious UI. There are two ways to access Kubevious UI. 
+Kubevious runs within your cluster. Upon successful completion of helm chart installation, you will see commands to access Kubevious UI. There are two ways to access Kubevious UI. 
 
 ### Option 1. Access using port forwarding
 The easiest but not most convenient method. Wait few seconds before pods are up and running. Setup port forwarding:
@@ -84,61 +84,73 @@ The following table lists the configurable parameters of the kubevious chart and
 | cluster.domain                      | Overrides the default Kubernetes cluster domain name.        | cluster.local                                |
 | ingress.enabled                     | Whether to expose Kubevious using Ingress gateway.           | false                                        |
 | ingress.annotations                 | Dictionary of Ingress annodations.                           | `{kubernetes.io/ingress.allow-http: "true"}` |
-| ingress.hosts                       | Array of hosts and paths for ingress                         | `[{host: "", paths: [ "" ] }`]               |
+| ingress.hosts                       | Array of hosts and paths for ingress                         | `[{host: "", paths: [{ path: "", pathType: ImplementationSpecific }] }`]               |
 | ingress.tls                         | Array of ingress tls configurations. Fields are *hosts* array and *secretName* |                                              |
-| kubevious.podAnnotations            | Kubevious backend pod annotations                            |                                              |
-| kubevious.image.pullPolicy          | Kubevious backend PodSpec pullPolicy                         | IfNotPresent                                 |
-| kubevious.image.imagePullSecrets    | Kubevious backend PodSpec imagePullSecrets                   |                                              |
-| kubevious.service.type              | Kubevious backend type of service                            | ClusterIP                                    |
-| kubevious.service.port              | Kubevious backend port of service                            | 4002                                         |
-| kubevious.resources.requests.cpu    | Kubevious backend request CPU                                | 100m                                         |
-| kubevious.resources.requests.memory | Kubevious backend request Memory                             | 200Mi                                        |
-| kubevious.resources.limits.cpu      | Kubevious backend limit CPU                                  |                                              |
-| kubevious.resources.limits.memory   | Kubevious backend limit Memory                               |                                              |
-| kubevious.podSecurityContext        | Kubevious backend PodSpec securityContext                    |                                              |
-| kubevious.nodeSelector              | Kubevious backend PodSpec nodeSelector                       |                                              |
-| kubevious.tolerations               | Kubevious backend PodSpec tolerations                        |                                              |
-| kubevious.affinity                  | Kubevious backend PodSpec affinity                           |                                              |
-| kubevious.log.level | Kubevious backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
-| parser.podAnnotations               | Kubevious parser pod annotations                            |                                              |
-| parser.image.pullPolicy          | Kubevious parser PodSpec pullPolicy                         | IfNotPresent                                 |
-| parser.image.imagePullSecrets    | Kubevious parser PodSpec imagePullSecrets                   |                                              |
-| parser.service.type              | Kubevious parser type of service                            | ClusterIP                                    |
-| parser.service.port              | Kubevious parser port of service                            | 4002                                         |
-| parser.resources.requests.cpu    | Kubevious parser request CPU                                | 100m                                         |
-| parser.resources.requests.memory | Kubevious parser request Memory                             | 200Mi                                        |
-| parser.resources.limits.cpu      | Kubevious parser limit CPU                                  |                                              |
-| parser.resources.limits.memory   | Kubevious parser limit Memory                               |                                              |
-| parser.podSecurityContext        | Kubevious parser PodSpec securityContext                    |                                              |
-| parser.nodeSelector              | Kubevious parser PodSpec nodeSelector                       |                                              |
-| parser.tolerations               | Kubevious parser PodSpec tolerations                        |                                              |
-| parser.affinity                  | Kubevious parser PodSpec affinity                           |                                              |
+| backend.podAnnotations            | Backend pod annotations                            |                                              |
+| backend.image.pullPolicy          | Backend PodSpec pullPolicy                         | IfNotPresent                                 |
+| backend.image.imagePullSecrets    | Backend PodSpec imagePullSecrets                   |                                              |
+| backend.service.type              | Backend type of service                            | ClusterIP                                    |
+| backend.service.port              | Backend port of service                            | 4000                                         |
+| backend.resources.requests.cpu    | Backend request CPU                                | 100m                                         |
+| backend.resources.requests.memory | Backend request Memory                             | 200Mi                                        |
+| backend.resources.limits.cpu      | Backend limit CPU                                  |                                              |
+| backend.resources.limits.memory   | Backend limit Memory                               |                                              |
+| backend.podSecurityContext        | Backend PodSpec securityContext                    |                                              |
+| backend.nodeSelector              | Backend PodSpec nodeSelector                       |                                              |
+| backend.tolerations               | Backend PodSpec tolerations                        |                                              |
+| backend.affinity                  | Backend PodSpec affinity                           |                                              |
+| backend.log.level                 | Backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
+| collector.podAnnotations            | Collector pod annotations                            |                                              |
+| collector.image.pullPolicy          | Collector PodSpec pullPolicy                         | IfNotPresent                                 |
+| collector.image.imagePullSecrets    | Collector PodSpec imagePullSecrets                   |                                              |
+| collector.service.type              | Collector type of service                            | ClusterIP                                    |
+| collector.service.port              | Collector port of service                            | 4000                                         |
+| collector.resources.requests.cpu    | Collector request CPU                                | 100m                                         |
+| collector.resources.requests.memory | Collector request Memory                             | 200Mi                                        |
+| collector.resources.limits.cpu      | Collector limit CPU                                  |                                              |
+| collector.resources.limits.memory   | Collector limit Memory                               |                                              |
+| collector.podSecurityContext        | Collector PodSpec securityContext                    |                                              |
+| collector.nodeSelector              | Collector PodSpec nodeSelector                       |                                              |
+| collector.tolerations               | Collector PodSpec tolerations                        |                                              |
+| collector.affinity                  | Collector PodSpec affinity                           |                                              |
+| collector.log.level                 | Collector log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
+| parser.podAnnotations               | Parser pod annotations                            |                                              |
+| parser.image.pullPolicy          | Parser PodSpec pullPolicy                         | IfNotPresent                                 |
+| parser.image.imagePullSecrets    | Parser PodSpec imagePullSecrets                   |                                              |
+| parser.service.type              | Parser type of service                            | ClusterIP                                    |
+| parser.service.port              | Parser port of service                            | 4000                                         |
+| parser.resources.requests.cpu    | Parser request CPU                                | 100m                                         |
+| parser.resources.requests.memory | Parser request Memory                             | 200Mi                                        |
+| parser.resources.limits.cpu      | Parser limit CPU                                  |                                              |
+| parser.resources.limits.memory   | Parser limit Memory                               |                                              |
+| parser.podSecurityContext        | Parser PodSpec securityContext                    |                                              |
+| parser.nodeSelector              | Parser PodSpec nodeSelector                       |                                              |
+| parser.tolerations               | Parser PodSpec tolerations                        |                                              |
+| parser.affinity                  | Parser PodSpec affinity                           |                                              |
 | parser.log.level | Parser backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
-| parser.serviceAccount.create | Indicates whether a service account should be created for Kubevious parser | true |
-| parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
+| parser.serviceAccount.create | Indicates whether a service account should be created for Parser | true |
+| parser.serviceAccount.annotations | Annotations to add to Parser service account |                                              |
 | parser.serviceAccount.name | The name of the service account to use. If not and create is true, a name is generated |                                              |
-| parser.serviceAccount.skipRoleBinding | Skip creation of RoleBinding and Role for Kubevious Parser. You would have to create a RoleBinding and Role manually and allow Kubernetes API access for Parser ServiceAccount. | false |
-|                                     |                                                              |                                              |
-| ui.podAnnotations            | Kubevious ui pod annotations                            |                                              |
-| ui.image.pullPolicy          | Kubevious ui PodSpec pullPolicy                         | IfNotPresent                                 |
-| ui.image.imagePullSecrets    | Kubevious ui PodSpec imagePullSecrets                   |                                              |
-| ui.service.type              | Kubevious ui type of service                            | ClusterIP                                    |
-| ui.service.port              | Kubevious ui port of service                            | 80                                        |
-| ui.resources.requests.cpu    | Kubevious ui request CPU                                | 25m                                        |
-| ui.resources.requests.memory | Kubevious ui request Memory                             | 50Mi                                        |
-| ui.resources.limits.cpu      | Kubevious ui limit CPU                                  |                                              |
-| ui.resources.limits.memory   | Kubevious ui limit Memory                               |                                              |
-| ui.podSecurityContext        | Kubevious ui PodSpec securityContext                    |                                              |
-| ui.nodeSelector              | Kubevious ui PodSpec nodeSelector                       |                                              |
-| ui.tolerations               | Kubevious ui PodSpec tolerations                        |                                              |
-| ui.affinity                  | Kubevious ui PodSpec affinity                           |                                              |
+| parser.serviceAccount.skipRoleBinding | Skip creation of RoleBinding and Role for Parser. You would have to create a RoleBinding and Role manually and allow Kubernetes API access for Parser ServiceAccount. | false |
+| ui.podAnnotations            | UI pod annotations                            |                                              |
+| ui.image.pullPolicy          | UI PodSpec pullPolicy                         | IfNotPresent                                 |
+| ui.image.imagePullSecrets    | UI PodSpec imagePullSecrets                   |                                              |
+| ui.service.type              | UI type of service                            | ClusterIP                                    |
+| ui.service.port              | UI port of service                            | 80                                        |
+| ui.resources.requests.cpu    | UI request CPU                                | 25m                                        |
+| ui.resources.requests.memory | UI request Memory                             | 50Mi                                        |
+| ui.resources.limits.cpu      | UI limit CPU                                  |                                              |
+| ui.resources.limits.memory   | UI limit Memory                               |                                              |
+| ui.podSecurityContext        | UI PodSpec securityContext                    |                                              |
+| ui.nodeSelector              | UI PodSpec nodeSelector                       |                                              |
+| ui.tolerations               | UI PodSpec tolerations                        |                                              |
+| ui.affinity                  | UI PodSpec affinity                           |                                              |
 | mysql.external.enabled | Indicates whether an existing MySQL database should be used. When enabled a new MySQL database would not be deployed. | false |
 | mysql.external.host | Host for external MySQL server | |
 | mysql.external.port | Port for external MySQL server | |
 | mysql.external.database | Database name for external MySQL server. The database should be manually created. | |
 | mysql.external.user | User name. User should have access to the database specified above. | |
 | mysql.external.password | Password. | |
-| mysql.image.pullPolicy          | Kubevious mysql PodSpec pullPolicy                         | IfNotPresent                                 |
 | mysql.db_name | MySQL database name | kubevious |
 | mysql.db_user | MySQL database user | kubevious |
 | mysql.generate_passwords | Indicates whether a random password should be generated for root and kubevious users | false |
@@ -148,18 +160,32 @@ The following table lists the configurable parameters of the kubevious chart and
 | mysql.persistence.accessMode | MySQL persistent volume access mode | ReadWriteOnce |
 | mysql.persistence.size | MySQL persistent volume size | 20Gi |
 | mysql.persistence.storageClass | MySQL persistent volume storage class name |  |
-| mysql.image.imagePullSecrets    | Kubevious mysql PodSpec imagePullSecrets                   |                                              |
-| mysql.service.type              | Kubevious mysql type of service                            | ClusterIP                                    |
-| mysql.service.port              | Kubevious mysql port of service                            | 3306                                    |
-| mysql.resources.requests.cpu    | Kubevious mysql request CPU                                | 250m                                       |
-| mysql.resources.requests.memory | Kubevious mysql request Memory                             | 1000Mi                                      |
-| mysql.resources.limits.cpu      | Kubevious mysql limit CPU                                  |                                              |
-| mysql.resources.limits.memory   | Kubevious mysql limit Memory                               |                                              |
-| mysql.podAnnotations            | Kubevious mysql pod annotations                            |                                              |
-| mysql.podSecurityContext        | Kubevious mysql PodSpec securityContext                    |                                              |
-| mysql.nodeSelector              | Kubevious mysql PodSpec nodeSelector                       |                                              |
-| mysql.tolerations               | Kubevious mysql PodSpec tolerations                        |                                              |
-| mysql.affinity                  | Kubevious mysql PodSpec affinity                           ||
+| mysql.image.pullPolicy          | MySQL PodSpec pullPolicy                         | IfNotPresent                                 |
+| mysql.image.imagePullSecrets    | MySQL PodSpec imagePullSecrets                   |                                              |
+| mysql.service.type              | MySQL type of service                            | ClusterIP                                    |
+| mysql.service.port              | MySQL port of service                            | 3306                                    |
+| mysql.resources.requests.cpu    | MySQL request CPU                                | 250m                                       |
+| mysql.resources.requests.memory | MySQL request Memory                             | 1000Mi                                      |
+| mysql.resources.limits.cpu      | MySQL limit CPU                                  |                                              |
+| mysql.resources.limits.memory   | MySQL limit Memory                               |                                              |
+| mysql.podAnnotations            | MySQL pod annotations                            |                                              |
+| mysql.podSecurityContext        | MySQL PodSpec securityContext                    |                                              |
+| mysql.nodeSelector              | MySQL PodSpec nodeSelector                       |                                              |
+| mysql.tolerations               | MySQL PodSpec tolerations                        |                                              |
+| mysql.affinity                  | MySQL PodSpec affinity                           ||
+| redis.image.pullPolicy          | Redis PodSpec pullPolicy                         | IfNotPresent                                 |
+| redis.image.imagePullSecrets    | Redis PodSpec imagePullSecrets                   |                                              |
+| redis.service.type              | Redis type of service                            | ClusterIP                                    |
+| redis.service.port              | Redis port of service                            | 6379                                    |
+| redis.resources.requests.cpu    | Redis request CPU                                | 100m                                       |
+| redis.resources.requests.memory | Redis request Memory                             | 128Mi                                      |
+| redis.resources.limits.cpu      | Redis limit CPU                                  |                                              |
+| redis.resources.limits.memory   | Redis limit Memory                               |                                              |
+| redis.podAnnotations            | Redis pod annotations                            |                                              |
+| redis.podSecurityContext        | Redis PodSpec securityContext                    |                                              |
+| redis.nodeSelector              | Redis PodSpec nodeSelector                       |                                              |
+| redis.tolerations               | Redis PodSpec tolerations                        |                                              |
+| redis.affinity                  | Redis PodSpec affinity                           ||
 | worldvious.opt_out_version_check | Disables version check. As a part of the version check, Kubevious deployments are added to the leaderboard at https://worldvious.io. Reporting is anonymized to the nearest city/zip. No IP address is stored or logged. We calculate the SHA256 hash of the IP address and use it as a key. As a part of this request, we also added news notification and a feedback request mechanism. | false |
 | worldvious.opt_out_error_report | Disables automatic exception and error reporting.            | false |
 | worldvious.opt_out_counters_report | Disables periodic reporting of cluster metrics, such as: number of nodes, pods, ingresses, configmaps, etc. The number of pods and nodes would appear on the https://worldvious.io leaderboard. Those are the same counters you would see in the console log of kubevious and parser pods. | false |
