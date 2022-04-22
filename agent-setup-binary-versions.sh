@@ -4,10 +4,7 @@ MY_DIR="$(dirname $MY_PATH)"
 
 source ${MY_DIR}/scripts/service-version-helper.sh
 
-cd $MY_DIR/kubernetes
+cd $MY_DIR/agent
 
-processBinary "ui"
-processBinary "backend"
-processBinary "collector"
 processBinary "parser"
 
