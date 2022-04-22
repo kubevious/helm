@@ -57,7 +57,6 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.serviceAccount.create | Indicates whether a service account should be created for Kubevious parser | true |
 | parser.serviceAccount.annotations | Annotations to add to Kubevious parser service account |                                              |
 | parser.serviceAccount.name | The name of the service account to use. If not and create is true, a name is generated |                                              |
-| parser.serviceAccount.legacyMinimal | The legacy permission mode where only minimal read-only access to the cluster is allowed. When turned on you will not be able to see and validate any custom CRDs. See [below](#kubernetes-secret-sanitization) if you want to learn how how sensitive data is sanitized. | false |
 
 ## Detailed Notes
 

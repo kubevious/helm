@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kubevious-agent
-description: A Helm chart for Kubevious Agent
+description: A Helm chart for Kubevious SaaS Agent
 type: application
 keywords:
   - kubernetes ui

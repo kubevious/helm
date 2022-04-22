@@ -53,6 +53,5 @@ steps:
       - pwd
       - ls -la
       - helm template kubevious-agent ./agent --debug -n kubevious-agent --output-dir output/default
-      - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/legacy-minimal.yaml --output-dir output/legacy-minimal
       - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/existing-service-account.yaml --output-dir output/existing-service-account
 
