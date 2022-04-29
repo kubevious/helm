@@ -64,7 +64,7 @@ collector:
   replicaCount: 1
   image:
     repository: kubevious/collector
-    tag: 0.9.14
+    tag: 0.9.15
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
