@@ -9,6 +9,6 @@ rm -rf ${OUTPUT_DIR}
 
 helm template kubevious ./kubernetes \
     -n kubevious \
-    -f dev/overrides-node-selector.yaml \
+    -f dev/overrides-v8-memory.yaml \
     --version 0.8.15 \
     --output-dir ${OUTPUT_DIR}

@@ -24,6 +24,7 @@ parser:
       # limits:
       #   cpu: 500m
       #   memory: 1Gi
+  v8MaxOldSpace: null
   nodeSelector: {}
   tolerations: []
   affinity: {}

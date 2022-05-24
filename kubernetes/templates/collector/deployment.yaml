@@ -43,6 +43,10 @@ spec:
               value: "4002"          
             - name: BACKEND_BASE_URL
               value: {{ include "kubevious-backend.baseUrl" . }}
+{{- if .Values.collector.v8MaxOldSpace }}
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size={{ .Values.collector.v8MaxOldSpace }}"
+{{- end }}              
           envFrom:
             - configMapRef:
                 name: {{ include "kubevious-mysql.config" . }}

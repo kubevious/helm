@@ -44,6 +44,10 @@ spec:
               value: "{{ include "kubevious-collector.baseUrl" . }}/api/v1/collect"
             - name: SERVER_PORT
               value: "4003"
+{{- if .Values.parser.v8MaxOldSpace }}
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size={{ .Values.parser.v8MaxOldSpace }}"
+{{- end }}
           envFrom:  
             - configMapRef:
                 name: {{ include "kubevious-worldvious.config" . }}

@@ -1,0 +1,4 @@
+parser:
+    v8MaxOldSpace: 2048
+collector:
+    v8MaxOldSpace: 4096

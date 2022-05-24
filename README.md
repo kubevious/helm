@@ -65,6 +65,17 @@ $ kubectl delete pvc data-kubevious-mysql-0 -n kubevious
 
 A two-way feedback mechanism was added to Kubevious. It includes version checks, news updates, useful hints and tips,  and reporting of errors, cluster size metrics, and internal time counters. Participants can also see their clusters on a https://worldvious.io leaderboard map. Location is anonymized to the nearest city/zip. No IP address is stored or logged. We calculate the SHA256 hash of the IP address and use it as a key in the backend. If, for some reason, you do not want to participate, please see details of reporting [configurations](#configuration) parameters and instructions to opt-out (it's super easy).
 
+## Scale Setup
+
+When running Kubevious in large Kubernetes clusters with lots of Nodes, Pods, Events or other resources, consider providing adequate resources to following chart settings:
+
+- collector.resources.*
+- collector.v8MaxOldSpace
+- parser.resources.*
+- parser.v8MaxOldSpace
+
+For details see https://nodejs.org/docs/latest-v14.x/api/cli.html#cli_useful_v8_options
+
 ## Configuration
 
 The following table lists the configurable parameters of the kubevious chart and their default values.
@@ -101,6 +112,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | collector.resources.requests.memory | Collector request Memory                             | 200Mi                                        |
 | collector.resources.limits.cpu      | Collector limit CPU                                  |                                              |
 | collector.resources.limits.memory   | Collector limit Memory                               |                                              |
+| collector.v8MaxOldSpace             | Collector V8 old memory section (in megabytes)       |                                              |
 | collector.podSecurityContext        | Collector PodSpec securityContext                    |                                              |
 | collector.nodeSelector              | Collector PodSpec nodeSelector                       |                                              |
 | collector.tolerations               | Collector PodSpec tolerations                        |                                              |
@@ -115,6 +127,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.resources.requests.memory | Parser request Memory                             | 200Mi                                        |
 | parser.resources.limits.cpu      | Parser limit CPU                                  |                                              |
 | parser.resources.limits.memory   | Parser limit Memory                               |                                              |
+| parser.v8MaxOldSpace             | Parser V8 old memory section (in megabytes)       |                                              |
 | parser.podSecurityContext        | Parser PodSpec securityContext                    |                                              |
 | parser.nodeSelector              | Parser PodSpec nodeSelector                       |                                              |
 | parser.tolerations               | Parser PodSpec tolerations                        |                                              |

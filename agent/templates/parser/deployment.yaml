@@ -48,6 +48,10 @@ spec:
               value: /runtime/token/key
             - name: SERVER_PORT
               value: "4000"
+{{- if .Values.parser.v8MaxOldSpace }}
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size={{ .Values.parser.v8MaxOldSpace }}"
+{{- end }}                
           volumeMounts:
             - mountPath: /runtime/token
               name: kubevious-token

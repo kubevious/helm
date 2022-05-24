@@ -49,6 +49,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | parser.resources.requests.memory | Kubevious parser request Memory                             | 200Mi                                        |
 | parser.resources.limits.cpu      | Kubevious parser limit CPU                                  |                                              |
 | parser.resources.limits.memory   | Kubevious parser limit Memory                               |                                              |
+| parser.v8MaxOldSpace             | Parser V8 old memory section (in megabytes)                 |                                              |
 | parser.podSecurityContext        | Kubevious parser PodSpec securityContext                    |                                              |
 | parser.nodeSelector              | Kubevious parser PodSpec nodeSelector                       |                                              |
 | parser.tolerations               | Kubevious parser PodSpec tolerations                        |                                              |
