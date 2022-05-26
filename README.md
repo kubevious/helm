@@ -19,7 +19,7 @@ kubectl create namespace kubevious
 Add Kubevious repository and install the Helm chart:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.3 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.7 -n kubevious 
 ```
 
 ## Accessing Kubevious
