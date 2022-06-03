@@ -17,6 +17,9 @@ spec:
               properties:
                 state:
                   type: string
+                date:
+                  type: string
+                  format: datetime
                 success:
                   type: boolean
                 summary:
@@ -50,7 +53,7 @@ spec:
                         - cleared
                   required:
                     - issues
-                issues:
+                raisedIssues:
                   type: array
                   items:
                     type: object
@@ -65,8 +68,24 @@ spec:
                       - dn
                       - msg
                       - severity
+                clearedIssues:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      dn:
+                        type: string
+                      msg:
+                        type: string
+                      severity:
+                        type: string
+                    required:
+                      - dn
+                      - msg
+                      - severity                      
               required:
                 - state
+                - date
           required:
             - status
   scope: Namespaced
