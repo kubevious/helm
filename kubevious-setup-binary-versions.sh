@@ -9,5 +9,6 @@ cd $MY_DIR/kubernetes
 processBinary "ui"
 processBinary "backend"
 processBinary "collector"
+processBinary "guard"
 processBinary "parser"
 
