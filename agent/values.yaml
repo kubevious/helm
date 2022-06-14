@@ -7,8 +7,6 @@ fullnameOverride: ""
 ### KUBEVIOUS PARSER
 ###
 parser:
-  # Do not modify replicaCount
-  replicaCount: 1
   image:
     repository: kubevious/parser
     tag: 1.0.8
