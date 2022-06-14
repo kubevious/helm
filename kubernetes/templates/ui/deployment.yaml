@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: {{ include "kubevious-ui.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.ui.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/component: {{ include "kubevious-ui.fullname" . }}

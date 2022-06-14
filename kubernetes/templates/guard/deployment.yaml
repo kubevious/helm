@@ -2,51 +2,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kubevious-backend.fullname" . }}
+  name: {{ include "kubevious-guard.fullname" . }}
   labels:
-    app.kubernetes.io/component: {{ include "kubevious-backend.fullname" . }}
+    app.kubernetes.io/component: {{ include "kubevious-guard.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: {{ include "kubevious-backend.fullname" . }}
+      app.kubernetes.io/component: {{ include "kubevious-guard.fullname" . }}
       {{- include "kubevious.match-labels" . | nindent 6 }}
   template:
     metadata:
-    {{- with .Values.backend.podAnnotations }}
+    {{- with .Values.guard.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        app.kubernetes.io/component: {{ include "kubevious-backend.fullname" . }}
+        app.kubernetes.io/component: {{ include "kubevious-guard.fullname" . }}
         {{- include "kubevious.labels" . | nindent 8 }}
     spec:
-      {{- with .Values.backend.imagePullSecrets }}
+      {{- with .Values.guard.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.backend.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.guard.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.backend.securityContext | nindent 12 }}
-          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+            {{- toYaml .Values.guard.securityContext | nindent 12 }}
+          image: "{{ .Values.guard.image.repository }}:{{ .Values.guard.image.tag }}"
+          imagePullPolicy: {{ .Values.guard.image.pullPolicy }}
           env:
             - name: NODE_ENV
               value: "production"
             - name: LOG_LEVEL
-              value: "{{ .Values.backend.log.level }}"
+              value: "{{ .Values.guard.log.level }}"
             - name: SERVER_PORT
-              value: "4001"
-            - name: COLLECTOR_BASE_URL
-              value: {{ include "kubevious-collector.baseUrl" . }}
-            - name: PARSER_BASE_URL
-              value: {{ include "kubevious-parser.baseUrl" . }}
-            - name: GUARD_BASE_URL
-              value: {{ include "kubevious-guard.baseUrl" . }}
+              value: "4004"          
+            - name: BACKEND_BASE_URL
+              value: {{ include "kubevious-backend.baseUrl" . }}
+{{- if .Values.guard.v8MaxOldSpace }}
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size={{ .Values.guard.v8MaxOldSpace }}"
+{{- end }}              
           envFrom:
             - configMapRef:
                 name: {{ include "kubevious-mysql.config" . }}
@@ -60,7 +60,7 @@ spec:
                 name: {{ include "kubevious-worldvious.config" . }}
           ports:
             - name: http
-              containerPort: 4001
+              containerPort: 4004
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -71,17 +71,17 @@ spec:
               path: /
               port: http
           resources:
-            {{- toYaml .Values.backend.resources | nindent 12 }}
-      serviceAccountName: {{ include "kubevious-backend.serviceAccountName" . }}
-      {{- with .Values.backend.nodeSelector }}
+            {{- toYaml .Values.guard.resources | nindent 12 }}
+      serviceAccountName: {{ include "kubevious-guard.serviceAccountName" . }}
+      {{- with .Values.guard.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.backend.affinity }}
+      {{- with .Values.guard.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.backend.tolerations }}
+      {{- with .Values.guard.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

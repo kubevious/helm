@@ -3,8 +3,6 @@
 # Declare variables to be passed into your templates.
 nameOverride: ""
 fullnameOverride: ""
-cluster:
-  domain: cluster.local
 ###
 ### INGRESS
 ###
@@ -23,11 +21,44 @@ ingress:
 ### KUBEVIOUS BACKEND
 ###
 backend:
-  # Do not modify replicaCount
-  replicaCount: 1
   image:
     repository: kubevious/backend
-    tag: 1.0.6
+    tag: 1.0.8
+    pullPolicy: IfNotPresent
+  imagePullSecrets: []
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  service:
+    type: ClusterIP
+    port: 4000
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+      # limits:
+      #   cpu: 500m
+      #   memory: 1Gi
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  log:
+    level: info
+###
+### KUBEVIOUS COLLECTOR
+###
+collector:
+  image:
+    repository: kubevious/collector
+    tag: 1.0.9
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -51,20 +82,19 @@ backend:
       # limits:
       #   cpu: 500m
       #   memory: 1Gi
+  v8MaxOldSpace: null
   nodeSelector: {}
   tolerations: []
   affinity: {}
   log:
     level: info
 ###
-### KUBEVIOUS COLLECTOR
+### KUBEVIOUS GUARD
 ###
-collector:
-  # Do not modify replicaCount
-  replicaCount: 1
+guard:
   image:
-    repository: kubevious/collector
-    tag: 1.0.7
+    repository: kubevious/guard
+    tag: 1.0.3
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -98,11 +128,9 @@ collector:
 ### KUBEVIOUS PARSER
 ###
 parser:
-  # Do not modify replicaCount
-  replicaCount: 1
   image:
     repository: kubevious/parser
-    tag: 1.0.5
+    tag: 1.0.8
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -136,11 +164,9 @@ parser:
 ### KUBEVIOUS UI
 ###
 ui:
-  # Do not modify replicaCount
-  replicaCount: 1
   image:
     repository: kubevious/ui
-    tag: 1.0.5
+    tag: 1.0.7
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}

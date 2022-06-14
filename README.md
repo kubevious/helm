@@ -84,12 +84,11 @@ The following table lists the configurable parameters of the kubevious chart and
 | ----------------------------------- | ------------------------------------------------------------ | -------------------------------------------- |
 | nameOverride                        | Overrides the *app.kubernetes.io/name* label value           |                                              |
 | fullnameOverride                    | Overrides name of the app                                    |                                              |
-| cluster.domain                      | Overrides the default Kubernetes cluster domain name.        | cluster.local                                |
 | ingress.enabled                     | Whether to expose Kubevious using Ingress gateway.           | false                                        |
 | ingress.annotations                 | Dictionary of Ingress annodations.                           | `{kubernetes.io/ingress.allow-http: "true"}` |
 | ingress.hosts                       | Array of hosts and paths for ingress                         | `[{host: "", paths: [{ path: "", pathType: ImplementationSpecific }] }`]               |
 | ingress.tls                         | Array of ingress tls configurations. Fields are *hosts* array and *secretName* |                                              |
-| backend.podAnnotations            | Backend pod annotations                            |                                              |
+| backend.podAnnotations            | Backend pod annotations                            |  |
 | backend.image.pullPolicy          | Backend PodSpec pullPolicy                         | IfNotPresent                                 |
 | backend.image.imagePullSecrets    | Backend PodSpec imagePullSecrets                   |                                              |
 | backend.service.type              | Backend type of service                            | ClusterIP                                    |
@@ -118,6 +117,21 @@ The following table lists the configurable parameters of the kubevious chart and
 | collector.tolerations               | Collector PodSpec tolerations                        |                                              |
 | collector.affinity                  | Collector PodSpec affinity                           |                                              |
 | collector.log.level                 | Collector log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
+| guard.podAnnotations            | Guard pod annotations                            |                                              |
+| guard.image.pullPolicy          | Guard PodSpec pullPolicy                         | IfNotPresent                                 |
+| guard.image.imagePullSecrets    | Guard PodSpec imagePullSecrets                   |                                              |
+| guard.service.type              | Guard type of service                            | ClusterIP                                    |
+| guard.service.port              | Guard port of service                            | 4000                                         |
+| guard.resources.requests.cpu    | Guard request CPU                                | 100m                                         |
+| guard.resources.requests.memory | Guard request Memory                             | 200Mi                                        |
+| guard.resources.limits.cpu      | Guard limit CPU                                  |                                              |
+| guard.resources.limits.memory   | Guard limit Memory                               |                                              |
+| guard.v8MaxOldSpace             | Guard V8 old memory section (in megabytes)       |                                              |
+| guard.podSecurityContext        | Guard PodSpec securityContext                    |                                              |
+| guard.nodeSelector              | Guard PodSpec nodeSelector                       |                                              |
+| guard.tolerations               | Guard PodSpec tolerations                        |                                              |
+| guard.affinity                  | Guard PodSpec affinity                           |                                              |
+| guard.log.level                 | Guard log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
 | parser.podAnnotations               | Parser pod annotations                            |                                              |
 | parser.image.pullPolicy          | Parser PodSpec pullPolicy                         | IfNotPresent                                 |
 | parser.image.imagePullSecrets    | Parser PodSpec imagePullSecrets                   |                                              |
