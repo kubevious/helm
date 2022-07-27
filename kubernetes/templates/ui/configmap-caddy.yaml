@@ -12,7 +12,7 @@ data:
       admin :5555
     }
 
-    :80 {
+    :8080 {
 
         handle /api/v1/* {
             reverse_proxy {{ include "kubevious-backend.service.name" . }}:{{ .Values.backend.service.port }}
