@@ -80,7 +80,11 @@ spec:
           mountPath: /docker-entrypoint-initdb.d
         livenessProbe:
           exec:
+            {{ if eq .Values.mysql.db_user "root" }}
             command: ["mysqladmin", "ping"]
+            {{ else }}
+            command: ["mysqladmin", "ping", "-u$MYSQL_USER", "-p$MYSQL_PASSWORD"]
+            {{ end }}
           initialDelaySeconds: 120
           periodSeconds: 10
           timeoutSeconds: 5
@@ -89,9 +93,15 @@ spec:
             # Check we can execute queries over TCP (skip-networking is off).
             command:
               - bash 
-              - "-c" 
+              - "-c"
+            {{ if eq .Values.mysql.db_user "root" }}
               - | 
                 mysql -p$MYSQL_ROOT_PASSWORD -h 127.0.0.1 -e 'SELECT 1'
+            {{ else }}
+              - | 
+                mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -h 127.0.0.1 -e 'SELECT 1'
+            {{ end }}
+              
           initialDelaySeconds: 5
           periodSeconds: 2
           timeoutSeconds: 1
