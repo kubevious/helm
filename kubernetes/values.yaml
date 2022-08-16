@@ -206,7 +206,7 @@ mysql:
     password: ""
   image:
     repository: mysql
-    tag: 8.0.22
+    tag: 8.0.30
     pullPolicy: IfNotPresent
   db_name: kubevious
   db_user: "kubevious"
