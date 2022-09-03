@@ -23,7 +23,7 @@ ingress:
 backend:
   image:
     repository: kubevious/backend
-    tag: 1.0.9
+    tag: 1.0.12
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -58,7 +58,7 @@ backend:
 collector:
   image:
     repository: kubevious/collector
-    tag: 1.0.9
+    tag: 1.0.12
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -94,7 +94,7 @@ collector:
 guard:
   image:
     repository: kubevious/guard
-    tag: 1.0.3
+    tag: 1.0.5
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -130,7 +130,7 @@ guard:
 parser:
   image:
     repository: kubevious/parser
-    tag: 1.0.8
+    tag: 1.0.11
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -166,7 +166,7 @@ parser:
 ui:
   image:
     repository: kubevious/ui
-    tag: 1.0.8
+    tag: 1.0.9
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
