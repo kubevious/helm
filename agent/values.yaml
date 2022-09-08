@@ -9,7 +9,7 @@ fullnameOverride: ""
 parser:
   image:
     repository: kubevious/parser
-    tag: 1.0.8
+    tag: 1.0.11
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
