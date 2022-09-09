@@ -19,7 +19,7 @@ kubectl create namespace kubevious
 Add Kubevious repository and install the Helm chart:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.12 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.13 -n kubevious 
 ```
 
 ## Accessing Kubevious
@@ -38,7 +38,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 1.0.12 \
+    --version 1.0.13 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
