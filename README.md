@@ -22,6 +22,19 @@ helm repo add kubevious https://helm.kubevious.io
 helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.13 -n kubevious 
 ```
 
+## Troubleshooting
+If Kubevious crashes with OOM, try giving it a little bit extra memory:
+
+```sh
+helm upgrade --atomic -i -n kubevious \
+    --version 1.0.13 \
+    --set collector.resources.requests.memory=4G \
+    --set collector.v8MaxOldSpace=4000 \
+    --set parser.resources.requests.memory=4G \
+    --set parser.v8MaxOldSpace=4000 \
+    kubevious kubevious/kubevious
+```
+
 ## Accessing Kubevious
 Kubevious runs within your cluster. Upon successful completion of helm chart installation, you will see commands to access Kubevious UI. There are two ways to access Kubevious UI. 
 
