@@ -40,7 +40,7 @@ spec:
               value: {{ .Chart.Version }}              
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 4000
               protocol: TCP
           livenessProbe:
             httpGet:

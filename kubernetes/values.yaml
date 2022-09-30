@@ -18,6 +18,14 @@ ingress:
           pathType: ImplementationSpecific
   tls: []
 ###
+### KUBEVIOUS
+###
+kubevious:
+  api:
+    skipEvents: true
+    skipSecrets: false
+    skipped: []
+###
 ### KUBEVIOUS BACKEND
 ###
 backend:
@@ -249,7 +257,7 @@ mysql:
 redis:
   image:
     repository: redislabs/redisearch
-    tag: 2.0.9
+    tag: 2.4.14
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP

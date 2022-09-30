@@ -42,6 +42,18 @@ spec:
               value: "{{ .Values.parser.log.level }}"
             - name: KUBEVIOUS_COLLECTOR
               value: "{{ include "kubevious-collector.baseUrl" . }}/api/v1/collect"
+            {{- if .Values.kubevious.api.skipEvents }}
+            - name: KUBEVIOUS_API_SKIP_EVENTS
+              value: "true"
+            {{- end }}
+            {{- if .Values.kubevious.api.skipSecrets }}
+            - name: KUBEVIOUS_API_SKIP_SECRET
+              value: "true"
+            {{- end }}
+            {{- if .Values.kubevious.api.skipped }}
+            - name: KUBEVIOUS_API_SKIP
+              value: {{ join "," .Values.kubevious.api.skipped }}
+            {{- end }}
             - name: SERVER_PORT
               value: "4003"
 {{- if .Values.parser.v8MaxOldSpace }}

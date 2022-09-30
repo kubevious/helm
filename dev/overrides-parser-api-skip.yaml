@@ -1,0 +1,8 @@
+kubevious:
+  api:
+    skipEvents: true
+    skipSecrets: true
+    skipped:
+      - discovery.k8s.io/v1:EndpointSlice
+      - apps/v1:ControllerRevision
+      - v1:Service
