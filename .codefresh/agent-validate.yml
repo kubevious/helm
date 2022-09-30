@@ -33,7 +33,7 @@ steps:
   lint:
     title: Lint
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -44,7 +44,7 @@ steps:
   validate_default:
     title: Validate Chart Default
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -58,7 +58,7 @@ steps:
   validate_all:
     title: Validate Chart with All Overrides
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:

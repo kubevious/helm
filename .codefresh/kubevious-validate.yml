@@ -33,7 +33,7 @@ steps:
   lint:
     title: Lint
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -44,7 +44,7 @@ steps:
   validate_default:
     title: Validate Chart Default
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -57,7 +57,7 @@ steps:
   validate_ingress:
     title: Validate Chart with Ingress
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -70,7 +70,7 @@ steps:
   validate_external_mysql:
     title: Validate Chart with External MySQL
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -83,7 +83,7 @@ steps:
   validate_custom_name:
     title: Validate Chart with Custom Name
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -96,7 +96,7 @@ steps:
   validate_api_skip:
     title: Validate Chart with API Skip
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -109,7 +109,7 @@ steps:
   validate_api_node_memory_setting:
     title: Validate Chart with Node.js Memory Setting
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
@@ -122,7 +122,7 @@ steps:
   validate_all:
     title: Validate Chart with All Overrides
     stage: validate
-    image: kubevious/aws_cicd_deployer
+    image: kubevious/cicd_deployer
     working_directory: ${{MAIN_REPO_PATH}}
     shell: bash
     commands:
