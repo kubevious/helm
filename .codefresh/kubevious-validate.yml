@@ -118,3 +118,16 @@ steps:
       - ls -la
       - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-v8-memory.yaml --output-dir output/
       - ls -la output/
+
+  validate_all:
+    title: Validate Chart with All Overrides
+    stage: validate
+    image: kubevious/aws_cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}
+    shell: bash
+    commands:
+      - rm -rf output
+      - pwd
+      - ls -la
+      - ./kubevious-template-all.sh
+

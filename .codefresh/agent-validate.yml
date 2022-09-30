@@ -54,3 +54,15 @@ steps:
       - helm template kubevious-agent ./agent --debug -n kubevious-agent --output-dir output/default
       - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/existing-service-account.yaml --output-dir output/existing-service-account
       - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/overrides-parser-api-skip.yaml --output-dir output/overrides-parser-api-skip
+
+  validate_all:
+    title: Validate Chart with All Overrides
+    stage: validate
+    image: kubevious/aws_cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}
+    shell: bash
+    commands:
+      - rm -rf output-agent
+      - pwd
+      - ls -la
+      - ./agent-template-all.sh
