@@ -42,7 +42,7 @@ Kubevious runs within your cluster. Upon successful completion of helm chart ins
 The easiest but not most convenient method. Wait few seconds before pods are up and running. Setup port forwarding:
 
 ```sh
-kubectl port-forward $(kubectl get pods -n kubevious -l "app.kubernetes.io/component=kubevious-ui" -o jsonpath="{.items[0].metadata.name}") 8080:80 -n kubevious  
+kubectl port-forward service/kubevious-ui-clusterip 8080:80 -n kubevious
 ```
 Access from browser: http://localhost:8080
 
@@ -98,7 +98,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | nameOverride                        | Overrides the *app.kubernetes.io/name* label value           |                                              |
 | fullnameOverride                    | Overrides name of the app                                    |                                              |
 | kubevious.api.skipEvents | Indicates whether Kubernetes Events should be collected by Kubevious. On some systems, that can significantly increase memory, processing, and storage requirements. | True |
-| kubevious.api.skipSecrets | Indicates whether Kubevious should collect Kubernetes Secrets. Values of Secrets are always sanitized and replaced with *null*. Connecting Secrets helps detect inconsistencies between data keys and their references. | False |
+| kubevious.api.skipSecrets | Indicates whether Kubevious should collect Kubernetes Secrets. Values of Secrets are always sanitized and replaced with *null*. Collecting Secrets helps detect inconsistencies between data keys and their references. | False |
 | kubevious.api.skipped | List of APIs to be skipped from the collection. Use \<apiVersion>:\<kind> format. For example: `apps/v1:ControllerRevision` or `discovery.k8s.io/v1:EndpointSlice` | [] |
 | ingress.enabled                     | Whether to expose Kubevious using Ingress gateway.           | false                                        |
 | ingress.annotations                 | Dictionary of Ingress annodations.                           | `{kubernetes.io/ingress.allow-http: "true"}` |
