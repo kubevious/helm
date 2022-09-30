@@ -19,7 +19,7 @@ kubectl create namespace kubevious
 Add Kubevious repository and install the Helm chart:
 ```sh
 helm repo add kubevious https://helm.kubevious.io
-helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.13 -n kubevious 
+helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.14 -n kubevious 
 ```
 
 ## Troubleshooting
@@ -27,7 +27,7 @@ If Kubevious crashes with OOM, try giving it a little bit extra memory:
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 1.0.13 \
+    --version 1.0.14 \
     --set collector.resources.requests.memory=4G \
     --set collector.v8MaxOldSpace=4000 \
     --set parser.resources.requests.memory=4G \
@@ -51,7 +51,7 @@ Enable Ingress deployment using dedicated value parameters. See full list of [he
 
 ```sh
 helm upgrade --atomic -i -n kubevious \
-    --version 1.0.13 \
+    --version 1.0.14 \
     --set ingress.enabled=true \
     kubevious kubevious/kubevious
 ```
