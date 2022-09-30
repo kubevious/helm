@@ -4,7 +4,6 @@ stages:
   - "clone"
   - "validate"
 steps:
-
   init:
     title: Init
     stage: init
@@ -19,13 +18,13 @@ steps:
   clone:
     title: Clone Repo
     stage: clone
-    image: 'alpine/git:latest'
+    image: "alpine/git:latest"
     working_directory: "/codefresh/volume"
     commands:
       - pwd
       - ls -la
       - rm -rf ${{MAIN_REPO_PATH}}
-      - 'git clone https://${{CF_REPO_OWNER}}:${{GITHUB_TOKEN}}@github.com/${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}.git ${{MAIN_REPO_PATH}}'
+      - "git clone https://${{CF_REPO_OWNER}}:${{GITHUB_TOKEN}}@github.com/${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}.git ${{MAIN_REPO_PATH}}"
       - ls -la
       - cd ${{MAIN_REPO_PATH}}
       - git reset --hard ${{CF_REVISION}}
@@ -54,4 +53,4 @@ steps:
       - ls -la
       - helm template kubevious-agent ./agent --debug -n kubevious-agent --output-dir output/default
       - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/existing-service-account.yaml --output-dir output/existing-service-account
-
+      - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/overrides-parser-api-skip.yaml --output-dir output/overrides-parser-api-skip
