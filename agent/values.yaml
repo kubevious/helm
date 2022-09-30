@@ -4,6 +4,14 @@
 nameOverride: ""
 fullnameOverride: ""
 ###
+### KUBEVIOUS
+###
+kubevious:
+  api:
+    skipEvents: true
+    skipSecrets: false
+    skipped: []
+###
 ### KUBEVIOUS PARSER
 ###
 parser:

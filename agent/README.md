@@ -42,6 +42,9 @@ The following table lists the configurable parameters of the kubevious chart and
 | ----------------------------------- | ------------------------------------------------------------ | -------------------------------------------- |
 | nameOverride                        | Overrides the *app.kubernetes.io/name* label value           |                                              |
 | fullnameOverride                    | Overrides name of the app                                    |                                              |
+| kubevious.api.skipEvents            | Indicates whether Kubernetes Events should be collected by Kubevious. On some systems, that can significantly increase memory, processing, and storage requirements. | True |
+| kubevious.api.skipSecrets           | Indicates whether Kubevious should collect Kubernetes Secrets. Values of Secrets are always sanitized and replaced with *null*. Collecting Secrets helps detect inconsistencies between data keys and their references. | False |
+| kubevious.api.skipped               | List of APIs to be skipped from the collection. Use \<apiVersion>:\<kind> format. For example: `apps/v1:ControllerRevision` or `discovery.k8s.io/v1:EndpointSlice` | [] |
 | parser.podAnnotations               | Kubevious parser pod annotations                            |                                              |
 | parser.image.pullPolicy          | Kubevious parser PodSpec pullPolicy                         | IfNotPresent                                 |
 | parser.image.imagePullSecrets    | Kubevious parser PodSpec imagePullSecrets                   |                                              |
