@@ -30,6 +30,7 @@ spec:
       initContainers:
       - name: init-mysql
         image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
+        imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
         command:
         - bash
         - "-c"
@@ -48,6 +49,7 @@ spec:
       containers:
       - name: mysql
         image: "{{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}"
+        imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}
         env:
         - name: NODE_ENV
           value: "production"
