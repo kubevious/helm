@@ -1,7 +1,5 @@
 # Kubevious Helm Charts
-**Kubevious** is an app-centric assurance, validation, and introspection platform for Kubernetes. It helps running modern Kubernetes applications without disasters and costly outages by continuously validating application manifests, cluster state and configuration. Kubevious detects errors(*typos, misconfigurations, conflicts, inconsistencies*) and violations of best practices. Kubevious' unique app-centric user interface delivers intuitive insight, introspection and troubleshooting tools for cloud-native applications. Right out of the box. Kubevious operates inside the cluster with user interface accessible as a web app. It only takes a couple of minutes to get Kubevious up and running for existing production applications.
-
-For more information refer to the root repository: https://github.com/kubevious/kubevious
+This repo is focused only on the installation of Kubevious using Helm chart. To learn more about **Kubevious** and how it can help with preventing Kubernetes disasters, please refer to the root repository: https://github.com/kubevious/kubevious
 
 ## Prerequisites
 
