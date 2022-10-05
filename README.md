@@ -1,12 +1,12 @@
 # Kubevious Helm Charts
 This repo is focused only on the installation of Kubevious using Helm chart. To learn more about **Kubevious** and how it can help with preventing Kubernetes disasters, please refer to the root repository: https://github.com/kubevious/kubevious
 
-## Prerequisites
+## 🔨 Prerequisites
 
 - Kubernetes v1.13 or higher
 - Helm v3.2 or higher
 
-## Installation 
+## 🚀 Installation 
 
 First create a namespace:
 
@@ -20,7 +20,7 @@ helm repo add kubevious https://helm.kubevious.io
 helm upgrade --atomic -i kubevious kubevious/kubevious --version 1.0.15 -n kubevious 
 ```
 
-## Troubleshooting
+## 🚒 Troubleshooting
 If Kubevious crashes with OOM, try giving it a little bit extra memory:
 
 ```sh
@@ -33,7 +33,7 @@ helm upgrade --atomic -i -n kubevious \
     kubevious kubevious/kubevious
 ```
 
-## Accessing Kubevious
+## 🌐 Accessing Kubevious
 Kubevious runs within your cluster. Upon successful completion of helm chart installation, you will see commands to access Kubevious UI. There are two ways to access Kubevious UI. 
 
 ### Option 1. Access using port forwarding
@@ -54,7 +54,7 @@ helm upgrade --atomic -i -n kubevious \
     kubevious kubevious/kubevious
 ```
 
-## Uninstalling the Chart
+## 💤 Uninstalling the Chart
 Undeploy from cluster:
 
 ```sh
@@ -72,11 +72,11 @@ $ kubectl delete pvc data-kubevious-mysql-0 -n kubevious
 
 3. Bit more complicated way is to update passwords in *kubevious-mysql-secret* and *kubevious-mysql-secret-root* Kubernetes secrets. Though wouldn't recommend going that route.
 
-## Anonymous Analytics
+## 📈 Anonymous Analytics
 
 A two-way feedback mechanism was added to Kubevious. It includes version checks, news updates, useful hints and tips,  and reporting of errors, cluster size metrics, and internal time counters. Participants can also see their clusters on a https://worldvious.io leaderboard map. Location is anonymized to the nearest city/zip. No IP address is stored or logged. We calculate the SHA256 hash of the IP address and use it as a key in the backend. If, for some reason, you do not want to participate, please see details of reporting [configurations](#configuration) parameters and instructions to opt-out (it's super easy).
 
-## Scale Setup
+## 🐘 Scale Setup
 
 When running Kubevious in large Kubernetes clusters with lots of Nodes, Pods, Events or other resources, consider providing adequate resources to following chart settings:
 
@@ -87,7 +87,7 @@ When running Kubevious in large Kubernetes clusters with lots of Nodes, Pods, Ev
 
 For details see https://nodejs.org/docs/latest-v14.x/api/cli.html#cli_useful_v8_options
 
-## Configuration
+## ⚙️ Configuration
 
 The following table lists the configurable parameters of the kubevious chart and their default values.
 
