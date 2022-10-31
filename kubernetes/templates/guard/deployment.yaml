@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "kubevious-guard.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: {{ include "kubevious-guard.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}

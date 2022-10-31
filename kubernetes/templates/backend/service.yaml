@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: {{ include "kubevious-backend.service.name" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: {{ include "kubevious-backend.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}

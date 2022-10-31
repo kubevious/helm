@@ -4,6 +4,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: {{ include "kubevious-mysql.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: {{ include "kubevious-mysql.fullname" . }}
     {{- include "kubevious.labels" . | nindent 4 }}
