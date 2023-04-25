@@ -129,5 +129,5 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - ./kubevious-template-all.sh
+      - ./template-all.sh
 
