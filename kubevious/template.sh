@@ -4,11 +4,9 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-OUTPUT_DIR=output/debug
+OUTPUT_DIR=output/default
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes \
+helm template kubevious ./chart --debug \
     -n kubevious \
-    -f dev/overrides-v8-memory.yaml \
-    --version 0.8.15 \
     --output-dir ${OUTPUT_DIR}

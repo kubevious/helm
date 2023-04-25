@@ -12,7 +12,7 @@ steps:
     commands:
       - cf_export GITHUB_TOKEN=$(codefresh get context github --decrypt -o yaml | yq -y .spec.data.auth.password)
       - cf_export MAIN_REPO_PATH=/codefresh/volume/repo.git
-      - export PRODUCT_NAME=${{CF_REPO_NAME}}
+      - export PRODUCT_NAME=agent
       - cf_export PRODUCT_NAME=${PRODUCT_NAME}
 
   clone:
@@ -34,35 +34,35 @@ steps:
     title: Lint
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - pwd
       - ls -la
-      - helm lint agent/
+      - helm lint chart/
 
   validate_default:
     title: Validate Chart Default
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious-agent ./agent --debug -n kubevious-agent --output-dir output/default
-      - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/existing-service-account.yaml --output-dir output/existing-service-account
-      - helm template kubevious-agent ./agent --debug -n kubevious-agent -f agent-dev/overrides-parser-api-skip.yaml --output-dir output/overrides-parser-api-skip
+      - helm template kubevious-agent ./chart --debug -n kubevious-agent --output-dir output/default
+      - helm template kubevious-agent ./chart --debug -n kubevious-agent -f overrides/existing-service-account.yaml --output-dir output/existing-service-account
+      - helm template kubevious-agent ./chart --debug -n kubevious-agent -f overrides/overrides-parser-api-skip.yaml --output-dir output/overrides-parser-api-skip
 
   validate_all:
     title: Validate Chart with All Overrides
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
-      - rm -rf output-agent
+      - rm -rf output
       - pwd
       - ls -la
-      - ./agent-template-all.sh
+      - ./template-all.sh

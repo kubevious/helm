@@ -10,7 +10,7 @@ rm -rf ${OUTPUT_DIR}
 docker run -ti --rm -v $(pwd):/apps \
     -v ~/.kube:/root/.kube \
     -v ~/.helm:/root/.helm alpine/helm:3.1.0 \
-    template kubevious /apps/kubernetes --debug \
+    template kubevious /apps/chart --debug \
     -n kubevious \
-    -f /apps/dev/overrides.yaml \
+    -f /apps/overrides/overrides.yaml \
     --output-dir /apps/${OUTPUT_DIR}

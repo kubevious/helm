@@ -19,20 +19,20 @@ esac
 
 # VERSION=0.9.13
 
-# yq ".version = \"${VERSION}\"" -i kubernetes/Chart.yaml 
-# yq ".appVersion = \"${VERSION}\"" -i kubernetes/Chart.yaml
+# yq ".version = \"${VERSION}\"" -i chart/Chart.yaml 
+# yq ".appVersion = \"${VERSION}\"" -i chart/Chart.yaml
 
 echo "********************"
-cat kubernetes/Chart.yaml 
+cat chart/Chart.yaml 
 echo "********************"
 
-VERSION=$(yq ".version" kubernetes/Chart.yaml)
+VERSION=$(yq ".version" chart/Chart.yaml)
 echo "VERSION: ${VERSION}"
 echo "********************"
 
 rm -f kubevious-*.tgz
 
-helm package kubernetes/ --version ${VERSION}
+helm package chart/ --version ${VERSION}
 
 kubectl create namespace kubevious
 
@@ -40,5 +40,5 @@ kubectl create namespace kubevious
 helm upgrade -i  \
     --atomic \
     -n kubevious \
-    -f dev/overrides.yaml \
+    -f overrides/overrides.yaml \
     kubevious ./kubevious-${VERSION}.tgz

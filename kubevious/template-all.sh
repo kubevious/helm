@@ -4,12 +4,12 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd ${MY_DIR}
 
-OUTPUT_BASE_DIR=${MY_DIR}/output-agent
+OUTPUT_BASE_DIR=${MY_DIR}/output
 rm -rf ${OUTPUT_BASE_DIR}
 
-OVERRIDES_DIR=${MY_DIR}/agent-dev
+OVERRIDES_DIR=${MY_DIR}/overrides
 
-NAMESPACE=kubevious-agent
+NAMESPACE=kubevious
 
 for f in ${OVERRIDES_DIR}/*.yaml; do
     echo "OVERRIDE >>> $f";
@@ -18,7 +18,7 @@ for f in ${OVERRIDES_DIR}/*.yaml; do
 
     OUTPUT_DIR=${OUTPUT_BASE_DIR}/${NAME}
 
-    helm template kubevious-agent ./agent --debug \
+    helm template kubevious ./chart --debug \
         -n ${NAMESPACE} \
         -f $f \
         --output-dir ${OUTPUT_DIR}

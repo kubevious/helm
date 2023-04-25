@@ -4,10 +4,11 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-OUTPUT_DIR=output/external-mysql
+OUTPUT_DIR=output/debug
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes --debug \
+helm template kubevious ./chart \
     -n kubevious \
-    -f dev/overrides-external-mysql.yaml \
+    -f overrides/overrides-v8-memory.yaml \
+    --version 0.8.15 \
     --output-dir ${OUTPUT_DIR}

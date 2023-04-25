@@ -5,11 +5,11 @@ MY_DIR="$(dirname $MY_PATH)"
 cd $MY_DIR
 
 echo "RUNNIG HELM LINT..."
-helm lint kubernetes/
+helm lint chart/
 
 echo "RUNNIG HELM LINT with DEPLOY IMAGE..."
-docker run -ti --rm -v $(pwd):/apps kubevious/aws_cicd_deployer helm lint /apps/kubernetes
+docker run -ti --rm -v $(pwd):/apps kubevious/aws_cicd_deployer helm lint /apps/chart
 
 echo "RUNNIG HELM VERIFY..."
-helm verify kubernetes/
+helm verify chart/
 

@@ -7,7 +7,7 @@ cd $MY_DIR
 OUTPUT_DIR=output/custom-name
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes --debug \
+helm template kubevious ./chart --debug \
     -n kubevious \
-    -f dev/overrides-custom-name.yaml \
+    -f overrides/overrides-custom-name.yaml \
     --output-dir ${OUTPUT_DIR}

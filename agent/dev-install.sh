@@ -19,16 +19,16 @@ esac
 
 VERSION=0.0.1
 
-yq ".version = \"${VERSION}\"" -i kubernetes/Chart.yaml 
-yq ".appVersion = \"${VERSION}\"" -i kubernetes/Chart.yaml
+yq ".version = \"${VERSION}\"" -i chart/Chart.yaml 
+yq ".appVersion = \"${VERSION}\"" -i chart/Chart.yaml
 
 echo "**********"
-cat kubernetes/Chart.yaml 
+cat chart/Chart.yaml 
 echo "**********"
 
 rm -f kubevious-agent-*.tgz
 
-helm package agent/ --version ${VERSION}
+helm package chart/ --version ${VERSION}
 
 source ${MY_DIR}/runtime/key.sh
 
@@ -46,5 +46,5 @@ kubectl create secret generic kubevious-token -n kubevious-agent \
 helm upgrade -i  \
     --atomic \
     -n kubevious-agent \
-    -f agent-dev/overrides-install.yaml \
+    -f overrides/overrides-install.yaml \
     kubevious-agent ./kubevious-agent-${VERSION}.tgz

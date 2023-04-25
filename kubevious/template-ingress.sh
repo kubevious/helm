@@ -4,10 +4,10 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-OUTPUT_DIR=output/skip-role
+OUTPUT_DIR=output/ingress
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes --debug \
+helm template kubevious ./chart --debug \
     -n kubevious \
-    -f dev/overrides-skip-role-binding.yaml \
+    -f overrides/overrides-ingress.yaml \
     --output-dir ${OUTPUT_DIR}

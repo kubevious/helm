@@ -7,9 +7,9 @@ cd ${MY_DIR}
 OUTPUT_BASE_DIR=${MY_DIR}/output
 rm -rf ${OUTPUT_BASE_DIR}
 
-OVERRIDES_DIR=${MY_DIR}/dev
+OVERRIDES_DIR=${MY_DIR}/overrides
 
-NAMESPACE=kubevious
+NAMESPACE=kubevious-agent
 
 for f in ${OVERRIDES_DIR}/*.yaml; do
     echo "OVERRIDE >>> $f";
@@ -18,7 +18,7 @@ for f in ${OVERRIDES_DIR}/*.yaml; do
 
     OUTPUT_DIR=${OUTPUT_BASE_DIR}/${NAME}
 
-    helm template kubevious ./kubernetes --debug \
+    helm template kubevious-agent ./chart --debug \
         -n ${NAMESPACE} \
         -f $f \
         --output-dir ${OUTPUT_DIR}

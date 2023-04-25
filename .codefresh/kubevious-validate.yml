@@ -12,7 +12,7 @@ steps:
     commands:
       - cf_export GITHUB_TOKEN=$(codefresh get context github --decrypt -o yaml | yq -y .spec.data.auth.password)
       - cf_export MAIN_REPO_PATH=/codefresh/volume/repo.git
-      - export PRODUCT_NAME=${{CF_REPO_NAME}}
+      - export PRODUCT_NAME=kubevious
       - cf_export PRODUCT_NAME=${PRODUCT_NAME}
 
   clone:
@@ -34,96 +34,96 @@ steps:
     title: Lint
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - pwd
       - ls -la
-      - helm lint kubernetes/
+      - helm lint chart/
 
   validate_default:
     title: Validate Chart Default
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious --output-dir output/
       - ls -la output/
 
   validate_ingress:
     title: Validate Chart with Ingress
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-ingress.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-ingress.yaml --output-dir output/
       - ls -la output/
 
   validate_external_mysql:
     title: Validate Chart with External MySQL
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-external-mysql.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-external-mysql.yaml --output-dir output/
       - ls -la output/
 
   validate_custom_name:
     title: Validate Chart with Custom Name
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-custom-name.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-custom-name.yaml --output-dir output/
       - ls -la output/
 
   validate_api_skip:
     title: Validate Chart with API Skip
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-parser-api-skip.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-parser-api-skip.yaml --output-dir output/
       - ls -la output/
 
   validate_api_node_memory_setting:
     title: Validate Chart with Node.js Memory Setting
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./kubernetes --debug -n kubevious -f dev/overrides-v8-memory.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-v8-memory.yaml --output-dir output/
       - ls -la output/
 
   validate_all:
     title: Validate Chart with All Overrides
     stage: validate
     image: kubevious/cicd_deployer
-    working_directory: ${{MAIN_REPO_PATH}}
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
     shell: bash
     commands:
       - rm -rf output

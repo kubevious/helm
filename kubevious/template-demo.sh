@@ -4,10 +4,11 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-OUTPUT_DIR=output/parser-api-skip
+OUTPUT_DIR=output/demo
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes --debug \
+helm template kubevious ./chart --debug \
     -n kubevious \
-    -f dev/overrides-parser-api-skip.yaml \
+    -f overrides/overrides-demo.yaml \
+    --kube-version "1.20.15" \
     --output-dir ${OUTPUT_DIR}

@@ -4,10 +4,10 @@ MY_DIR="$(dirname $MY_PATH)"
 
 cd $MY_DIR
 
-OUTPUT_DIR=output/ingress
+OUTPUT_DIR=output/parser-api-skip
 rm -rf ${OUTPUT_DIR}
 
-helm template kubevious ./kubernetes --debug \
+helm template kubevious ./chart --debug \
     -n kubevious \
-    -f dev/overrides-ingress.yaml \
+    -f overrides/overrides-parser-api-skip.yaml \
     --output-dir ${OUTPUT_DIR}
