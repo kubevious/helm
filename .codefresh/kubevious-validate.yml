@@ -64,7 +64,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-ingress.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f overrides/overrides-ingress.yaml --output-dir output/
       - ls -la output/
 
   validate_external_mysql:
@@ -77,7 +77,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-external-mysql.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f overrides/overrides-external-mysql.yaml --output-dir output/
       - ls -la output/
 
   validate_custom_name:
@@ -90,7 +90,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-custom-name.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f overrides/overrides-custom-name.yaml --output-dir output/
       - ls -la output/
 
   validate_api_skip:
@@ -103,7 +103,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-parser-api-skip.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f overrides/overrides-parser-api-skip.yaml --output-dir output/
       - ls -la output/
 
   validate_api_node_memory_setting:
@@ -116,7 +116,7 @@ steps:
       - rm -rf output
       - pwd
       - ls -la
-      - helm template kubevious ./chart --debug -n kubevious -f dev/overrides-v8-memory.yaml --output-dir output/
+      - helm template kubevious ./chart --debug -n kubevious -f overrides/overrides-v8-memory.yaml --output-dir output/
       - ls -la output/
 
   validate_all:

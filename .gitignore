@@ -71,4 +71,4 @@ typings/
 .vscode
 
 output/
-output-agent/
+runtime/
