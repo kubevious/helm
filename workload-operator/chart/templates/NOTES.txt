@@ -28,3 +28,32 @@
                 WKOkkkkkkkkkkkkkOXWWKOkkkkkKW XOOOOOOOOOOOOOOOKW                
 
 Kubevious Workload Operator v{{- .Chart.Version }} installed!
+
+Now you can try applying the following manifest below:
+
+---
+apiVersion: kubevious.io/v1alpha1
+kind: Workload
+metadata:
+  name: nginx
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+  schedule:
+  - name: reserved
+    replicas: 20%
+    nodeSelector:
+      nodetype: ON_DEMAND
+  - name: spot
+    nodeSelector:
+      nodetype: SPOT
