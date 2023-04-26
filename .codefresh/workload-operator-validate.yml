@@ -1,0 +1,66 @@
+version: "1.0"
+stages:
+  - "init"
+  - "clone"
+  - "validate"
+steps:
+  init:
+    title: Init
+    stage: init
+    image: codefresh/cli
+    shell: bash
+    commands:
+      - cf_export GITHUB_TOKEN=$(codefresh get context github --decrypt -o yaml | yq -y .spec.data.auth.password)
+      - cf_export MAIN_REPO_PATH=/codefresh/volume/repo.git
+      - export PRODUCT_NAME=workload-operator
+      - cf_export PRODUCT_NAME=${PRODUCT_NAME}
+
+  clone:
+    title: Clone Repo
+    stage: clone
+    image: "alpine/git:latest"
+    working_directory: "/codefresh/volume"
+    commands:
+      - pwd
+      - ls -la
+      - rm -rf ${{MAIN_REPO_PATH}}
+      - "git clone https://${{CF_REPO_OWNER}}:${{GITHUB_TOKEN}}@github.com/${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}.git ${{MAIN_REPO_PATH}}"
+      - ls -la
+      - cd ${{MAIN_REPO_PATH}}
+      - git reset --hard ${{CF_REVISION}}
+      - ls -la
+
+  lint:
+    title: Lint
+    stage: validate
+    image: kubevious/cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
+    shell: bash
+    commands:
+      - pwd
+      - ls -la
+      - helm lint chart/
+
+  validate_default:
+    title: Validate Chart Default
+    stage: validate
+    image: kubevious/cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
+    shell: bash
+    commands:
+      - rm -rf output
+      - pwd
+      - ls -la
+      - helm template workload-operator ./chart --debug -n workload-operator --output-dir output/default
+
+  validate_all:
+    title: Validate Chart with All Overrides
+    stage: validate
+    image: kubevious/cicd_deployer
+    working_directory: ${{MAIN_REPO_PATH}}/${{PRODUCT_NAME}}
+    shell: bash
+    commands:
+      - rm -rf output
+      - pwd
+      - ls -la
+      - ./template-all.sh

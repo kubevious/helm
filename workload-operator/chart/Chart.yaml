@@ -1,0 +1,9 @@
+apiVersion: v2
+name: workload-operator
+description: A Helm chart for Kubevious Workload Operator
+type: application
+keywords:
+  - kubernetes workload
+icon: https://kubevious.io/img/logo.png
+version: 0.0.1
+appVersion: 0.0.1

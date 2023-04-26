@@ -1,0 +1,25 @@
+{{- if not .Values.operator.serviceAccount.skipRoleBinding -}}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "workload-operator.fullname" . }}
+  labels:
+    {{- include "workload-operator.labels" . | nindent 4 }}
+rules:
+  - apiGroups:
+      - kubevious.io
+    resources:
+      - workloads
+      - workloadprofiles
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - "*"
+{{- end }}
