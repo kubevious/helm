@@ -10,8 +10,15 @@ fetchBinaryVersion () {
 
 processBinary () {
     local REPO_NAME=${1}
+    local VALUE_NAME=${2}
+    if [[ -z "$VALUE_NAME" ]]; then
+        VALUE_NAME="${REPO_NAME}"
+    fi
+    echo "[processBinary] REPO_NAME=${REPO_NAME}"
+    echo "[processBinary] VALUE_NAME=${VALUE_NAME}"
+
     fetchBinaryVersion ${REPO_NAME}
     echo "${REPO_NAME} VERSION: ${PRODUCT_VERSION}"
 
-    yq ".${REPO_NAME}.image.tag = \"${PRODUCT_VERSION}\"" -i values.yaml
+    yq ".${VALUE_NAME}.image.tag = \"${PRODUCT_VERSION}\"" -i values.yaml
 }

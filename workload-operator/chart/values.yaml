@@ -3,20 +3,19 @@
 # Declare variables to be passed into your templates.
 nameOverride: ""
 fullnameOverride: ""
-
 ###
 ### OPERATOR
 operator:
   image:
     repository: kubevious/workload-operator
-    tag: 0.0.0
+    tag: 1.0.1
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
   podSecurityContext:
     runAsUser: 1000
     runAsGroup: 3000
-    fsGroup: 2000  
+    fsGroup: 2000
   securityContext:
     allowPrivilegeEscalation: false
   serviceAccount:
