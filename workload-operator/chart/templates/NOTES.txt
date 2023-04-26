@@ -57,3 +57,7 @@ spec:
   - name: spot
     nodeSelector:
       nodetype: SPOT
+
+
+Learn more about Workload Operator here:
+https://github.com/kubevious/workload-operator
