@@ -5,5 +5,5 @@ type: application
 keywords:
   - kubernetes workload
 icon: https://kubevious.io/img/logo.png
-version: 0.0.2
-appVersion: 0.0.2
+version: 0.0.3
+appVersion: 0.0.3
