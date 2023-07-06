@@ -96,6 +96,7 @@ collector:
   affinity: {}
   log:
     level: info
+  historyRetentionDays: 15
 ###
 ### KUBEVIOUS GUARD
 ###

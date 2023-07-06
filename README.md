@@ -116,6 +116,7 @@ The following table lists the configurable parameters of the kubevious chart and
 | backend.tolerations               | Backend PodSpec tolerations                        |                                              |
 | backend.affinity                  | Backend PodSpec affinity                           |                                              |
 | backend.log.level                 | Backend log level. Values are: *error, warn, info, verbose, debug, silly* | Info |
+| collector.historyRetentionDays | Number of days to maintain history | 15 |
 | collector.podAnnotations            | Collector pod annotations                            |                                              |
 | collector.image.pullPolicy          | Collector PodSpec pullPolicy                         | IfNotPresent                                 |
 | collector.image.imagePullSecrets    | Collector PodSpec imagePullSecrets                   |                                              |
