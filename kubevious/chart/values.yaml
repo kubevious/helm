@@ -31,7 +31,7 @@ kubevious:
 backend:
   image:
     repository: kubevious/backend
-    tag: 1.2.1
+    tag: 1.2.2
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
@@ -139,7 +139,7 @@ guard:
 parser:
   image:
     repository: kubevious/parser
-    tag: 1.2.1
+    tag: 1.2.2
     pullPolicy: IfNotPresent
   imagePullSecrets: []
   podAnnotations: {}
